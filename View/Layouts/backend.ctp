@@ -2,13 +2,13 @@
 <html>
 	<?php echo $this->Html->charset(); ?>
 	<head>
-		<title>Backend</title>
+		<title>Backend - <?php echo $title_for_layout; ?></title>
 		
 		 <!-- mobile viewport optimisation -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<!-- stylesheets -->
 		<?php echo $this->Html->css('/backend/css/yaml/core/base'); ?>
-		<?php echo $this->Html->css('/backend/css/yaml/forms/gray-theme'); ?>
+		<?php echo $this->Html->css('/backend/css/yaml/forms/gray-theme.custom'); ?>
 		<?php echo $this->Html->css('/backend/css/screen_backend/screen'); ?>
 		<?php echo $this->Html->css('/backend/css/screen_backend/typography'); ?>
 		
@@ -46,6 +46,15 @@
 			    	var fieldset = $(this).parent('fieldset');
 					fieldset.toggleClass('collapsed');
 			    });
+
+			    //Actions
+			    $('td.actions > ul.actions, div.actions > ul').each(function() {
+				    var actions = $(this).html();
+				    var html = '<li><button class="ym-button ym-actions">Actions</button><ul>'+actions+'</ul></li>'
+				    $(this).html(html);
+					$(this).addClass('dd-actions');
+					$(this).parent().addClass('dd-actions');
+			    });
 			});
 		</script>
 	</head>
@@ -53,7 +62,7 @@
 		<!-- HEADER -->
 		<header>
 			<div class="ym-wrapper">
-				<h1>SITENAME</h1>
+				<?php echo $this->Layout->fetch('header'); ?>
 				<?php echo $this->Layout->fetch('user'); ?>
 			</div>
 		</header>
@@ -62,7 +71,7 @@
 		<!-- TOPNAV -->
 		<nav id="topnav">
 			<div class="ym-wrapper">
-				<?php echo $this->Layout->fetch('nav'); ?>
+				<?php echo $this->Layout->fetch('top'); ?>
 			</div>
 		</nav>
 		<div class="ym-clearfix"></div>
@@ -72,9 +81,9 @@
 			<div class="ym-wrapper">
 				<div class="ym-column">
 					<!-- SIDENAV -->
-					<aside class="ym-col1" id="aside">
-						<div class="ym-box">
-							<?php echo $this->Layout->fetch('aside')?>
+					<aside class="ym-col1" id="aside-left">
+						<div class="ym-cbox">
+							<?php echo $this->Layout->fetch('left')?>
 						</div>
 						<div class="ym-clearfix"></div>
 					</aside>
@@ -103,7 +112,7 @@
 		<!-- #FOOTER -->
 		
 		<!-- MISC -->
-		<div id="spinner" class="spinner"><?php echo $this->Html->image('/backend/img/icons/spinner/pacman.gif'); ?></div>
+		<div id="spinner"></div>
 		<!-- #MISC -->
 <?php $this->Js->render(); ?>
 	</body>

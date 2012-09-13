@@ -21,9 +21,8 @@
 				<?php echo $this->Session->flash(); ?>
 				<?php echo $this->Session->flash('auth'); ?>
 			</div>
-			<?php echo $this->Layout->fetch('top'); ?>
 			<div class="ym-clearfix clearfix"></div>
-			<?php echo $this->Layout->fetch('@content'); ?>
+			<?php echo $this->fetch('content'); ?>
 			<div class="ym-clearfix clearfix"></div>
 		</div>
 		<div class="ym-clearfix clearfix"></div>

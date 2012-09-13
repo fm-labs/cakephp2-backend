@@ -7,5 +7,6 @@ class JqueryController extends AppController {
 	public function admin_syntaxhighlighter() {}
 	public function admin_tinymce() {}
 	public function admin_iphoneswitch() {}
+	public function admin_ui() {}
 }
 ?>

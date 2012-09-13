@@ -49,7 +49,7 @@ endif;
 				elseif($tab['type'] == 'block')
 					$tab['content'] = $this->fetch($tab['content']);
 				
-					$_content = $tab['content'] . $this->Html->div('clearfix','');
+					$_content = $tab['content'] . $this->Html->div('ym-clearfix clearfix','');
 					echo $this->Html->tag('div',$_content,
 						array('id'=>sprintf('%s-%s',$divId,$i)));
 			endforeach;
