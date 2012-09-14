@@ -1,11 +1,8 @@
 <?php 
 $this->extend('Backend.Common/tabs');
-$this->assign('title', 'Loaded CakePHP Plugins');
+$this->assign('title', 'System');
 ?>
-
 <div>
-	<h1><?php echo __d('backend',"Loaded CakePHP Plugins");?></h1>
-	
 	<dl>
 		<?php foreach($plugins as $plugin):?>
 			<dt><?php echo $this->Html->link(Inflector::humanize($plugin),array(

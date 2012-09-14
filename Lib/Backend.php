@@ -38,5 +38,15 @@ class Backend {
 		}
 		return false;
 	}
+	
+	static public function startup(Controller $controller) {
+		
+		//iframe
+		$isIframe = (isset($controller->request->params['named']['iframe'])) ? $controller->request->params['named']['iframe'] : false;
+		if ($isIframe) {
+			$controller->layout = "Backend.iframe";
+		}
+		$controller->set(compact('isIframe'));
+	}
 }
 ?>

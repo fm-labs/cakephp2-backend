@@ -51,6 +51,9 @@ class BackendComponent extends Component {
 			//$this->Auth->authorize = array('Backend.backend' => array());
 			//AuthComponent::$sessionKey = "Auth.Admin"; 
 			$this->Auth->startup($controller);
+			if ($this->Auth->user()) {
+				Backend::startup($controller);
+			}
 		}
 	}
 }

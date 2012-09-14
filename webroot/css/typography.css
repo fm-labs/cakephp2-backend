@@ -28,7 +28,7 @@
 
 	/* (en) reset font size for all elements to standard (16 Pixel) */
 	/* (de) Alle Schriftgrößen auf Standardgröße (16 Pixel) zurücksetzen */
-	html * { font-size:100%; }
+	html * { font-size: 14px; }
 
 	/**
 	* (en) reset monospaced elements to font size 16px in all browsers
@@ -51,7 +51,7 @@
 	/* (de) Basis-Layout erhält Standardschriftgröße von 14 Pixeln */
 	body {
 		font-family: "Droid Serif", Georgia, "Times New Roman", Times, serif;
-		font-size:87.50%; /* base: 14px */
+		font-size: 100%; /* base: 14px */
 		color:#444;
 
 		/* (en) Prevent auto-scaling of text in mobile webkit browsers */
@@ -69,7 +69,7 @@
 	h6 {
 		font-family: "Droid Sans", Arial, Helvetica, sans-serif;
 		font-weight: 400;
-		color:#161e21;
+		color:#4D87C7;
 		margin:0;
 	}
 
