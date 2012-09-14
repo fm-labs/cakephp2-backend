@@ -63,17 +63,16 @@
 		<header>
 			<div class="ym-wrapper">
 				<?php echo $this->Layout->fetch('header'); ?>
-				<?php echo $this->Layout->fetch('user'); ?>
 			</div>
 		</header>
 		<!-- #HEADER -->
 		
 		<!-- TOPNAV -->
-		<nav id="topnav">
+		<div id="top">
 			<div class="ym-wrapper">
 				<?php echo $this->Layout->fetch('top'); ?>
 			</div>
-		</nav>
+		</div>
 		<div class="ym-clearfix"></div>
 		<!-- #TOPNAV -->
 		
@@ -112,6 +111,9 @@
 		<!-- #FOOTER -->
 		
 		<!-- MISC -->
+		<div id="be-user-login" style="position: absolute;right:0; top:0;margin:10px 10px 0 0;color:#FFF">
+		<?php echo $this->Layout->module('Backend.user/login'); ?>
+		</div>
 		<div id="spinner"></div>
 		<!-- #MISC -->
 <?php $this->Js->render(); ?>

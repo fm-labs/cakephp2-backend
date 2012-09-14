@@ -7,6 +7,9 @@
 	</title>
 	<?php
 		echo $this->Html->meta('icon');
+		echo $this->Html->css('/backend/css/screen_auth/screen');
+		echo $this->Html->css('/backend/css/style');
+		echo $this->Html->css('/backend/css/forms');
 
 		echo $this->fetch('script');
 		echo $this->fetch('css');

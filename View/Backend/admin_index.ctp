@@ -1,54 +1,32 @@
-<style type="text/css">
-.grid-demo1 .ym-gbox {
-    background: none repeat scroll 0 0 #EEEEEE;
-    border: 1px solid #CCCCCC;
-    margin-right: 12px;
-    padding: 10px;
-    text-align: center;
-}
-
-.grid-demo1 .ym-grid + .ym-grid {
-    margin-top: 8px;
-}
-</style>
-<div class="backend">
+<div class="index backend">
 	<h1>Backend</h1>
-	<section class="ym-grid">
-		<h2>Grid</h2>
-		<div class="grid-demo1">
-				<div class="ym-grid">
-					<div class="ym-g20 ym-gl">
-						<div class="ym-gbox"> 20 %</div></div>
-					<div class="ym-g20 ym-gl"><div class="ym-gbox">20 %</div></div>
-					<div class="ym-g20 ym-gl"><div class="ym-gbox">20 %</div></div>
-					<div class="ym-g20 ym-gl"><div class="ym-gbox">20 %</div></div>
-					<div class="ym-g20 ym-gr"><div class="ym-gbox">20 %</div></div>
-				</div>
-				<div class="ym-grid">
-					<div class="ym-g25 ym-gl">
-						<div class="ym-gbox">25 %</div></div>
-					<div class="ym-g25 ym-gl"><div class="ym-gbox">25 %</div></div>
-					<div class="ym-g25 ym-gl"><div class="ym-gbox">25 %</div></div>
-					<div class="ym-g25 ym-gr"><div class="ym-gbox">25 %</div></div>
-				</div>
-				<div class="ym-grid">
-					<div class="ym-g33 ym-gl">
-						<div class="ym-gbox"> 33.333 % </div></div>
-					<div class="ym-g33 ym-gl"><div class="ym-gbox">33.333 %</div></div>
-					<div class="ym-g33 ym-gr"><div class="ym-gbox">33.333 %</div></div>
-				</div>
-				<div class="ym-grid">
-					<div class="ym-g50 ym-gl">
-						<div class="ym-gbox"> 50 %</div></div>
-					<div class="ym-g50 ym-gr"><div class="ym-gbox">50 %</div></div>
-				</div>
-				<div class="ym-grid">
-					<div class="ym-gbox"> Full Width </div>
-				</div>
-			</div>
-	</section>
 	
+
 	<section class="ym-grid">
+		<?php 
+		//dashboard settings
+		$cols = 4;
 		
-	</section>
+		$width = round(100 / $cols,2);
+		?>
+		<?php $i = 0;?>
+		<?php foreach($dashboard as $item):?>
+		<div class="ym-g<?php echo $width; ?> ym-gl"><div class="ym-gbox">
+			<h3><?php echo $this->Html->link($item['title'],$item['url'],@$item['attr']);?></h3>
+			<?php if ($item['actions']):?>
+			<ul>
+			<?php foreach($item['actions'] as $action): ?>
+				<?php list($title, $url, $attr) = $action; ?>
+				<li><?php echo $this->Html->link($title,$url,$attr); ?></li>
+			<?php endforeach; ?>
+			</ul>
+			<?php endif; ?>
+		</div></div>
+		
+		<?php if ((++$i % $cols) == 0):?><div class="ym-clearfix"></div><?php endif; ?>
+		
+		<?php endforeach; ?>
+	</section>	
+
+	
 </div>

@@ -1,5 +1,11 @@
-<?php echo $this->extend('Backend.Common/tabs'); ?><?php echo $this->assign('title',__d('backend','Settings')); ?><div class="settings index">
+<div class="index settings">
 	<h2><?php echo __d('backend','Settings');?></h2>
+
+	<div class="actions">
+		<ul>
+			<li><?php echo $this->Html->link(__d('backend','New Setting'), array('action' => 'add')); ?></li>
+		</ul>
+	</div>	
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id');?></th>
@@ -33,10 +39,4 @@
 	</table>
 	
 	<?php echo $this->element('Backend.pagination/default'); ?>	
-</div>
-<div class="actions">
-	<h3><?php echo __d('backend','Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__d('backend','New Setting'), array('action' => 'add')); ?></li>
-	</ul>
 </div>

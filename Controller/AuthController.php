@@ -8,15 +8,15 @@ class AuthController extends BackendAppController {
 	public function beforeFilter() {
 		parent::beforeFilter();
 		
-		$this->Auth->allow('admin_login','admin_session');
-		$this->layout = "Backend.auth";
-		
+		$this->Auth->allow('admin_login');
 	}
 	
 /**
  * Auth Login page
  */
 	public function admin_login() {
+
+		$this->layout = "Backend.auth";
 		
 	    if ($this->request->is('post')) {
 	        if (!$this->Auth->login()) {
@@ -37,9 +37,11 @@ class AuthController extends BackendAppController {
 	    }
 	}
 
-	
-	public function admin_session() {
-		
+/**
+ * Displays session data of currently logged in user
+ */	
+	public function admin_user() {
+		$this->set('authUser', $this->Auth->user());
 	}
 	
 /**
