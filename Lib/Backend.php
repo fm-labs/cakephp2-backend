@@ -34,6 +34,9 @@ class Backend {
 			$controller->layout = $config['layout'];
 			$controller->viewClass = $config['viewClass'];
 			
+			//add iframe detector
+			$controller->request->addDetector('iframe', array('callback' => array('Backend','isIframeRequest')));
+			
 			return true;
 		}
 		return false;
@@ -42,11 +45,15 @@ class Backend {
 	static public function startup(Controller $controller) {
 		
 		//iframe
-		$isIframe = (isset($controller->request->params['named']['iframe'])) ? $controller->request->params['named']['iframe'] : false;
-		if ($isIframe) {
+		if ($controller->request->is('iframe')) {
 			$controller->layout = "Backend.iframe";
 		}
-		$controller->set(compact('isIframe'));
 	}
+	
+	static public function isIframeRequest(CakeRequest $request) {
+		return (isset($request->params['named']['iframe'])) ? $request->params['named']['iframe'] : false;
+	}	
+	
+	
 }
 ?>
