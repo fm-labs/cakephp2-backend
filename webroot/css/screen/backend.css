@@ -35,8 +35,8 @@
 	/* Column Configuration */
 	.ym-column {
 		display: block;
-		overflow: hidden;
-		padding-left: 250px; /* column width */
+		overflow: visible;
+		padding-left: 175px; /* column width */
 		width: auto;
 	}
 	.ym-col1 { /* content */
@@ -47,8 +47,8 @@
 	.ym-col3 { /* sidebar */
 		position: relative;
 		float: left;
-		width: 250px; /* column width */
-		margin: 0 0 0 -250px;
+		width: 175px; /* column width */
+		margin: 0 0 0 -175px;
 	}	
 
 	/* fallback for missing media queries support*/
@@ -60,10 +60,11 @@
 	}
 
 	/* Basic Element Styling */
-	header {
+	header, footer {
 		background: #444;
 		color: #ccc;
 		overflow: hidden;
+		display: block;		
 	}
 
 	header h1 {
@@ -82,13 +83,20 @@
 	    border-width: 0 0 1px 0;	
 	}	
 	
+	#content {
+		overflow: visible;
+		min-height: 400px;
+	}
+	
 	#main .info {
 		margin-bottom: 1.5em;
 	}
 
 	footer {
-		background: #eee;
-		color: #444;
+		z-index:1;
+		min-height: 150px;
+		margin-top: 2.5em;
+		padding-bottom: 1em;
 	}
 
 	footer p {

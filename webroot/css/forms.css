@@ -38,6 +38,12 @@ input:focus, textarea:focus {
 	box-shadow: 0 0 3px #aaa; 
 }
 
+input[type="checkbox"] {
+	border: none;
+	background: transparent;
+	box-shadow: none;
+}
+
 /* SELECT */
 select {
 	border:1px solid #aaa;	

@@ -21,6 +21,11 @@
     }
   </style>
 <![endif]-->
+
+<!--[if lt IE 9]>
+<?php echo $this->Html->script('/backend/js/html5shiv'); ?>
+<![endif]-->
+
 <?php echo $this->Html->script('/backend/js/jquery-1.7.2.min'); ?>
 <?php echo $this->Html->script('/backend/js/jquery.sortable.min'); ?>
 <?php echo $this->Html->script('/backend/js/backend'); ?>

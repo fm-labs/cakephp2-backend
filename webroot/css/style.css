@@ -222,6 +222,7 @@ ul.dd-actions li ul {
 	right: 0;
 	list-style-position: outside;
 	list-style-type: none;
+	z-index: 9999;	
 }
 
 ul.dd-actions ul li,

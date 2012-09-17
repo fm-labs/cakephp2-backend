@@ -53,6 +53,7 @@
 				</div>
 			</div>
 		</div>
+		<div class="ym-clearfix"></div>
 		
 		<!-- FOOTER -->
 		<footer>
@@ -60,6 +61,7 @@
 				<?php echo $this->element('sql_dump');?>
 			</div>
 		</footer>
+		<div class="ym-clearfix"></div>
 		<!-- #FOOTER -->
 		
 		<!-- MISC -->

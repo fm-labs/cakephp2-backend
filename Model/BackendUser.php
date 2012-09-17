@@ -75,8 +75,8 @@ class BackendUser extends BackendAppModel {
 				if ($this->data[$this->alias]['password'] != $this->data[$this->alias]['password2']) {
 					#$this->invalidate('password',__d('backend',"The passwords do not match"));
 					$this->invalidate('password2',__d('backend',"The passwords do not match"));
+					$this->data[$this->alias]['password2'] = null;
 				}
-				$this->data[$this->alias]['password2'] = null;
 			}
 		} elseif (isset($this->data[$this->alias]['password'])) {
 			$this->invalidate('password', __('Password verification not submitted'));
