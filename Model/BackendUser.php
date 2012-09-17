@@ -33,6 +33,11 @@ class BackendUser extends BackendAppModel {
 				'rule' => array('notEmpty'),
 			)
 		),
+		'password2' => array(
+			'notEmpty' => array(
+				'rule' => array('notEmpty'),
+			)
+		),
 		'first_name' => array(
 			'notEmpty' => array(
 				'rule' => array('notEmpty')
@@ -57,25 +62,24 @@ class BackendUser extends BackendAppModel {
 					'password' => $oldPass
 				)
 			))) {
-				$this->invalidate('pass_old',__d('admin_panel',"The current password does not match"));
+				$this->invalidate('pass_old',__d('backend',"The current password does not match"));
 			}
 		}
-		//compare new passwords
-		if (isset($this->data[$this->alias]['password']) 
-			&&!empty($this->data[$this->alias]['password']) 
-			&& isset($this->data[$this->alias]['password2'])) {
-				
-			#$this->data[$this->alias]['password'] = null;
-			if ($this->data[$this->alias]['password'] != @$this->data[$this->alias]['password2']) {
-				#$this->invalidate('password',__d('admin_panel',"The passwords do not match"));
-				$this->invalidate('password2',__d('admin_panel',"The passwords do not match"));
-			} else {
-				$this->data[$this->alias]['password'] = $this->data[$this->alias]['password'];
+		
+		//when password field 
+		if (isset($this->data[$this->alias]['password']) && isset($this->data[$this->alias]['password2'])) {
+			if (empty($this->data[$this->alias]['password']) && empty($this->data[$this->alias]['password2'])) {
+				unset($this->data[$this->alias]['password']);
+				unset($this->data[$this->alias]['password2']);
+			} elseif (!empty($this->data[$this->alias]['password']) ) {
+				if ($this->data[$this->alias]['password'] != $this->data[$this->alias]['password2']) {
+					#$this->invalidate('password',__d('backend',"The passwords do not match"));
+					$this->invalidate('password2',__d('backend',"The passwords do not match"));
+				}
+				$this->data[$this->alias]['password2'] = null;
 			}
-			$this->data[$this->alias]['password2'] = null;
 		} elseif (isset($this->data[$this->alias]['password'])) {
 			$this->invalidate('password', __('Password verification not submitted'));
-			$this->data[$this->alias]['password'] = null;
 		}
 		return true;
 	}

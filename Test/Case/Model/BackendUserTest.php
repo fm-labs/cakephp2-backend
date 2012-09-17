@@ -7,7 +7,7 @@ App::uses('BackendUser', 'Backend.Model');
  */
 class BackendUserTest extends CakeTestCase {
 
-	public $fixture = array(
+	public $fixtures = array(
 		'plugin.backend.backend_user'	
 	);
 	
@@ -23,6 +23,7 @@ class BackendUserTest extends CakeTestCase {
 	
 	public function testAdd() {
 		//Scenario: Simple add with Username only
+		//MUST VALIDATE
 		$data = array(
 			'username' => 'test_add_1',
 		);
@@ -31,14 +32,44 @@ class BackendUserTest extends CakeTestCase {
 		$this->assertTrue($result);
 		
 		//Scenario: Simple add with Username and password
+		//MUST FAIL
 		$data = array(
 			'username' => 'test_add_1',
 			'password' => 'my_test_password',
-			'password2' => ''	
 		);
 		$this->BackendUser->create(array('BackendUser'=>$data));
 		$result = $this->BackendUser->validates();
-		$this->assertTrue($result);
+		debug($this->BackendUser->validationErrors);
+		$this->assertFalse($result);
+		$this->assertTrue(array_key_exists('password', $this->BackendUser->validationErrors));
+		
+		
+		//Scenario: Simple add with Username and password
+		//MUST FAIL
+		$data = array(
+			'username' => 'test_add_1',
+			'password' => 'my_test_password',
+			'password2' => ''
+		);
+		$this->BackendUser->create(array('BackendUser'=>$data));
+		$result = $this->BackendUser->validates();
+		debug($this->BackendUser->validationErrors);
+		$this->assertFalse($result);
+		$this->assertTrue(array_key_exists('password2', $this->BackendUser->validationErrors));
+		
+		//Scenario: Simple add with Username and password
+		//MUST FAIL
+		$data = array(
+			'username' => 'test_add_1',
+			'password' => 'my_test_password',
+			'password2' => 'wrong_test_password'
+		);
+		$this->BackendUser->create(array('BackendUser'=>$data));
+		$result = $this->BackendUser->validates();
+		$this->assertFalse($result);
+		//$this->assertTrue(array_key_exists('password', $this->BackendUser->validationErrors));
+		$this->assertTrue(array_key_exists('password2', $this->BackendUser->validationErrors));
+		debug($this->BackendUser->validationErrors);
 		
 	}
 
