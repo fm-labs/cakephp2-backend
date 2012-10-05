@@ -16,6 +16,16 @@ class BackendController extends BackendAppController {
 					array(__('Globals'),array('plugin'=>'backend','controller'=>'system', 'action' => 'globals'),null),
 				)		
 			),
+			'logs' => array(
+				'title' => __('Logs'),
+				'url' => array('plugin'=>'backend','controller'=>'log_viewer', 'action' => 'index'),
+				'actions' => array(
+					array(__('Debug'),array('plugin'=>'backend','controller'=>'log_viewer', 'action' => 'view','debug'),null),
+					array(__('Error'),array('plugin'=>'backend','controller'=>'log_viewer', 'action' => 'view','error'),null),
+					array(__('Auth'),array('plugin'=>'backend','controller'=>'log_viewer', 'action' => 'view','auth'),null),
+					array(__('Backend'),array('plugin'=>'backend','controller'=>'log_viewer', 'action' => 'view','backend'),null),
+				)		
+			),
 			'appearance' => array(
 				'title' => __('Appearance'),
 				'url' => array('plugin'=>'backend','controller'=>'appearance', 'action' => 'index'),
