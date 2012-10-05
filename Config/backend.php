@@ -1,14 +1,10 @@
 <?php
+/**
+ * Default Backend config
+ */
 $config = array('Backend' => array(
-	'Backend' => array(
-		'dashboardUrl' => array('plugin'=>'backend','controller'=>'backend','action'=>'index'), 	
+	'Dashboard' => array(
+		'url' => array('plugin'=>'backend','controller'=>'backend','action'=>'index'), 	
 	),
-	/* deprecated
-	'Layout' => array(
-		'default' => array(
-			'blocks' => array('aside','content_before','content_after')		
-		)
-	)
-	*/
 ));
 ?>

@@ -1,5 +1,6 @@
 <?php
 App::uses('BackendAppController','Backend.Controller');
+App::uses('CakeEvent','Event');
 
 class AuthController extends BackendAppController {
 	
@@ -20,20 +21,32 @@ class AuthController extends BackendAppController {
 		
 	    if ($this->request->is('post')) {
 	        if (!$this->Auth->login()) {
+	        	
+	        	//Event Backend.Auth.onLoginFail
+	        	$event = new CakeEvent('Backend.Controller.Auth.onLoginFail', $this, $this->request->data['BackendUser']);
+	        	$this->getEventManager()->dispatch($event);
+	        	
 	            $this->Session->setFlash(__d('backend','Username or password is incorrect'), 'default', array(), 'auth');	            
 	        } else {
-	        	//Write LastLogin Date
-	        	$userId = $this->Auth->user('id');
-	        	$this->BackendUser->id = $userId;
-	        	$this->BackendUser->saveField('last_login',date("Y-m-d H:i:s"));
+	        	
+	        	//Event Backend.Auth.onLogin
+	        	$event = new CakeEvent('Backend.Controller.Auth.onLogin', $this, $this->Auth->user());
+	        	$this->getEventManager()->dispatch($event);
 	        	
 	            $this->Session->setFlash(__d('backend','Login successful'));
-	            return $this->redirect($this->Auth->redirect());
+	            
+	            if ($event->result)
+	            	$redirect = $event->result;
+	            else
+	            	$redirect = $this->Auth->redirect();
+	            
+	            if ($redirect == "/")
+	            	$redirect = Configure::read('Backend.dashboardUrl');
+	            
+	            return $this->redirect($redirect);
 	        }
 	    } elseif ($this->Auth->user()) {
-	    	//$this->redirect($this->referer(array('controller'=>'backend','action'=>'index')));
-	    	//$this->redirect($this->referer(array('controller'=>'backend','action'=>'index')));
-	    	//$this->redirect(array('action'=>'session'));
+	    	$this->redirect(Configure::read('Backend.dashboardUrl'));
 	    }
 	}
 
@@ -48,6 +61,10 @@ class AuthController extends BackendAppController {
  * Auth Logout
  */	
 	public function admin_logout() {
+        //Event Backend.Auth.onLogout
+        $event = new CakeEvent('Backend.Controller.Auth.onLogout', $this, $this->Auth->user());
+        $this->getEventManager()->dispatch($event);
+        	
 	    $this->redirect($this->Auth->logout());
 	}	
 }

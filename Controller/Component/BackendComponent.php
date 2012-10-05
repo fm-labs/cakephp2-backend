@@ -1,6 +1,6 @@
 <?php
 App::uses('Component','Controller');
-App::uses('Backend','Backend.Lib');
+App::uses('BackendEventListener','Backend.Event');
 
 /**
  * 
@@ -10,30 +10,51 @@ App::uses('Backend','Backend.Lib');
  */
 class BackendComponent extends Component {
 	
-	public $controller;
-	
 	public $components = array('Session', 'Auth');
+	
+	public $viewClass = 'CakeLayout.CakeLayout';
+	
+	public $layout = 'Backend.backend';
+	
+	public $prefixes = array('admin');
 	
 	protected $_enabled = false;
 	
+	/**
+	 * Initialize Controller and CakeRequest
+	 *
+	 * This method applies Controller attributes.
+	 * Should be called in Component::initialize() or Controller::beforeFilter()
+	 *
+	 * @param Controller $controller
+	 * @param CakeRequest $request
+	 * @return boolean
+	*/
 	public function initialize(Controller $controller) {
-		$this->Auth->initialize($controller);
 		
-		if (Backend::initialize($controller)) {
-			$this->_enabled = true;
-		}
+			
+		//Attach EventListeners
+		$controller->getEventManager()->attach(new BackendEventListener());
 		
-		$this->controller = $controller;
-	}
+		//add backend detector
+		$controller->request->addDetector('backend', array('callback' => array($this,'isBackendRequest')));
+		$controller->request->addDetector('iframe', array('callback' => array($this,'isIframeRequest')));
+		
+		if ($controller->request->is('backend')) {
 	
-	public function startup(Controller $controller) {
-		
-		if ($this->_enabled) {
+			$this->_enabled = true;
+			
+			//Controller
+			$controller->layout = $this->layout;
+			$controller->viewClass = $this->viewClass;
+
 			//Auth
-			//Configure::write('Session.cookie','ADMINPANEL');
+			$controller->Components->enable('Auth',false);
+			AuthComponent::$sessionKey = "Auth.Backend";
+				
 			$this->Auth->authenticate = array(
 					'Form' => array(
-						'userModel' => 'Backend.BackendUser',
+							'userModel' => 'Backend.BackendUser',
 					)
 			);
 			$this->Auth->loginAction = array(
@@ -41,20 +62,49 @@ class BackendComponent extends Component {
 					'action'=>'login',
 					'plugin'=>'backend'
 			);
-			/*
-			$this->Auth->loginRedirect = array(
-					'controller'=>'auth',
-					'action'=>'session',
-					'plugin'=>'backend'
-			);
-			*/
-			//$this->Auth->authorize = array('Backend.backend' => array());
-			//AuthComponent::$sessionKey = "Auth.Admin"; 
-			$this->Auth->startup($controller);
-			if ($this->Auth->user()) {
-				Backend::startup($controller);
-			}
+			
 		}
 	}
+	
+	
+	public function startup(Controller $controller) {
+		
+		//iframe
+		if ($controller->request->is('iframe')) {
+			$controller->layout = "Backend.iframe";
+		}
+	}
+	
+	
+	/**
+	 * Check if given CakeRequest should be handled by Backend
+	 * by checking registered routing prefixes.
+	 * Backend can be bound to one or more routing prefixes.
+	 *
+	 * @param CakeRequest $request
+	 * @return string|bool If valid, returns name of the prefix, otherwise FALSE
+	 */
+	public function isBackendRequest(CakeRequest $request) {
+		foreach($this->prefixes as $prefix => $config) {
+			if (is_numeric($prefix)) {
+				$prefix = $config;
+				$config = array();
+			}
+			if (isset($request->params[$prefix]) && $request->params[$prefix] === true)
+				return true;
+		}
+	
+		return false;
+	}
+	
+	/**
+	 * Detector function for Iframes
+	 *
+	 * @param CakeRequest $request
+	 * @return boolean
+	 */
+	public function isIframeRequest(CakeRequest $request) {
+		return (isset($request->params['named']['iframe'])) ? $request->params['named']['iframe'] : false;
+	}	
 }
 ?>
