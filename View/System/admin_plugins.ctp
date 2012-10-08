@@ -1,8 +1,7 @@
-<?php 
-$this->extend('Backend.Common/tabs');
-$this->assign('title', 'System');
-?>
+<?php $this->Html->addCrumb(__d('backend','System'),array('action'=>'index')); ?>
+<?php $this->Html->addCrumb(__d('backend','Plugins'),array('action'=>'plugins')); ?>
 <div>
+	<h2><?php echo __d('backend','Plugins'); ?></h2>
 	<dl>
 		<?php foreach($plugins as $plugin):?>
 			<dt><?php echo $this->Html->link(Inflector::humanize($plugin),array(

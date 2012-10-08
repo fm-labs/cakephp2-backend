@@ -1,104 +1,104 @@
 <?php echo $this->extend('Backend.Common/admin_view'); ?>
-<?php echo $this->assign('title',__('Page')); ?>
+<?php echo $this->assign('title',__d('backend','Page')); ?>
 	<div class="pages view">
-			<h2><?php  echo __('Page');?></h2>
+			<h2><?php  echo __d('backend','Page');?></h2>
 				<dl>
-					<dt><?php echo __('Id'); ?></dt>
+					<dt><?php echo __d('backend','Id'); ?></dt>
 		<dd>
 			<?php echo h($page['Page']['id']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Parent Page'); ?></dt>
+		<dt><?php echo __d('backend','Parent Page'); ?></dt>
 		<dd>
 			<?php echo $this->Html->link($page['ParentPage']['title'], array('controller' => 'pages', 'action' => 'view', $page['ParentPage']['id'])); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Lft'); ?></dt>
+		<dt><?php echo __d('backend','Lft'); ?></dt>
 		<dd>
 			<?php echo h($page['Page']['lft']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Rght'); ?></dt>
+		<dt><?php echo __d('backend','Rght'); ?></dt>
 		<dd>
 			<?php echo h($page['Page']['rght']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Title'); ?></dt>
+		<dt><?php echo __d('backend','Title'); ?></dt>
 		<dd>
 			<?php echo h($page['Page']['title']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Url'); ?></dt>
+		<dt><?php echo __d('backend','Url'); ?></dt>
 		<dd>
 			<?php echo h($page['Page']['url']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Alias'); ?></dt>
+		<dt><?php echo __d('backend','Alias'); ?></dt>
 		<dd>
 			<?php echo h($page['Page']['alias']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Target'); ?></dt>
+		<dt><?php echo __d('backend','Target'); ?></dt>
 		<dd>
 			<?php echo h($page['Page']['target']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Layout View'); ?></dt>
+		<dt><?php echo __d('backend','Layout View'); ?></dt>
 		<dd>
 			<?php echo $this->Html->link($page['LayoutView']['title'], array('controller' => 'layout_views', 'action' => 'view', $page['LayoutView']['id'])); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Meta Title'); ?></dt>
+		<dt><?php echo __d('backend','Meta Title'); ?></dt>
 		<dd>
 			<?php echo h($page['Page']['meta_title']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Meta Language'); ?></dt>
+		<dt><?php echo __d('backend','Meta Language'); ?></dt>
 		<dd>
 			<?php echo h($page['Page']['meta_language']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Meta Robots Tag'); ?></dt>
+		<dt><?php echo __d('backend','Meta Robots Tag'); ?></dt>
 		<dd>
 			<?php echo h($page['Page']['meta_robots_tag']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Meta Description'); ?></dt>
+		<dt><?php echo __d('backend','Meta Description'); ?></dt>
 		<dd>
 			<?php echo h($page['Page']['meta_description']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Css Class'); ?></dt>
+		<dt><?php echo __d('backend','Css Class'); ?></dt>
 		<dd>
 			<?php echo h($page['Page']['css_class']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Hide From Nav'); ?></dt>
+		<dt><?php echo __d('backend','Hide From Nav'); ?></dt>
 		<dd>
 			<?php echo h($page['Page']['hide_from_nav']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Hide From Sitemap'); ?></dt>
+		<dt><?php echo __d('backend','Hide From Sitemap'); ?></dt>
 		<dd>
 			<?php echo h($page['Page']['hide_from_sitemap']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Published'); ?></dt>
+		<dt><?php echo __d('backend','Published'); ?></dt>
 		<dd>
 			<?php echo h($page['Page']['published']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Publish Start'); ?></dt>
+		<dt><?php echo __d('backend','Publish Start'); ?></dt>
 		<dd>
 			<?php echo h($page['Page']['publish_start']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Publish End'); ?></dt>
+		<dt><?php echo __d('backend','Publish End'); ?></dt>
 		<dd>
 			<?php echo h($page['Page']['publish_end']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Modified'); ?></dt>
+		<dt><?php echo __d('backend','Modified'); ?></dt>
 		<dd>
 			<?php echo h($page['Page']['modified']); ?>
 			&nbsp;
@@ -110,16 +110,16 @@
 	<?php $this->start('actions');?>
 	<div class="actions dd-actions">
 		<ul>
-		<li><button class="ym-button ym-actions"><?php echo __('Actions'); ?></button>
+		<li><button class="ym-button ym-actions"><?php echo __d('backend','Actions'); ?></button>
 		<ul>
-			<li><?php echo $this->Html->link(__('Edit %s',__('Page')), array('action' => 'edit', $page['Page']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete %s',__('Page')), array('action' => 'delete', $page['Page']['id']), null, __('Are you sure you want to delete # %s?', $page['Page']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List %s',__('Pages')), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New %s',__('Page')), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List %s',__('Layout Views')), array('controller' => 'layout_views', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New %s',__('Layout View')), array('controller' => 'layout_views', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List %s',__('Pages')), array('controller' => 'pages', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New %s',__('Parent Page')), array('controller' => 'pages', 'action' => 'add')); ?> </li>
+			<li><?php echo $this->Html->link(__d('backend','Edit %s',__d('backend','Page')), array('action' => 'edit', $page['Page']['id'])); ?> </li>
+		<li><?php echo $this->Form->postLink(__d('backend','Delete %s',__d('backend','Page')), array('action' => 'delete', $page['Page']['id']), null, __d('backend','Are you sure you want to delete # %s?', $page['Page']['id'])); ?> </li>
+		<li><?php echo $this->Html->link(__d('backend','List %s',__d('backend','Pages')), array('action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__d('backend','New %s',__d('backend','Page')), array('action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__d('backend','List %s',__d('backend','Layout Views')), array('controller' => 'layout_views', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__d('backend','New %s',__d('backend','Layout View')), array('controller' => 'layout_views', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__d('backend','List %s',__d('backend','Pages')), array('controller' => 'pages', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__d('backend','New %s',__d('backend','Parent Page')), array('controller' => 'pages', 'action' => 'add')); ?> </li>
 		</ul>
 		</li>
 		</ul>
@@ -131,32 +131,32 @@
 	$this->start($blockId);
 	?>
 <div class="related">
-	<h3><?php echo __('Related %s',__('Pages'));?></h3>
+	<h3><?php echo __d('backend','Related %s',__d('backend','Pages'));?></h3>
 	<?php if (!empty($page['ChildPage'])):?>
 	<div class="index">
 		<table cellpadding = "0" cellspacing = "0">
 		<tr>
-			<th><?php echo __('Id'); ?></th>
-		<th><?php echo __('Parent Id'); ?></th>
-		<th><?php echo __('Lft'); ?></th>
-		<th><?php echo __('Rght'); ?></th>
-		<th><?php echo __('Title'); ?></th>
-		<th><?php echo __('Url'); ?></th>
-		<th><?php echo __('Alias'); ?></th>
-		<th><?php echo __('Target'); ?></th>
-		<th><?php echo __('Layout View Id'); ?></th>
-		<th><?php echo __('Meta Title'); ?></th>
-		<th><?php echo __('Meta Language'); ?></th>
-		<th><?php echo __('Meta Robots Tag'); ?></th>
-		<th><?php echo __('Meta Description'); ?></th>
-		<th><?php echo __('Css Class'); ?></th>
-		<th><?php echo __('Hide From Nav'); ?></th>
-		<th><?php echo __('Hide From Sitemap'); ?></th>
-		<th><?php echo __('Published'); ?></th>
-		<th><?php echo __('Publish Start'); ?></th>
-		<th><?php echo __('Publish End'); ?></th>
-		<th><?php echo __('Modified'); ?></th>
-			<th class="actions"><?php echo __('Actions');?></th>
+			<th><?php echo __d('backend','Id'); ?></th>
+		<th><?php echo __d('backend','Parent Id'); ?></th>
+		<th><?php echo __d('backend','Lft'); ?></th>
+		<th><?php echo __d('backend','Rght'); ?></th>
+		<th><?php echo __d('backend','Title'); ?></th>
+		<th><?php echo __d('backend','Url'); ?></th>
+		<th><?php echo __d('backend','Alias'); ?></th>
+		<th><?php echo __d('backend','Target'); ?></th>
+		<th><?php echo __d('backend','Layout View Id'); ?></th>
+		<th><?php echo __d('backend','Meta Title'); ?></th>
+		<th><?php echo __d('backend','Meta Language'); ?></th>
+		<th><?php echo __d('backend','Meta Robots Tag'); ?></th>
+		<th><?php echo __d('backend','Meta Description'); ?></th>
+		<th><?php echo __d('backend','Css Class'); ?></th>
+		<th><?php echo __d('backend','Hide From Nav'); ?></th>
+		<th><?php echo __d('backend','Hide From Sitemap'); ?></th>
+		<th><?php echo __d('backend','Published'); ?></th>
+		<th><?php echo __d('backend','Publish Start'); ?></th>
+		<th><?php echo __d('backend','Publish End'); ?></th>
+		<th><?php echo __d('backend','Modified'); ?></th>
+			<th class="actions"><?php echo __d('backend','Actions');?></th>
 		</tr>
 		<?php
 			$i = 0;
@@ -183,9 +183,9 @@
 			<td><?php echo $childPage['publish_end'];?></td>
 			<td><?php echo $childPage['modified'];?></td>
 			<td class="actions">
-				<?php echo $this->Html->link(__('View'), array('controller' => 'pages', 'action' => 'view', $childPage['id'])); ?>
-				<?php echo $this->Html->link(__('Edit'), array('controller' => 'pages', 'action' => 'edit', $childPage['id'])); ?>
-				<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'pages', 'action' => 'delete', $childPage['id']), null, __('Are you sure you want to delete # %s?', $childPage['id'])); ?>
+				<?php echo $this->Html->link(__d('backend','View'), array('controller' => 'pages', 'action' => 'view', $childPage['id'])); ?>
+				<?php echo $this->Html->link(__d('backend','Edit'), array('controller' => 'pages', 'action' => 'edit', $childPage['id'])); ?>
+				<?php echo $this->Form->postLink(__d('backend','Delete'), array('controller' => 'pages', 'action' => 'delete', $childPage['id']), null, __d('backend','Are you sure you want to delete # %s?', $childPage['id'])); ?>
 			</td>
 		</tr>
 	<?php endforeach; ?>
@@ -195,7 +195,7 @@
 
 	<div class="actions">
 		<ul>
-			<li><?php echo $this->Html->link(__('New %s',__('Child Page')), array('controller' => 'pages', 'action' => 'add'));?> </li>
+			<li><?php echo $this->Html->link(__d('backend','New %s',__d('backend','Child Page')), array('controller' => 'pages', 'action' => 'add'));?> </li>
 		</ul>
 	</div>
 </div>
@@ -205,7 +205,7 @@
 	$this->end();
 
 	$this->viewVars['tabs'][] = array(
-		'title' => __('Related %s',__('Pages')),
+		'title' => __d('backend','Related %s',__d('backend','Pages')),
 		'content' => $blockId,
 		'type' => 'block'
 	);

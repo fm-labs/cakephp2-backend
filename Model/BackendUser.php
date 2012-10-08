@@ -79,7 +79,7 @@ class BackendUser extends BackendAppModel {
 				}
 			}
 		} elseif (isset($this->data[$this->alias]['password'])) {
-			$this->invalidate('password', __('Password verification not submitted'));
+			$this->invalidate('password', __d('backend','Password verification not submitted'));
 		}
 		return true;
 	}

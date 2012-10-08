@@ -2,10 +2,10 @@
 	<h2>Auth user</h2>
 	<div class="actions">
 		<ul class="actions">
-			<li><?php echo $this->Html->link(__('Change Password'),
+			<li><?php echo $this->Html->link(__d('backend','Change Password'),
 					array('plugin'=>'backend','controller'=>'backend_users','action'=>'passc','admin'=>true)
 			); ?></li>
-			<li><?php echo $this->Html->link(__('Logout'),
+			<li><?php echo $this->Html->link(__d('backend','Logout'),
 					array('plugin'=>'backend','controller'=>'auth','action'=>'logout','admin'=>true)
 			); ?></li>
 		</ul>

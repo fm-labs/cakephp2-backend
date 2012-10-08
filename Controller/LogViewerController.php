@@ -17,7 +17,7 @@ class LogViewerController extends BackendAppController {
 	
 	public function admin_view($logFile = null) {
 		if (!$logFile) {
-			$this->Session->setFlash(__('Select a Log file'));
+			$this->Session->setFlash(__d('backend','Select a Log file'));
 			$this->redirect(array('action'=>'index'));
 		}
 		
@@ -26,7 +26,7 @@ class LogViewerController extends BackendAppController {
 			$File = new File($filePath,false);
 			$log = $File->read();
 		} else {
-			$this->Session->setFlash(__('Log file %s does not exist',$logFile));
+			$this->Session->setFlash(__d('backend','Log file %s does not exist',$logFile));
 			$log = "";
 		}
 		
@@ -35,7 +35,7 @@ class LogViewerController extends BackendAppController {
 	
 	public function admin_clear($logFile = null) {
 		if (!$logFile) {
-			$this->Session->setFlash(__('Select a Log file'));
+			$this->Session->setFlash(__d('backend','Select a Log file'));
 			$this->redirect(array('action'=>'index'));
 		}
 		
@@ -43,21 +43,21 @@ class LogViewerController extends BackendAppController {
 		$File = new File($filePath,false);
 		$File->write("");
 
-		$this->Session->setFlash(__('Log file %s cleared',$logFile));
+		$this->Session->setFlash(__d('backend','Log file %s cleared',$logFile));
 		$this->redirect(array('action'=>'index'));
 	}
 	
 	public function admin_delete($logFile) {
 		if (!$logFile) {
-			$this->Session->setFlash(__('Select a Log file'));
+			$this->Session->setFlash(__d('backend','Select a Log file'));
 			$this->redirect(array('action'=>'index'));
 		}
 		
 		$filePath = $this->_getFilePath($logFile);
 		if (unlink($filePath)) {
-			$this->Session->setFlash(__('Log file %s deleted',$logFile));
+			$this->Session->setFlash(__d('backend','Log file %s deleted',$logFile));
 		} else {
-			$this->Session->setFlash(__('Log file %s could not be deleted',$logFile));
+			$this->Session->setFlash(__d('backend','Log file %s could not be deleted',$logFile));
 		}
 		$this->redirect(array('action'=>'index'));
 	}

@@ -9,6 +9,6 @@
 $pages = $this->requestAction(array('controller'=>'pages','action'=>'request_pages_by_alias','admin-side-navigation'));
 ?>
 <nav class="ym-vlist">
-	<h6 class="ym-vtitle"><?php echo __('Navigation'); ?></h6>
+	<h6 class="ym-vtitle"><?php echo __d('backend','Navigation'); ?></h6>
 	<?php echo $this->Page->templatedList($pages,'default'); ?>
 </nav>

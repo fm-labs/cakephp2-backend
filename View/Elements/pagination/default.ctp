@@ -91,7 +91,7 @@ div.pagination ul.pagination-pages li a:active {
 	if (!isset($paginationCounter)) $paginationCounter = array();
 	$paginationCounter = am(array(
 		//'format' => __d('admin_panel','Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
-		'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total')
+		'format' => __d('backend','Page {:page} of {:pages}, showing {:current} records out of {:count} total')
 	),$paginationCounter);
 	//numbers
 	if (!isset($paginationNumbers)) $paginationNumbers = array();

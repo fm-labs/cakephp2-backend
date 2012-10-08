@@ -67,7 +67,7 @@ class PagesController extends BackendAppController {
 	public function admin_view($id = null) {
 		$this->Page->id = $id;
 		if (!$this->Page->exists()) {
-			throw new NotFoundException(__('Invalid page'));
+			throw new NotFoundException(__d('backend','Invalid page'));
 		}
 		$this->set('page', $this->Page->read(null, $id));
 	}
@@ -81,11 +81,11 @@ class PagesController extends BackendAppController {
 		if ($this->request->is('post')) {
 			$this->Page->create();
 			if ($this->Page->save($this->request->data)) {
-				$this->Session->setFlash(__('The page has been saved'));
+				$this->Session->setFlash(__d('backend','The page has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->request->data = $this->Page->data;
-				$this->Session->setFlash(__('The page could not be saved. Please, try again.'));
+				$this->Session->setFlash(__d('backend','The page could not be saved. Please, try again.'));
 			}
 		}
 		$layoutViews = $this->Page->LayoutView->find('list');
@@ -103,14 +103,14 @@ class PagesController extends BackendAppController {
 	public function admin_edit($id = null) {
 		$this->Page->id = $id;
 		if (!$this->Page->exists()) {
-			throw new NotFoundException(__('Invalid page'));
+			throw new NotFoundException(__d('backend','Invalid page'));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Page->save($this->request->data)) {
-				$this->Session->setFlash(__('The page has been saved'));
+				$this->Session->setFlash(__d('backend','The page has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The page could not be saved. Please, try again.'));
+				$this->Session->setFlash(__d('backend','The page could not be saved. Please, try again.'));
 			}
 		} else {
 			$this->request->data = $this->Page->read(null, $id);
@@ -134,13 +134,13 @@ class PagesController extends BackendAppController {
 		}
 		$this->Page->id = $id;
 		if (!$this->Page->exists()) {
-			throw new NotFoundException(__('Invalid page'));
+			throw new NotFoundException(__d('backend','Invalid page'));
 		}
 		if ($this->Page->delete()) {
-			$this->Session->setFlash(__('Page deleted'));
+			$this->Session->setFlash(__d('backend','Page deleted'));
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->Session->setFlash(__('Page was not deleted'));
+		$this->Session->setFlash(__d('backend','Page was not deleted'));
 		$this->redirect(array('action' => 'index'));
 	}
 }

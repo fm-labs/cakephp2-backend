@@ -1,6 +1,7 @@
+<?php $this->Html->addCrumb(__d('backend','System'),array('action'=>'index')); ?>
+<?php $this->Html->addCrumb(__d('backend','Globals'),array('action'=>'globals')); ?>
 <div>
-	<h1><?php echo __d('backend',"CAKEPHP Globals");?></h1>
-	
+	<h2><?php echo __d('backend','CAKEPHP Globals'); ?></h2>
 	<dl>
 		<?php foreach($globals as $global):?>
 			<dt><?php echo $global; ?>&nbsp;</dt>

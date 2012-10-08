@@ -4,7 +4,7 @@
 <?php $this->SyntaxHighlighter->loadBrush('php'); ?>
 
 	<div class="pages index">
-		<h2><?php echo __('Pages');?></h2>
+		<h2><?php echo __d('backend','Pages');?></h2>
 		
 		<table cellpadding="0" cellspacing="0">
 		<tbody>
@@ -15,7 +15,7 @@
 					<th><?php echo $this->Paginator->sort('rght');?></th>
 					<th><?php echo $this->Paginator->sort('title');?></th>
 					<th><?php echo $this->Paginator->sort('alias');?></th>
-					<th class="actions"><?php echo __('Actions');?></th>
+					<th class="actions"><?php echo __d('backend','Actions');?></th>
 		</tr>
 		<?php
 		foreach ($pages as $page): ?>
@@ -33,9 +33,9 @@
 		<ul class="actions dd-actions">
 			<li><button class="ym-button ym-actions">Actions</button>
 			<ul>
-			<li><?php echo $this->Html->link(__('View'), array('action' => 'view', $page['Page']['id'])); ?></li>
-			<li><?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $page['Page']['id'])); ?></li>
-			<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $page['Page']['id']), null, __('Are you sure you want to delete # %s?', $page['Page']['id'])); ?></li>
+			<li><?php echo $this->Html->link(__d('backend','View'), array('action' => 'view', $page['Page']['id'])); ?></li>
+			<li><?php echo $this->Html->link(__d('backend','Edit'), array('action' => 'edit', $page['Page']['id'])); ?></li>
+			<li><?php echo $this->Form->postLink(__d('backend','Delete'), array('action' => 'delete', $page['Page']['id']), null, __d('backend','Are you sure you want to delete # %s?', $page['Page']['id'])); ?></li>
 			</ul>
 		</ul>
 		
@@ -50,11 +50,11 @@
 	<?php $this->start('actions');?>
 	<div class="actions">
 		<ul class="dd-actions">
-		<li><button class="ym-button ym-actions"><?php echo __('Actions'); ?></button>
+		<li><button class="ym-button ym-actions"><?php echo __d('backend','Actions'); ?></button>
 			<ul>
-				<li><?php echo $this->Html->link(__('New %s',__('Page')), array('action' => 'add')); ?></li>
-				<li><?php echo $this->Html->link(__('List %s',__('Pages')), array('controller' => 'pages', 'action' => 'index')); ?> </li>
-				<li><?php echo $this->Html->link(__('New %s',__('Parent Page')), array('controller' => 'pages', 'action' => 'add')); ?> </li>
+				<li><?php echo $this->Html->link(__d('backend','New %s',__d('backend','Page')), array('action' => 'add')); ?></li>
+				<li><?php echo $this->Html->link(__d('backend','List %s',__d('backend','Pages')), array('controller' => 'pages', 'action' => 'index')); ?> </li>
+				<li><?php echo $this->Html->link(__d('backend','New %s',__d('backend','Parent Page')), array('controller' => 'pages', 'action' => 'add')); ?> </li>
 			</ul>
 		</li>
 		</ul>

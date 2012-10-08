@@ -66,4 +66,14 @@ class SystemController extends BackendAppController {
 		$this->set(compact('plugins'));
 	}
 	
+	public function admin_datetime() {
+		
+		$data = array();
+		
+		$data['dateDefaultTimezoneGet'] = date_default_timezone_get();
+		$data['dateTimeZoneIniGet'] = ini_get('date.timezone');
+		
+		$this->set(compact('data'));
+	}
+	
 }

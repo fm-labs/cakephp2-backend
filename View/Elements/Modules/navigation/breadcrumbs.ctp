@@ -39,10 +39,10 @@ nav.be-breadcrumbs ul li a:hover {
 </style>
 <div class="module">
 	<nav class="be-breadcrumbs">
-		<?php #echo $this->Html->getCrumbs('&raquo;', __('Dashboard')); ?>
+		<?php #echo $this->Html->getCrumbs('&raquo;', __d('backend','Dashboard')); ?>
 		<?php echo $this->Html->getCrumbList(array(), array(
 			'url' => Configure::read('Backend.Dashboard.url'),
-			'text' => __('Dashboard')		
+			'text' => __d('backend','Dashboard')		
 		)); ?>
 	</nav>
 </div>
