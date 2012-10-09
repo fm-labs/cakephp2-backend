@@ -40,7 +40,10 @@ class BackendComponent extends Component {
 		$controller->request->addDetector('backend', array('callback' => array($this,'isBackendRequest')));
 		$controller->request->addDetector('iframe', array('callback' => array($this,'isIframeRequest')));
 		
+		
 		if ($controller->request->is('backend')) {
+			
+			$controller->Components->load('Auth');
 	
 			$this->_enabled = true;
 			
@@ -49,7 +52,7 @@ class BackendComponent extends Component {
 			$controller->viewClass = $this->viewClass;
 
 			//Auth
-			$controller->Components->enable('Auth',false);
+			//$controller->Components->enable('Auth',false);
 			AuthComponent::$sessionKey = "Auth.Backend";
 				
 			$this->Auth->authenticate = array(
@@ -58,9 +61,10 @@ class BackendComponent extends Component {
 					)
 			);
 			$this->Auth->loginAction = array(
-					'controller'=>'auth',
+					'plugin' => 'backend',
+					'controller'=> 'auth',
 					'action'=>'login',
-					'plugin'=>'backend'
+					
 			);
 			
 		}
