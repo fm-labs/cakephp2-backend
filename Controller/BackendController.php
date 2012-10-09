@@ -4,6 +4,8 @@ App::uses('CakeLayoutModules', 'CakeLayout.Lib');
 
 class BackendController extends BackendAppController {
 
+	public function admin_home() {}
+	
 	public function admin_index() {
 		
 		$dashboard = array(

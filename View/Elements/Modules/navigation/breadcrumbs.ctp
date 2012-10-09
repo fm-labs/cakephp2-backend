@@ -41,7 +41,7 @@ nav.be-breadcrumbs ul li a:hover {
 	<nav class="be-breadcrumbs">
 		<?php #echo $this->Html->getCrumbs('&raquo;', __d('backend','Dashboard')); ?>
 		<?php echo $this->Html->getCrumbList(array(), array(
-			'url' => Configure::read('Backend.Dashboard.url'),
+			'url' => array('plugin'=>'backend','controller'=>'backend','action'=>'home'),
 			'text' => __d('backend','Dashboard')		
 		)); ?>
 	</nav>

@@ -2,7 +2,7 @@
 App::uses('AppHelper','View/Helper');
 
 /**
- * Display Helper
+ * BackendHtmlHelper Helper
  * 
  * Helper class that holds some useful function to output data
  * 
@@ -10,7 +10,7 @@ App::uses('AppHelper','View/Helper');
  * @property HtmlHelper $Html
  * @property JqueryCollapsableHelper $JqueryCollapsable
  */
-class DisplayHelper extends AppHelper {
+class BackendHtmlHelper extends AppHelper {
 
 	public $helpers = array('Html','Jquery.JqueryCollapsable');
 	

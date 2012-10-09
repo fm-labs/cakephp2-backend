@@ -16,10 +16,6 @@ class BackendComponent extends Component {
 	
 	public $layout = 'Backend.backend';
 	
-	public $prefixes = array('admin');
-	
-	protected $_enabled = false;
-	
 	/**
 	 * Initialize Controller and CakeRequest
 	 *
@@ -45,8 +41,6 @@ class BackendComponent extends Component {
 			
 			$controller->Components->load('Auth');
 	
-			$this->_enabled = true;
-			
 			//Controller
 			$controller->layout = $this->layout;
 			$controller->viewClass = $this->viewClass;
@@ -89,16 +83,7 @@ class BackendComponent extends Component {
 	 * @return string|bool If valid, returns name of the prefix, otherwise FALSE
 	 */
 	public function isBackendRequest(CakeRequest $request) {
-		foreach($this->prefixes as $prefix => $config) {
-			if (is_numeric($prefix)) {
-				$prefix = $config;
-				$config = array();
-			}
-			if (isset($request->params[$prefix]) && $request->params[$prefix] === true)
-				return true;
-		}
-	
-		return false;
+		return defined('BACKEND');
 	}
 	
 	/**
