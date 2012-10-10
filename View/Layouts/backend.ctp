@@ -1,3 +1,4 @@
+<?php $loggedInUser = AuthComponent::user(); ?>
 <?php echo $this->Html->docType('html5'); ?>
 <html>
 	<?php echo $this->Html->charset(); ?>
@@ -35,7 +36,9 @@
 					<!-- SIDENAV -->
 					<aside class="ym-col3" id="aside-left">
 						<div class="ym-cbox">
+							<?php if ($loggedInUser):?>
 							<?php echo $this->Layout->fetch('left')?>
+							<?php endif; ?>
 						</div>
 					</aside>
 					<!-- #SIDENAV -->
