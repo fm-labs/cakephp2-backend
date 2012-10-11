@@ -68,7 +68,7 @@
 		<!-- #FOOTER -->
 		
 		<!-- MISC -->
-		<div id="be-user-login" style="position: absolute;right:0; top:0;margin:10px 10px 0 0;color:#FFF">
+		<div id="be-user-login" style="position: absolute;right:0; top:0;">
 		<?php echo $this->Layout->module('Backend.user/login'); ?>
 		</div>
 		<div id="spinner"></div>
