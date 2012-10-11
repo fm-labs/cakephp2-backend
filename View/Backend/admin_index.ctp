@@ -11,8 +11,7 @@
 }
 
 .dashboard-item > a {
-	margin: 0;
-	padding-left: 60px;
+	margin: 0 0 0 60px;
 	font-weight: bold;
 	font-size: 140%;
 }
