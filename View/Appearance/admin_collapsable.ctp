@@ -1,4 +1,4 @@
-<?php $this->Helpers->load('Backend.Display'); ?>
+<?php $this->Helpers->load('Backend.BackendHtml'); ?>
 <?php $this->Helpers->load('SyntaxHighlighter.SyntaxHighlighter'); ?>
 <?php $this->SyntaxHighlighter->loadBrush('html'); ?>
 <?php $this->SyntaxHighlighter->loadBrush('php'); ?>
@@ -37,7 +37,7 @@
 		?>
 		<div class="example">
 			<?php 
-			$collapsableNestedList = $this->Display->collapsableNestedList($list,array(
+			$collapsableNestedList = $this->BackendHtml->collapsableNestedList($list,array(
 					'collapse'=>true,
 					'pathActive' => array('RootNode1.SubNode1.Subnode1-1','RootNode2'),
 					'pathHidden' => array('RootNode3'),

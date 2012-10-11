@@ -1,4 +1,4 @@
-<?php $this->Helpers->load('Backend.Display'); ?>
+<?php $this->Helpers->load('Backend.BackendHtml'); ?>
 <?php $this->Helpers->load('SyntaxHighlighter.SyntaxHighlighter'); ?>
 <?php $this->SyntaxHighlighter->loadBrush('html'); ?>
 <?php $this->SyntaxHighlighter->loadBrush('php'); ?>
