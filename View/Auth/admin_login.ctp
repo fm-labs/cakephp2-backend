@@ -11,6 +11,12 @@
 			?>
 		</fieldset>
 		<?php echo $this->Form->end(); ?>
+		
+		<div class="auth_info" style="font-size: 80%; color: #CCC; margin-top: 30px;">
+			<?php echo date('d.M.Y H:i:s'); ?> |
+			<?php echo $this->request->clientIp(); ?><br />
+			<?php echo env('HTTP_USER_AGENT') ?> 
+		</div>
 	</div>
 
 </div>

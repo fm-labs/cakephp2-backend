@@ -35,21 +35,17 @@ class AuthController extends BackendAppController {
 	        	
 	            $this->Session->setFlash(__d('backend','Login successful'));
 	            
+	            //TODO should the event result return an redirect url?
 	            if ($event->result)
 	            	$redirect = $event->result;
 	            else
 	            	$redirect = $this->Auth->redirect();
 
-	            /*
-	            if ($redirect == "/")
-	            	$redirect = Configure::read('Backend.dashboardUrl');
-	            */
-	            
+	            $this->redirect($redirect);
 	        }
 	    } elseif ($this->Auth->user()) {
-	    	$redirect = $this->referer(array('plugin'=>'backend','controller'=>'auth','action'=>'user'));
+	        $this->redirect($this->referer(array('plugin'=>'backend','controller'=>'auth','action'=>'home')));
 	    }
-        $this->redirect($redirect);
 	}
 
 /**
