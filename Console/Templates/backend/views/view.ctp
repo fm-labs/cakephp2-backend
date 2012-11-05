@@ -22,17 +22,19 @@
 <div class="actions">
 	<ul>
 <?php
-	echo "\t\t<li><?php echo \$this->Html->link(__('Edit " . $singularHumanName ."'), array('action' => 'edit', \${$singularVar}['{$modelClass}']['{$primaryKey}'])); ?> </li>\n";
-	echo "\t\t<li><?php echo \$this->Form->postLink(__('Delete " . $singularHumanName . "'), array('action' => 'delete', \${$singularVar}['{$modelClass}']['{$primaryKey}']), null, __('Are you sure you want to delete # %s?', \${$singularVar}['{$modelClass}']['{$primaryKey}'])); ?> </li>\n";
-	echo "\t\t<li><?php echo \$this->Html->link(__('List " . $pluralHumanName . "'), array('action' => 'index')); ?> </li>\n";
-	echo "\t\t<li><?php echo \$this->Html->link(__('New " . $singularHumanName . "'), array('action' => 'add')); ?> </li>\n";
+	echo "\t\t<li><?php echo \$this->Html->link(__('Edit %s',__('" . $singularHumanName ."')), array('action' => 'edit', \${$singularVar}['{$modelClass}']['{$primaryKey}'])); ?> </li>\n";
+	echo "\t\t<li><?php echo \$this->Form->postLink(__('Delete %s',__('" . $singularHumanName . "')), array('action' => 'delete', \${$singularVar}['{$modelClass}']['{$primaryKey}']), null, __('Are you sure you want to delete # %s?', \${$singularVar}['{$modelClass}']['{$primaryKey}'])); ?> </li>\n";
+	echo "\t\t<li><?php echo \$this->Html->link(__('List %s',__('" . $pluralHumanName . "')), array('action' => 'index')); ?> </li>\n";
+	echo "\t\t<li><?php echo \$this->Html->link(__('New %s',__('" . $singularHumanName . "')), array('action' => 'add')); ?> </li>\n";
 
 	$done = array();
 	foreach ($associations as $type => $data) {
 		foreach ($data as $alias => $details) {
 			if ($details['controller'] != $this->name && !in_array($details['controller'], $done)) {
-				echo "\t\t<li><?php echo \$this->Html->link(__('List " . Inflector::humanize($details['controller']) . "'), array('controller' => '{$details['controller']}', 'action' => 'index')); ?> </li>\n";
-				echo "\t\t<li><?php echo \$this->Html->link(__('New " .  Inflector::humanize(Inflector::underscore($alias)) . "'), array('controller' => '{$details['controller']}', 'action' => 'add')); ?> </li>\n";
+				echo "\t\t<li><?php echo \$this->Html->link(__('List %s',__('" . Inflector::humanize($details['controller']) . "')), 
+					array('controller' => '{$details['controller']}', 'action' => 'index')); ?> </li>\n";
+				echo "\t\t<li><?php echo \$this->Html->link(__('New %s',__('" .  Inflector::humanize(Inflector::underscore($alias)) . "')), 
+					array('controller' => '{$details['controller']}', 'action' => 'add')); ?> </li>\n";
 				$done[] = $details['controller'];
 			}
 		}
@@ -68,12 +70,13 @@ foreach ($fields as $field) {
 if (!empty($associations['hasOne'])) :
 	foreach ($associations['hasOne'] as $alias => $details): ?>
 	<div class="related">
+		<h3><?php echo "<?php echo __('Related %s',__('" . Inflector::humanize($details['controller']) . "')); ?>"; ?></h3>
 		<div class="actions">
 			<ul>
-				<li><?php echo "<?php echo \$this->Html->link(__('Edit " . Inflector::humanize(Inflector::underscore($alias)) . "'), array('controller' => '{$details['controller']}', 'action' => 'edit', \${$singularVar}['{$alias}']['{$details['primaryKey']}'])); ?></li>\n"; ?>
+				<li><?php echo "<?php echo \$this->Html->link(__('Edit %s',__('" . Inflector::humanize(Inflector::underscore($alias)) . "')), 
+					array('controller' => '{$details['controller']}', 'action' => 'edit', \${$singularVar}['{$alias}']['{$details['primaryKey']}'])); ?></li>\n"; ?>
 			</ul>
 		</div>
-		<h3><?php echo "<?php echo __('Related " . Inflector::humanize($details['controller']) . "'); ?>"; ?></h3>
 	<?php echo "<?php if (!empty(\${$singularVar}['{$alias}'])): ?>\n"; ?>
 		<dl>
 	<?php
@@ -102,12 +105,13 @@ foreach ($relations as $alias => $details):
 	?>
 <div class="related">
 	<h3><?php echo "<?php echo __('Related " . $otherPluralHumanName . "'); ?>"; ?></h3>
-	<table cellpadding = "0" cellspacing = "0">
 	<div class="actions">
 		<ul>
-			<li><?php echo "<?php echo \$this->Html->link(__('New " . Inflector::humanize(Inflector::underscore($alias)) . "'), array('controller' => '{$details['controller']}', 'action' => 'add')); ?>"; ?> </li>
+			<li><?php echo "<?php echo \$this->Html->link(__('New %s',__('" . Inflector::humanize(Inflector::underscore($alias)) . "')), 
+				array('controller' => '{$details['controller']}', 'action' => 'add')); ?>"; ?> </li>
 		</ul>
 	</div>
+	<table cellpadding = "0" cellspacing = "0">
 	<?php echo "<?php if (!empty(\${$singularVar}['{$alias}'])): ?>\n"; ?>
 	<tr>
 <?php
@@ -128,9 +132,12 @@ echo "\t<?php
 
 			echo "\t\t\t<td class=\"actions\">\n";
 			echo "\t\t\t<ul class=\"actions\">\n";
-			echo "\t\t\t\t<li><?php echo \$this->Html->link(__('View'), array('controller' => '{$details['controller']}', 'action' => 'view', \${$otherSingularVar}['{$details['primaryKey']}'])); ?></li>\n";
-			echo "\t\t\t\t<li><?php echo \$this->Html->link(__('Edit'), array('controller' => '{$details['controller']}', 'action' => 'edit', \${$otherSingularVar}['{$details['primaryKey']}'])); ?></li>\n";
-			echo "\t\t\t\t<li><?php echo \$this->Form->postLink(__('Delete'), array('controller' => '{$details['controller']}', 'action' => 'delete', \${$otherSingularVar}['{$details['primaryKey']}']), null, __('Are you sure you want to delete # %s?', \${$otherSingularVar}['{$details['primaryKey']}'])); ?></li>\n";
+			echo "\t\t\t\t<li><?php echo \$this->Html->link(__('View'), 
+				array('controller' => '{$details['controller']}', 'action' => 'view', \${$otherSingularVar}['{$details['primaryKey']}'])); ?></li>\n";
+			echo "\t\t\t\t<li><?php echo \$this->Html->link(__('Edit'), 
+				array('controller' => '{$details['controller']}', 'action' => 'edit', \${$otherSingularVar}['{$details['primaryKey']}'])); ?></li>\n";
+			echo "\t\t\t\t<li><?php echo \$this->Form->postLink(__('Delete'), 
+				array('controller' => '{$details['controller']}', 'action' => 'delete', \${$otherSingularVar}['{$details['primaryKey']}']), null, __('Are you sure you want to delete # %s?', \${$otherSingularVar}['{$details['primaryKey']}'])); ?></li>\n";
 			echo "\t\t\t</ul>\n";
 			echo "\t\t\t</td>\n";
 		echo "\t\t</tr>\n";

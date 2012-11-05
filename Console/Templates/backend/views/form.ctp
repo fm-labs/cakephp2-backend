@@ -25,14 +25,14 @@
 	<?php if (strpos($action, 'add') === false): ?>
 			<li><?php echo "<?php echo \$this->Form->postLink(__('Delete'), array('action' => 'delete', \$this->Form->value('{$modelClass}.{$primaryKey}')), null, __('Are you sure you want to delete # %s?', \$this->Form->value('{$modelClass}.{$primaryKey}'))); ?>"; ?></li>
 	<?php endif; ?>
-			<li><?php echo "<?php echo \$this->Html->link(__('List " . $pluralHumanName . "'), array('action' => 'index')); ?>"; ?></li>
+			<li><?php echo "<?php echo \$this->Html->link(__('List %s',__('" . $pluralHumanName . "')), array('action' => 'index')); ?>"; ?></li>
 	<?php
 			$done = array();
 			foreach ($associations as $type => $data) {
 				foreach ($data as $alias => $details) {
 					if ($details['controller'] != $this->name && !in_array($details['controller'], $done)) {
-						echo "\t\t<li><?php echo \$this->Html->link(__('List " . Inflector::humanize($details['controller']) . "'), array('controller' => '{$details['controller']}', 'action' => 'index')); ?> </li>\n";
-						echo "\t\t<li><?php echo \$this->Html->link(__('New " . Inflector::humanize(Inflector::underscore($alias)) . "'), array('controller' => '{$details['controller']}', 'action' => 'add')); ?> </li>\n";
+						echo "\t\t<li><?php echo \$this->Html->link(__('List %s',__('" . Inflector::humanize($details['controller']) . "')), array('controller' => '{$details['controller']}', 'action' => 'index')); ?> </li>\n";
+						echo "\t\t<li><?php echo \$this->Html->link(__('New %s',__('" . Inflector::humanize(Inflector::underscore($alias)) . "')), array('controller' => '{$details['controller']}', 'action' => 'add')); ?> </li>\n";
 						$done[] = $details['controller'];
 					}
 				}
@@ -42,7 +42,7 @@
 	</div>
 <?php echo "<?php echo \$this->Form->create('{$modelClass}'); ?>\n"; ?>
 	<fieldset>
-		<legend><?php printf("<?php echo __('%s', __('%s')); ?>", Inflector::humanize($action), $singularHumanName); ?></legend>
+		<legend><?php printf("<?php echo __('%s %%s', __('%s')); ?>", Inflector::humanize($action), $singularHumanName); ?></legend>
 <?php
 		echo "\t<?php\n";
 		foreach ($fields as $field) {
@@ -61,6 +61,7 @@
 ?>
 	</fieldset>
 <?php
-	echo "<?php echo \$this->Form->end(__('Submit')); ?>\n";
+	echo "<?php echo \$this->Form->button(__('Submit')); ?>\n";
+	echo "<?php echo \$this->Form->end(); ?>\n";
 ?>
 </div>
