@@ -18,6 +18,7 @@ class AuthController extends BackendAppController {
 	public function admin_login() {
 
 		$this->layout = "Backend.auth";
+		$defaultRedirect = array('plugin'=>'backend','controller'=>'backend','action'=>'home');
 		
 	    if ($this->request->is('post')) {
 	        if (!$this->Auth->login()) {
@@ -39,12 +40,13 @@ class AuthController extends BackendAppController {
 	            if ($event->result)
 	            	$redirect = $event->result;
 	            else
-	            	$redirect = $this->Auth->redirect();
+	            	//$redirect = $this->Auth->redirect();
+	            	$redirect = $defaultRedirect;
 
 	            $this->redirect($redirect);
 	        }
 	    } elseif ($this->Auth->user()) {
-	        $this->redirect($this->referer(array('plugin'=>'backend','controller'=>'auth','action'=>'home')));
+	        $this->redirect($this->referer($defaultRedirect));
 	    }
 	}
 
