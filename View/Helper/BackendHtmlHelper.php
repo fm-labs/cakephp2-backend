@@ -17,7 +17,7 @@ class BackendHtmlHelper extends AppHelper {
 	public function __construct(&$View, $settings = array())  {
 		parent::__construct($View, $settings);
 		
-		$this->Html->loadConfig('CakeLayout.display_tags');
+		$this->Html->loadConfig('Backend.display_tags');
 	}
 
 /**

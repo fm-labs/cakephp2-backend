@@ -4,9 +4,15 @@
 		<?php echo $this->Form->create('BackendUser'); ?>
 		<fieldset>
 			<legend><?php echo __d('admin_panel',"Login");?></legend>
+			<div class="row-fluid">
+				<div class="span6">
+				<?php echo $this->Form->input('username');	?>
+				</div>
+				<div class="span6">
+				<?php echo $this->Form->input('password');	?>
+				</div>
+			</div>
 			<?php
-			echo $this->Form->input('username');
-			echo $this->Form->input('password');
 			echo $this->Form->submit(__d('admin_panel',"Login"));
 			?>
 		</fieldset>

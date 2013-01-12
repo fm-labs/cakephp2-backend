@@ -12,8 +12,6 @@ class BackendComponent extends Component {
 	
 	public $components = array('Session', 'Auth');
 	
-	public $viewClass = 'CakeLayout.CakeLayout';
-	
 	public $layout = 'Backend.backend';
 	
 	/**
@@ -28,7 +26,6 @@ class BackendComponent extends Component {
 	*/
 	public function initialize(Controller $controller) {
 		
-			
 		//Attach EventListeners
 		$controller->getEventManager()->attach(new BackendEventListener());
 		
@@ -43,7 +40,7 @@ class BackendComponent extends Component {
 	
 			//Controller
 			$controller->layout = $this->layout;
-			$controller->viewClass = $this->viewClass;
+			$controller->viewClass = 'Backend.Backend';
 
 			//Auth
 			//$controller->Components->enable('Auth',false);
@@ -58,9 +55,7 @@ class BackendComponent extends Component {
 					'plugin' => 'backend',
 					'controller'=> 'auth',
 					'action'=>'login',
-					
 			);
-			
 		}
 	}
 	
@@ -83,7 +78,13 @@ class BackendComponent extends Component {
 	 * @return string|bool If valid, returns name of the prefix, otherwise FALSE
 	 */
 	public function isBackendRequest(CakeRequest $request) {
-		return defined('BACKEND');
+		
+		//TODO remove global constant
+		if (defined('BACKEND'))
+			return true;
+		
+		if (isset($request->params['admin']) && $request->params['admin'] === true)
+			return true;
 	}
 	
 	/**

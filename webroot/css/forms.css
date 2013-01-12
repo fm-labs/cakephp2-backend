@@ -1,12 +1,15 @@
 /********************************/
-/* FORM I */
-/********************************/
+/* FORM I 
 
 form {}
 
 form div { clear: none; }
 
 form div.submit { padding: 0; margin: 10px 0 0 0; }
+
+*/
+
+/* INPUT, TEXTAREA 
 
 input, textarea, select, button {
     color: #333;
@@ -15,7 +18,6 @@ input, textarea, select, button {
     vertical-align: middle;	
 }
 
-/* INPUT, TEXTAREA */
 input, textarea { 
 	border:1px solid #aaa;
 	box-shadow: 0px 0px 3px #e9e9e9, 0 3px 5px #eee inset;
@@ -43,17 +45,20 @@ input[type="checkbox"] {
 	background: transparent;
 	box-shadow: none;
 }
+*/
 
-/* SELECT */
+/* SELECT 
 select {
 	border:1px solid #aaa;	
 	box-shadow: 0px 0px 3px #e9e9e9, 0 3px 5px #eee inset;
 	border-radius:2px;	
 }
+*/
 
 
 /** -CLEAN- **/
 
+/*
 .input {
 	margin-bottom: 0.8em;	
 }
@@ -93,6 +98,7 @@ textarea[readonly="readonly"] {
     background-color: #F5F5F5 !important;
     color: #818181 !important;
 }
+*/
 
 input.datepicker,
 input.timepicker,
@@ -104,23 +110,16 @@ input.datetimepicker {
 	width: 150px !important;
 }
 
-textarea {
-	height: 80px;
-}
-
 label {
-	font-size: 1em;
-    display: block;
-	margin-bottom: 2px;
 	vertical-align: top;
 	font-weight: bold;
-	color: #444;
 	vertical-align:middle;
 }
 
-fieldset {
-	overflow: hidden;
+.required label:after {
+	content: "*";
 }
+
 
 fieldset .body {
 	margin: 0;
@@ -153,15 +152,7 @@ fieldset.collapsed > .body {
 	-o-transition: height 2s; /* Opera */	
 }
 
-.required label:after {
-	content: "*";
-}
-
-/* Checkbox / Radio */
-.checkbox,
-.radio {
-}
-
+/* Checkbox / Radio 
 .checkbox input,
 .radio input {
 	width: auto;
@@ -188,9 +179,10 @@ fieldset.collapsed > .body {
     width: 180px;
 	margin-bottom: 5px;
 }
+*/
 
 
-/* Form Errors */
+/* Form Errors 
 .error label {
 	color: #C73E14;	
 }
@@ -200,8 +192,9 @@ div.error-message {
 	font-weight: normal;
 	background: none;
 }
+*/
 
-/* Buttons */
+/* Buttons 
 a.button,
 input[type="submit"] {
 	background: none repeat scroll 0 0 #808080;
@@ -226,63 +219,8 @@ input[type="submit"]:HOVER {
 	box-shadow: 0 0 6px #8AB858;
 	background: none repeat scroll 0 0 #808080;
 }
-
-.buttonset {
-	background: #e9e9e9;
-	padding: 15px;
-	border: 1px solid #ccc;
-	text-align: right;
-}
-
-.buttonset input,
-.buttonset a {
-	margin-right: 5px;	
-}
-
-/** FM Definitions **/
+*/
 
 
-.fm_checkbox_multiple_2,
-.fm_checkbox_multiple_3,
-.fm_checkbox_multiple_4 {
-	display:inline-block;
-	overflow:hidden;
-}
-
-.fm_checkbox_multiple_2 { width: 49%; }
-.fm_checkbox_multiple_3 { width: 32%; }
-.fm_checkbox_multiple_4 { width: 24.5%; }
-
-/* Text */
-.fm_text_year { width: 45px; }
-.fm_text_unit { width: 55px; }
-.fm_text_money { width: 70px; text-align:right; }
-.w25 .fm_text_money { width: 79px; }
-.fm_text_factor { width: 220px; }
-.fm_input_nr1 { width: 10px; }
-.fm_input_nr2 { width: 20px; }
-.fm_input_nr3 { width: 30px; }
-.fm_input_nr4 { width: 40px; }
-.fm_input_nr5 { width: 50px; }
-.fm_input_nr6 { width: 60px; }
-
-/* Textarea */
-.fm_textarea_tiny { height: 50px; }
-.fm_textarea_small { height: 100px; }
-.fm_textarea_big { height: 200px; }
-
-/* Select */
-.date select,.datetime select { width: 112px;}
-.time select { width: 60px; }
-.fm_select_cur { width: 80px;}
-.fm_select_factor { width: 115px; margin-left:5px;}
-.fm_select_qty { width:75px; }
-.fm_select_list {width:125px;}
-
-/** Two Column Form */
-.ym-g50 input[type="text"],
-.ym-g50 textarea {
-	width: 95%;
-}
 
 

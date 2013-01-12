@@ -1,3 +1,7 @@
+
+		
+<?php return false; ?>
+
 <?php echo $this->Html->css('/backend/css/cake'); ?>
 
  <!-- mobile viewport optimisation -->

@@ -9,82 +9,39 @@
  * 
  */
 //TODO move css to css file
-//TODO use CSS3 gradients instead of background-images
 ?>
 <style>
-div.pagination {
+.pagination-wrap {
     margin: 10px 0 0;
     overflow: hidden;
-    padding: 0;
 }
-div.pagination .pagination-counter {
+
+.pagination-wrap .pagination-counter {
     float: left;
     margin: 0;
-    text-align: left;
-    background: repeat-x scroll 0 0 #EBEBEB;
-	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAYCAMAAAAMEmfoAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACdQTFRF6+vr8fHx9fX17+/v8/Pz9PT08vLy7Ozs7u7u7e3t8PDw+fn59/f3qAGAjAAAACdJREFUeNocwQkSABAMBMElIQf/f68p3Tq6mlx0bg62jMli8HsCDAAMxwB8y67ZSgAAAABJRU5ErkJggg==);
-    border-color: #DEDEDE #C4C4C4 #C4C4C4 #CFCFCF;
-    border-style: solid;
-    border-width: 1px;
-    color: #4A4A4A;
-    display: block;
-    float: left;
-    font-weight: bold;
-    padding: 6px 8px;
-}
-div.pagination ul.pagination-pages {
-    float: right;
-    margin: 0;
-    padding: 0;
-    text-align: right;
-}
-div.pagination ul.pagination-pages li {
-    background: repeat-x scroll 0 0 #EBEBEB;
-	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAYCAMAAAAMEmfoAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACdQTFRF6+vr8fHx9fX17+/v8/Pz9PT08vLy7Ozs7u7u7e3t8PDw+fn59/f3qAGAjAAAACdJREFUeNocwQkSABAMBMElIQf/f68p3Tq6mlx0bg62jMli8HsCDAAMxwB8y67ZSgAAAABJRU5ErkJggg==);
-	border-color: #DEDEDE #C4C4C4 #C4C4C4 #CFCFCF;
-    border-style: solid;
-    border-width: 1px;
-    color: #4A4A4A;
-    float: left;
-    font-weight: bold;
-    list-style: none outside none;
-    margin: 0 0 0 4px;
-    padding: 0;
-}
-div.pagination ul.pagination-pages li.separator {
-    padding: 6px;
-}
-div.pagination ul.pagination-pages li.current {
-    background: repeat-x scroll 0 0 #B4B4B4;
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAYCAMAAAAMEmfoAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAEhQTFRFtbW10NDQuLi409PTv7+/0tLSysrKwcHBzs7O5eXltLS0yMjI2NjY3t7etra2ubm5w8PDzMzMvb291dXV19fXxsbGu7u7xcXFmE0m2AAAAC9JREFUeNoEwYUBgCAAALBZGIABIv9/6maXJa9qshhsHkHUdLfVrPhcRieOX4ABABqAARUG5jC3AAAAAElFTkSuQmCC);
-	border-color: #CCCCCC #B1B1B1 #AFAFAF #BEBEBE;
-    border-style: solid;
-    border-width: 1px;
-    color: #515151;
-    padding: 6px;
-}
-div.pagination ul.pagination-pages li span.disabled {
-    color: #B4B4B4;
+    text-align: left;	
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     display: inline-block;
-    padding: 6px;
-}
-div.pagination ul.pagination-pages li a {
-    color: #515151;
-    display: block;
+    margin-bottom: 0;
+    margin-left: 0;
+    background-color: #FFFFFF;
+    border-color: #DDDDDD;
+    border-image: none;
+    border-style: solid;
+    border-width: 1px 1px 1px 1px;
     float: left;
-    margin: 0;
-    padding: 6px;
+    line-height: 20px;
+    padding: 4px 12px;
     text-decoration: none;
 }
-div.pagination ul.pagination-pages li a:hover, 
-div.pagination ul.pagination-pages li a:active {
-    background: repeat-x scroll 0 0 #B4B4B4;
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAYCAMAAAAMEmfoAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAEhQTFRFtbW10NDQuLi409PTv7+/0tLSysrKwcHBzs7O5eXltLS0yMjI2NjY3t7etra2ubm5w8PDzMzMvb291dXV19fXxsbGu7u7xcXFmE0m2AAAAC9JREFUeNoEwYUBgCAAALBZGIABIv9/6maXJa9qshhsHkHUdLfVrPhcRieOX4ABABqAARUG5jC3AAAAAElFTkSuQmCC);
-    border-color: #CCCCCC #B1B1B1 #AFAFAF #BEBEBE;
-    border-style: solid;
-    border-width: 1px;
-    margin: -1px;
+
+.pagination-wrap .pagination {
+    float: right;
+    margin: 0;
+    text-align: left;	
 }
+
 </style>
 <?php
 	//counter
@@ -101,17 +58,21 @@ div.pagination ul.pagination-pages li a:active {
 		'first' => 'first',
 		'last' => 'last',
 		'modulus' => 8,
-		'ellipsis' => '...'
+		'ellipsis' => '...',
+		'currentClass' => 'active', //requires CakePHP 2.1
+		'currentTag' => 'span' //requires CakePHP 2.3
 	),$paginationNumbers);
 ?>
-<div class="pagination">
-	<p class="pagination-counter"><?php
+<div class="pagination-wrap">
+	<div class="pagination-counter"><?php
 	echo $this->Paginator->counter($paginationCounter);
-	?></p>
+	?></div>
 	
-	<ul class="pagination-pages">
-		<li><?php echo $this->Paginator->prev('< ' . __d('backend','previous'), array(), null, array('class' => 'prev disabled')); ?></li>
-		<?php echo $this->Paginator->numbers($paginationNumbers); ?>
-		<li><?php echo $this->Paginator->next(__d('backend','next') . ' >', array(), null, array('class' => 'next disabled')); ?></li>
-	</ul>
+	<div class="pagination">
+		<ul>
+			<li><?php echo $this->Paginator->prev('< ' . __d('backend','previous'), array(), null, array('class prev')); ?></li>
+			<?php echo $this->Paginator->numbers($paginationNumbers); ?>
+			<li><?php echo $this->Paginator->next(__d('backend','next') . ' >', array(), null, array('class' => 'next')); ?></li>
+		</ul>
+	</div>
 </div>

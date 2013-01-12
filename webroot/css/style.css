@@ -1,16 +1,16 @@
 @CHARSET "UTF-8";
 
-body {
-	font-family: Verdana, Helvetica, Arial, sans-serif;
-}
-
+/*
 ul, ol {
 	list-style-position: inside;
 	list-style-type: none;
 }
+*/
 
 div.related {
+	border-top: 1px dashed #333333;
 	margin-bottom: 1.5em;
+	margin-top: 1em;
 }
 
 strong, b { font-weight: bold; }
@@ -22,30 +22,45 @@ iframe {
 	width: 100%;
 }
 
+/** Breadcrumbs **/
+div.breadcrumbs {
+	color: #BBB;
+	font-size: 12px;
+}
+
+div.breadcrumbs a {
+	font-size: 12px;
+	padding: 0 5px;
+}
+
 /** Scaffold View **/
 dl {
 	line-height: 2em;
 	margin: 1em 0 0 0;
-	width: 98%;
 }
+
+dl dt {
+    font-weight: bold;
+    padding-left: 4px;
+    vertical-align: top;
+    width: 20em;
+	line-height: 2em;	
+}
+
+dl dd {
+	margin: -2em 0 0 20em;
+	vertical-align: top;
+	padding: 0 4px;
+	line-height: 2em;
+}
+
+
+
 dl dd:nth-child(4n+2),
 dl dt:nth-child(4n+1) {
 	background: #f4f4f4;
 }
 
-dd {
-	margin: -2em 0 0 20em;
-	vertical-align: top;
-	padding: 0 4px;
-}
-
-
-dt {
-    font-weight: bold;
-    padding-left: 4px;
-    vertical-align: top;
-    width: 20em;
-}
 
 /** Classes **/
 
@@ -97,12 +112,6 @@ i.icon-bool-1 {
 	background-image: url(../img/icons/16x16/status.png);
 }
 
-
-/** Fonts **/
-.font1 { font-family: Verdana, Geneva, sans-serif; }
-.font2 { font-family: Hemihead, Verdana, Geneva, sans-serif; }
-.font3 { font-family: Tahoma, Geneva, sans-serif; }
-
 /** Fieldset **/
 fieldset {
 	padding: 15px 0;	
@@ -151,6 +160,13 @@ table tr th {
 	vertical-align: middle;	
 }
 
+table tr th a.asc:after {
+	content: ' ⇣';
+}
+
+table tr th a.desc:after {
+	content: ' ⇡';
+}
 
 table tr td {
 	padding: 3px 5px;
@@ -162,7 +178,6 @@ table tr:nth-child(2n+1) th[scope="row"] {
 	background-color:#fff;
 }
 
-table tr td:first-child,
 table tr th[scope="row"] {
 	background-repeat: no-repeat;
 	background-position: top left;
@@ -177,95 +192,24 @@ table tr:HOVER th[scope="row"]{
 
 
 /** Actions **/
-div.dd-actions {
-	float:right; 
-	margin-top: -32px;
-}
 
-.ym-actions:before {
-    content: "✔";
-}
-
-td.actions ul.dd-actions {
-	opacity: 0.3;
-}
-
-tr:HOVER td.actions ul.dd-actions {
-	opacity: 1;
-}
-
-ul.dd-actions{
-}
-
-.dd-actions button {
-	margin: 0;
-}
-
-ul.dd-actions  {
-	position: relative;
-	margin: 0;
-	padding: 0;
-}
-
-ul.dd-actions > li {
-	display: inline-block;
-	position: relative;
-}
-
-ul.dd-actions li ul {
-	display: none;
-	position: absolute;
-	width: 200px;
-	background-color: #FFF;
-	border: 1px solid #CCC;
-	padding: 0;
-	right: 0;
-	list-style-position: outside;
-	list-style-type: none;
-	z-index: 9999;	
-}
-
-ul.dd-actions ul li,
-ul.dd-actions ul li a {
-	font-size: 12px;
-	color: #333;
-	line-height: 18px;
-	margin: 0;
-	padding: 0;
-}
-
-ul.dd-actions ul li {
-	padding: 5px 10px;
+div.actions {
+	margin: -40px 0 10px 0;
 	text-align: right;
 }
 
-ul.dd-actions li ul li:nth-child(2n+1) {
-	background-color: #f8f8f8;
+td.actions {
+	text-align: right;
 }
 
-ul.dd-actions li ul li:HOVER  {
-	color: #333;	
-	background-color: #DDD;
+td.actions ul {
+	opacity: 0.3;
 }
 
-ul.dd-actions li:HOVER ul {
-	display: block;
-	z-index: 9999;
+tr:HOVER td.actions ul {
+	opacity: 1;
 }
 
-
-
-ul.dd-actions ul li a {	
-	background: none;
-	box-shadow: none;
-	text-shadow: none;
-	border-width: 0 0 1px 0;
-	border-radius: 0;
-}
-
-ul.dd-actions ul li a {
-	
-}
 
 /* -------------------------------------------
 		NOTIFICATIONS

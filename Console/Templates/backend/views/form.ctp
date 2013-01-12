@@ -16,6 +16,13 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 ?>
+<?php if (strpos($action, 'add') === false): ?>
+<?php echo "<?php \$this->Html->addCrumb(__('{$pluralHumanName}'),array('action'=>'index'),array()); ?>\n"; ?>
+<?php echo "<?php \$this->Html->addCrumb(__('Edit %s',__('{$singularHumanName}')),array('action'=>'edit',\$this->Form->value('{$modelClass}.id')),array('class'=>'active')); ?>\n"; ?>
+<?php else: ?>
+<?php echo "<?php \$this->Html->addCrumb(__('{$pluralHumanName}'),array('action'=>'index'),array()); ?>\n"; ?>
+<?php echo "<?php \$this->Html->addCrumb(__('Add %s',__('{$singularHumanName}')),array('action'=>'add'),array('class'=>'active')); ?>\n"; ?>
+<?php endif; ?>
 <div class="<?php echo $pluralVar; ?> form">
 
 	<h2><?php printf("<?php echo __('%s'); ?>", $singularHumanName); ?></h2>
@@ -42,7 +49,7 @@
 	</div>
 <?php echo "<?php echo \$this->Form->create('{$modelClass}'); ?>\n"; ?>
 	<fieldset>
-		<legend><?php printf("<?php echo __('%s %%s', __('%s')); ?>", Inflector::humanize($action), $singularHumanName); ?></legend>
+		<legend><?php printf("<?php echo __('%s %%s', __('%s')); ?>", Inflector::humanize(preg_replace('/^[a-z]+_/','',$action)), $singularHumanName); ?></legend>
 <?php
 		echo "\t<?php\n";
 		foreach ($fields as $field) {

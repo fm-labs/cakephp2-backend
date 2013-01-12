@@ -2,7 +2,7 @@
 <html>
 	<?php echo $this->Html->charset(); ?>
 	<head>
-		<title>Backend</title>
+		<title>Backend: 404 NotFound</title>
 		
 		<?php echo $this->fetch('meta'); ?>
 		<?php echo $this->fetch('css'); ?>
@@ -13,7 +13,7 @@
 		<!-- HEADER -->
 		<header>
 			<div class="ym-wrapper">
-				<h1>HELLO</h1>
+				<h1>404 NotFound</h1>
 			</div>
 		</header>
 		<!-- #HEADER -->

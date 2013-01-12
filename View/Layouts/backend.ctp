@@ -3,76 +3,59 @@
 <html>
 	<?php echo $this->Html->charset(); ?>
 	<head>
-		<title>Backend - <?php echo $title_for_layout; ?></title>
-		
-		<?php echo $this->element('Backend.head'); ?>
-		<?php echo $this->Html->css('/backend/css/screen/backend'); ?>
+		<title><?php echo $title_for_layout; ?></title>
 		
 		<?php echo $this->fetch('meta'); ?>
+		
+		<?php echo $this->Html->css('/backend/css/bootstrap/css/bootstrap'); ?>
+		<?php echo $this->Html->css('/backend/css/bootstrap/css/bootstrap-responsive'); ?>
+		<?php echo $this->Html->css('/backend/css/style'); ?>
+		<?php echo $this->Html->css('/backend/css/forms'); ?>
 		<?php echo $this->fetch('css'); ?>
-		<?php echo $this->fetch('script'); ?>
+		
+		<?php echo $this->Html->script('/backend/js/jquery-1.8.0.min.js'); ?>
+		<?php echo $this->fetch('script-head'); ?>
 	</head>
-	<body>
+	<body style="padding: 45px 0 40px 0;">
 		<!-- HEADER -->
 		<header>
-			<div class="ym-wrapper">
-				<?php echo $this->Layout->fetch('header'); ?>
-			</div>
+			<?php echo $this->element('Backend.layout/backend/header'); ?>
+			<?php echo $this->fetch('header'); ?>
 		</header>
 		<!-- #HEADER -->
 		
-		<!-- TOPNAV -->
-		<div id="top">
-			<div class="ym-wrapper">
-				<?php echo $this->Layout->fetch('top'); ?>
-			</div>
-		</div>
-		<div class="ym-clearfix"></div>
-		<!-- #TOPNAV -->
-		
-		<div id="main">
-			<div class="ym-wrapper">
-				<div class="ym-column">
-					<!-- SIDENAV -->
-					<aside class="ym-col3" id="aside-left">
-						<div class="ym-cbox">
-							<?php if ($loggedInUser):?>
-							<?php echo $this->Layout->fetch('left')?>
-							<?php endif; ?>
-						</div>
-					</aside>
-					<!-- #SIDENAV -->
-					
-					<!-- MAIN -->
-					<div class="ym-col1" id="content">
-						<div class="ym-cbox">
-							<?php echo $this->Session->flash(); ?>
-							<?php echo $this->Session->flash('auth'); ?>
-							<?php echo $this->Layout->fetch('@content@'); ?>
-						</div>
-					</div>
-					<!-- #MAIN -->
-					
+		<div class="container-fluid">
+			<div class="row-fluid">
+				<div class="span2">
+					<?php if ($loggedInUser):?>
+					<?php echo $this->fetch('left')?>
+					<?php endif; ?>
+				</div>
+				<div class="span10">
+					<?php echo $this->element('Backend.layout/backend/breadcrumbs'); ?>
+					<?php echo $this->Session->flash(); ?>
+					<?php echo $this->Session->flash('auth'); ?>
+					<?php echo $this->element('Backend.layout/backend/content_before'); ?>
+					<?php echo $this->fetch('content'); ?>
+					<?php echo $this->element('Backend.layout/backend/content_after'); ?>
 				</div>
 			</div>
 		</div>
-		<div class="ym-clearfix"></div>
 		
 		<!-- FOOTER -->
 		<footer>
-			<div class="ym-wrapper">
+			<div class="container-fluid">
 				<?php echo $this->element('sql_dump');?>
 			</div>
 		</footer>
-		<div class="ym-clearfix"></div>
 		<!-- #FOOTER -->
 		
 		<!-- MISC -->
-		<div id="be-user-login" style="position: absolute;right:0; top:0;">
-		<?php echo $this->Layout->module('Backend.user/login'); ?>
-		</div>
 		<div id="spinner"></div>
 		<!-- #MISC -->
-<?php $this->Js->render(); ?>
+		<?php echo $this->Html->script('/backend/js/bootstrap/bootstrap'); ?>
+		<?php echo $this->Html->script('/backend/js/backend'); ?>
+		<?php echo $this->fetch('script'); ?>
+		<?php echo $this->Js->writeBuffer(); ?>
 	</body>
 </html>

@@ -2,7 +2,7 @@
 #CakePlugin::load('Tools');
 CakePlugin::load('Curl');
 App::uses('Curl','Curl.Lib');
-App::uses('CurlOptions','Curl.Lib');
+//App::uses('CurlOptions','Curl.Lib');
 
 class CurlController extends BackendAppController {
 

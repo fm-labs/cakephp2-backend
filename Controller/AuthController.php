@@ -18,7 +18,7 @@ class AuthController extends BackendAppController {
 	public function admin_login() {
 
 		$this->layout = "Backend.auth";
-		$defaultRedirect = array('plugin'=>'backend','controller'=>'backend','action'=>'home');
+		$defaultRedirect = array('plugin'=>'backend','controller'=>'backend','action'=>'index');
 		
 	    if ($this->request->is('post')) {
 	        if (!$this->Auth->login()) {

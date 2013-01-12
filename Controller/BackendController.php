@@ -1,12 +1,17 @@
 <?php
 App::uses('BackendAppController', 'Backend.Controller');
-App::uses('CakeLayoutModules', 'CakeLayout.Lib');
 
 class BackendController extends BackendAppController {
 
-	public function admin_home() {}
+	public function index() {
+		$this->redirect(array('admin'=>true,'action'=>'index'));
+	}
 	
 	public function admin_index() {
+		
+	}
+	
+	public function admin_dashboard() {
 		
 		$dashboard = array(
 			'system' => array(
@@ -82,15 +87,6 @@ class BackendController extends BackendAppController {
 		
 		$this->set(compact('dashboard'));
 		
-	}
-	
-	public function admin_modules_available() {
-		
-		$modules = CakeLayoutModules::listAvailable();
-		
-		debug($modules);
-		
-		$this->render('admin_index');
 	}
 	
 }

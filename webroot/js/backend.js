@@ -8,12 +8,49 @@ $(document).ready(function() {
 		fieldset.toggleClass('collapsed');
     });
 
-    //Actions
-    $('td.actions > ul.actions, div.actions > ul').each(function() {
-	    var actions = $(this).html();
-	    var html = '<li><button class="ym-button ym-actions">Actions</button><ul>'+actions+'</ul></li>'
-	    $(this).html(html);
-		$(this).addClass('dd-actions');
-		$(this).parent().addClass('dd-actions');
+	//Form Buttons
+	$('button,input[type="submit"]').each(function() {
+		$(this).addClass('btn');
+	});
+	
+    //Action Buttons
+    $('td.actions,div.actions').each(function() {
+    	
+    	$(this).children('ul').each(function() {
+    		
+    		// check for heading
+        	var heading = $(this).prev('h3');
+        	if (heading.length > 0) {
+        		var h = heading.html();
+        		heading.hide();
+        	} else {
+        		var h = "Actions";
+        	}
+        	
+        	// create clone to work on
+        	var clone = $(this).clone();
+        	clone.addClass('dropdown-menu');
+        	clone.css({'right': '0', 'left': 'auto'});
+        	
+        	// create twitter-bootstrap style button
+        	var btn = $('<a>',{ 'class': 'btn dropdown-toggle', 'data-toggle': 'dropdown', 'href': '#'})
+        		.append(h+"&nbsp;")
+        		.append('<span class="caret"></span>');
+        	
+        	// create twitter-bootstrap style buttongroup
+        	var out = $('<div>',{ 'class': 'btn-group'})
+        		.append(btn)
+        		.append(clone);
+        	
+        	$(this).after(out);
+        	$(this).remove();	
+    	});
+
+    	$(this).children('a').each(function() {
+    		
+        	$(this).addClass('btn btn-mini');
+        	
+    	});
+    	
     });
 });

@@ -5,33 +5,30 @@
 	<title>
 		<?php echo __d('backend',"Login"); ?>
 	</title>
+	<?php echo $this->Html->css('/backend/css/bootstrap/css/bootstrap'); ?>
+	<?php echo $this->Html->css('/backend/css/bootstrap/css/bootstrap-responsive'); ?>
+	<?php echo $this->Html->css('/backend/css/style'); ?>
+	<?php echo $this->Html->css('/backend/css/forms'); ?>
 	<?php
 		echo $this->Html->meta('icon');
-		echo $this->Html->css('/backend/css/typography');
-		echo $this->Html->css('/backend/css/style');
-		echo $this->Html->css('/backend/css/forms');
-		echo $this->Html->css('/backend/css/screen/auth');
-
 		echo $this->fetch('script');
 		echo $this->fetch('css');
 		
 	?>
 </head>
 <body>
-	<div id="container">
+	<div class="container" style="max-width: 500px;">
 		
-		<div id="content">
 			<div id="flash">
 				<?php echo $this->Session->flash(); ?>
 				<?php echo $this->Session->flash('auth'); ?>
 			</div>
-			<div class="ym-clearfix clearfix"></div>
 			<?php echo $this->fetch('content'); ?>
-			<div class="ym-clearfix clearfix"></div>
-		</div>
-		<div class="ym-clearfix clearfix"></div>
+			
 	</div>
 
-<?php if (isset($this->Js)) echo $this->Js->writeBuffer(); ?>
+	<?php echo $this->Html->script('/backend/js/jquery-1.8.0.min.js'); ?>
+	<?php echo $this->Html->script('/backend/js/bootstrap/bootstrap'); ?>
+	<?php echo $this->Html->script('/backend/js/backend'); ?>
 </body>
 </html>
