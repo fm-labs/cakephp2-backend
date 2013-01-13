@@ -15,5 +15,13 @@ class AppearanceController extends BackendAppController {
 	
 	public function admin_collapsable() {}
 	
+	//TODO sanitation. check security concerns.
+	public function admin_flash($element = 'default', $message = 'Test Message') {
+		
+		$this->Session->setFlash($message, $element);
+		
+		$this->set(compact('element','message'));
+	}
+	
 }
 ?>

@@ -76,4 +76,16 @@ class SystemController extends BackendAppController {
 		$this->set(compact('data'));
 	}
 	
+	public function admin_session() {
+		
+		$session = $this->Session->read();
+		$this->set(compact('session'));
+	}
+	
+	public function admin_config() {
+		
+		$config = Configure::read();
+		$this->set(compact('config'));
+	}
+	
 }

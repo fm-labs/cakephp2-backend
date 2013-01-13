@@ -1,4 +1,3 @@
-<?php $loggedInUser = AuthComponent::user(); ?>
 <?php echo $this->Html->docType('html5'); ?>
 <html>
 	<?php echo $this->Html->charset(); ?>
@@ -24,21 +23,20 @@
 		</header>
 		<!-- #HEADER -->
 		
+					
 		<div class="container-fluid">
+			<?php echo $this->element('Backend.layout/backend/breadcrumbs'); ?>
+			<?php echo $this->Session->flash(); ?>
+			<?php echo $this->Session->flash('auth'); ?>
 			<div class="row-fluid">
-				<div class="span2">
-					<?php if ($loggedInUser):?>
-					<?php echo $this->fetch('left')?>
-					<?php endif; ?>
-				</div>
 				<div class="span10">
-					<?php echo $this->element('Backend.layout/backend/breadcrumbs'); ?>
-					<?php echo $this->Session->flash(); ?>
-					<?php echo $this->Session->flash('auth'); ?>
 					<?php echo $this->element('Backend.layout/backend/content_before'); ?>
 					<?php echo $this->fetch('content'); ?>
 					<?php echo $this->element('Backend.layout/backend/content_after'); ?>
 				</div>
+				<aside class="span2">
+					<?php echo $this->element('Backend.layout/backend/sidebar'); ?>
+				</aside>
 			</div>
 		</div>
 		

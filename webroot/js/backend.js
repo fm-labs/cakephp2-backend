@@ -33,7 +33,7 @@ $(document).ready(function() {
         	clone.css({'right': '0', 'left': 'auto'});
         	
         	// create twitter-bootstrap style button
-        	var btn = $('<a>',{ 'class': 'btn dropdown-toggle', 'data-toggle': 'dropdown', 'href': '#'})
+        	var btn = $('<a>',{ 'class': 'btn btn-small dropdown-toggle', 'data-toggle': 'dropdown', 'href': '#'})
         		.append(h+"&nbsp;")
         		.append('<span class="caret"></span>');
         	
@@ -51,6 +51,11 @@ $(document).ready(function() {
         	$(this).addClass('btn btn-mini');
         	
     	});
-    	
     });
+    
+    // Flash messages
+    $('.message').each(function() {
+    	$(this).addClass('alert');
+    });
+    
 });

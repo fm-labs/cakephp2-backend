@@ -7,12 +7,12 @@ class BackendController extends BackendAppController {
 		$this->redirect(array('admin'=>true,'action'=>'index'));
 	}
 	
-	public function admin_index() {
+	public function admin_dashboard() {
 		
 	}
 	
-	public function admin_dashboard() {
 		
+	public function admin_index() {
 		$dashboard = array(
 			'system' => array(
 				'title' => __d('backend','System'),
@@ -22,6 +22,8 @@ class BackendController extends BackendAppController {
 					array(__d('backend','Php Info'),array('plugin'=>'backend','controller'=>'system', 'action' => 'phpinfo'),null),
 					array(__d('backend','Date & Time Info'),array('plugin'=>'backend','controller'=>'system', 'action' => 'datetime'),null),
 					array(__d('backend','Globals'),array('plugin'=>'backend','controller'=>'system', 'action' => 'globals'),null),
+					array(__d('backend','Session'),array('plugin'=>'backend','controller'=>'system', 'action' => 'session'),null),
+					array(__d('backend','Config'),array('plugin'=>'backend','controller'=>'system', 'action' => 'config'),null),
 				)		
 			),
 			'logs' => array(
@@ -47,6 +49,7 @@ class BackendController extends BackendAppController {
 				'actions' => array(
 					array(__d('backend','Typo'),array('plugin'=>'backend','controller'=>'appearance', 'action' => 'typo'),null),
 					array(__d('backend','Form'),array('plugin'=>'backend','controller'=>'appearance', 'action' => 'form'),null),
+					array(__d('backend','Flash'),array('plugin'=>'backend','controller'=>'appearance', 'action' => 'flash'),null),
 					array(__d('backend','Collapsable'),array('plugin'=>'backend','controller'=>'appearance', 'action' => 'collapsable'),null),
 				)
 			),

@@ -12,7 +12,7 @@ App::uses('AppHelper','View/Helper');
  */
 class BackendHtmlHelper extends AppHelper {
 
-	public $helpers = array('Html','Jquery.JqueryCollapsable');
+	public $helpers = array('Html');
 	
 	public function __construct(&$View, $settings = array())  {
 		parent::__construct($View, $settings);
@@ -42,44 +42,62 @@ class BackendHtmlHelper extends AppHelper {
 /**
  * Generate Icon for given $params
  * 
- * @param mixed $params Accepts string and array. A string param is used as image-source-path or icon params depending on $type
- * @param string $type Type can be 'image' or 'icon'(default)
+ * @param string $name Icon name
  */	
-	public function icon($params,$type = 'icon') {
-		
-		//determin type
-		if (is_array($params) && isset($params['type'])) {
-			$type = $params['type'];
-			unset($params['type']);
+	public function icon($name) {
+		// boolean magic
+		if (is_bool($name)) {
+			$name = ($name === true) ? 'ok' : 'minus-sign';
 		}
-		
-		//handly icon as Html::image()
-		if ($type == 'image') {
-			if (is_array($params) && isset($params['src'])) {
-				$src = $params['src'];
-				unset($params['src']);
-			} else {
-				$src = $params;
-				$params = array();
-			}
-			return $this->Html->image($src,$params);
-		}
-		
-		//handle as css icon
-		if (!is_array($params)) {
-			$params = array('class' => 'icon ' . $params);
-		}
-		
-		return $this->Html->useTag('icon',$params);
+		return $this->Html->useTag('icon',$name);
 	}
 	
+	/**
+	 * Prints an array as DL list
+	 * 
+	 * @param array $list Array to print
+	 * @param string $parent Keypath of parent node
+	 */
+	public function printNestedList($list, $parent = null) {
+		
+		$out = "";
+		
+		foreach($list as $k => $v) {
+			$path = ($parent) ? $parent.".".$k : $k;
+			if (is_array($v) || is_object($v)) {
+				$out .= $this->printNestedList($v, $path);
+				continue;
+			}
+			
+			if (is_null($v)) {
+				$v = 'NULL';
+			}
+			elseif (is_bool($v)) {
+				$v = ($v === true) ? 'TRUE' : 'FALSE';
+			}
+			
+			$tmp = "";
+			$tmp .= $this->Html->tag('dt', $path."&nbsp;");
+			$tmp .= $this->Html->tag('dd', $v."&nbsp;");
+			
+			$out .= $tmp;
+		}
+		
+		if ($parent)
+			return $out;
+
+		return $this->Html->tag('dl',$out);
+	}
 	
+	/**
+	 * @deprecated
+	 * @param unknown_type $data
+	 * @param unknown_type $params
+	 */
 	public function collapsableNestedList($data, $params = array()) {
+		trigger_error('BackendHtmlHelper::collapsableNestedList is DEPRECATED. Use JqueryCollapsable Plugin instead!',E_USER_NOTICE);
 		return $this->JqueryCollapsable->collapsableNestedList($data, $params);
 	}
 	
-	public function actions($actions) {
-		
-	}
 }
 ?>

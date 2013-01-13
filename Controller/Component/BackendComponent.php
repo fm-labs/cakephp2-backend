@@ -14,6 +14,8 @@ class BackendComponent extends Component {
 	
 	public $layout = 'Backend.backend';
 	
+	private $_isBackendRequest = false;
+	
 	/**
 	 * Initialize Controller and CakeRequest
 	 *
@@ -36,11 +38,14 @@ class BackendComponent extends Component {
 		
 		if ($controller->request->is('backend')) {
 			
+			$this->_isBackendRequest = true;
+			
 			$controller->Components->load('Auth');
 	
 			//Controller
 			$controller->layout = $this->layout;
 			$controller->viewClass = 'Backend.Backend';
+			$controller->helpers[] = 'Backend.BackendHtml';
 
 			//Auth
 			//$controller->Components->enable('Auth',false);
@@ -68,6 +73,34 @@ class BackendComponent extends Component {
 		}
 	}
 	
+	public function beforeRender($controller) {
+
+		if ($this->_isBackendRequest) {
+			
+			// pretty flash messages
+			//TODO make configurable option to enable/disable this feature
+			$messages = $this->Session->read('Message');
+			foreach($messages as $key => $message) {
+				$type = $message['element'];
+				if (!in_array($type,array('default','success', 'error','info','warning')))
+					continue;
+				
+				$params = am(array(
+					'plugin'=>'backend',
+					'class'=>'alert',
+					'type'=>$type,
+					'title'=>Inflector::humanize($type)
+				),$message['params']);
+				
+				$this->Session->write('Message.'.$key, array(
+					'message' => $message['message'],
+					'element' => 'flash',
+					'params' => $params
+				));
+			}
+		}
+		
+	}
 	
 	/**
 	 * Check if given CakeRequest should be handled by Backend

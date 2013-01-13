@@ -1,13 +1,10 @@
-<?php $this->Html->addCrumb(__('Backend'), array('controller'=>'backend', 'action'=>'index')); ?>
-
-<div class="index backend">
-	<h1>Backend</h1>
-
-	<?php echo $this->Html->link(__('Backend Index'),array('action'=>'dashboard')); ?><br />
+<div class="index">
+	<h1>DEFAULT BACKEND INDEX</h1>
 	
-	<section class="ym-grid" style="margin-top: 1em;">
-		<?php echo $this->element('Backend.dashboard',compact('dashboard')); ?>
-	</section>	
-
+	<?php echo $this->Html->link(__('Backend Dashboard'),array('action'=>'dashboard')); ?>
 	
+	<p>
+		You can modify this page by editing:<br />
+		APP/View/Plugin/Backend/Backend/admin_dashboard.ctp
+	</p>
 </div>

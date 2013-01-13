@@ -1,4 +1,4 @@
-<?php $this->Html->addCrumb(__d('backend','System'),array('action'=>'index')); ?>
+<?php $this->Html->addCrumb(__d('backend','Systeminfo'),array('action'=>'index')); ?>
 <?php $this->Html->addCrumb(__d('backend','Date & Time'),array('action'=>'datetime')); ?>
 <div>
 	<h2><?php echo __d('backend','Date & Time'); ?></h2>
