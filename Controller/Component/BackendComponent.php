@@ -40,7 +40,12 @@ class BackendComponent extends Component {
 			
 			$this->_isBackendRequest = true;
 			
-			$controller->Components->load('Auth');
+			try {
+				Configure::load('backend');
+			} catch (Exception $e) {
+				$this->log($e->getMessage(),'debug');
+			}
+			
 	
 			//Controller
 			$controller->layout = $this->layout;
@@ -48,7 +53,7 @@ class BackendComponent extends Component {
 			$controller->helpers[] = 'Backend.BackendHtml';
 
 			//Auth
-			//$controller->Components->enable('Auth',false);
+			$controller->Components->load('Auth');
 			AuthComponent::$sessionKey = "Auth.Backend";
 				
 			$this->Auth->authenticate = array(
@@ -129,5 +134,9 @@ class BackendComponent extends Component {
 	public function isIframeRequest(CakeRequest $request) {
 		return (isset($request->params['named']['iframe'])) ? $request->params['named']['iframe'] : false;
 	}	
+	
+	public function log($msg, $type = 'debug') {
+		CakeLog::write($type, $msg, 'backend');
+	}
 }
 ?>

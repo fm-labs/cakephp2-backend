@@ -10,9 +10,23 @@ class LogViewerController extends BackendAppController {
 		$logDir = LOGS;
 		
 		$Folder = new Folder($logDir,false);
-		$logFiles = $Folder->find('.*.log');
+		$logfiles = $Folder->find('.*.log',true);
 		
-		$this->set(compact('logDir','logFiles'));
+		$files = array();
+		foreach($logfiles as $logfile) {
+			$F = new File($logDir.$logfile);
+			
+			$file = array(
+				'name' => $logfile,
+				'dir' => $logDir,
+				'size' => $F->size(),
+				'last_modified' => $F->lastChange(),
+				'last_access' => $F->lastAccess(),	
+			);
+			array_push($files,$file);
+		}
+		
+		$this->set(compact('files'));
 	}
 	
 	public function admin_view($logFile = null) {
@@ -64,5 +78,14 @@ class LogViewerController extends BackendAppController {
 	
 	protected function _getFilePath($logFile) {
 		return LOGS . $logFile . '.log';
+	}
+	
+	public function admin_rotate($alias = null) {
+		
+		App::uses('LogRotation','Backend.Log');
+		$L = new LogRotation('cron');
+		$L->rotate();
+		
+		//$this->redirect($this->referer());
 	}
 }
