@@ -106,7 +106,7 @@ foreach ($relations as $alias => $details):
 	$otherPluralHumanName = Inflector::humanize($details['controller']);
 	?>
 <div class="related">
-	<h3><?php echo "<?php echo __('Related " . $otherPluralHumanName . "'); ?>"; ?></h3>
+	<h3><?php echo "<?php echo __('Related %s',__('" . $otherPluralHumanName . "')); ?>"; ?></h3>
 	<div class="actions">
 		<ul>
 			<li><?php echo "<?php echo \$this->Html->link(__('New %s',__('" . Inflector::humanize(Inflector::underscore($alias)) . "')), 

@@ -47,7 +47,6 @@
 	//counter
 	if (!isset($paginationCounter)) $paginationCounter = array();
 	$paginationCounter = am(array(
-		//'format' => __d('admin_panel','Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
 		'format' => __d('backend','Page {:page} of {:pages}, showing {:current} records out of {:count} total')
 	),$paginationCounter);
 	//numbers

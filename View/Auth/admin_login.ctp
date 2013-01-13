@@ -3,7 +3,7 @@
 	<div id="login_form">
 		<?php echo $this->Form->create('BackendUser'); ?>
 		<fieldset>
-			<legend><?php echo __d('admin_panel',"Login");?></legend>
+			<legend><?php echo __d('backend',"Login");?></legend>
 			<div class="row-fluid">
 				<div class="span6">
 				<?php echo $this->Form->input('username');	?>
@@ -13,7 +13,7 @@
 				</div>
 			</div>
 			<?php
-			echo $this->Form->submit(__d('admin_panel',"Login"));
+			echo $this->Form->submit(__d('backend',"Login"));
 			?>
 		</fieldset>
 		<?php echo $this->Form->end(); ?>
