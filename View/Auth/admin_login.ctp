@@ -1,4 +1,4 @@
-<div id="users_login" style="margin-top:100px">
+<div id="users_login">
 
 	<div id="login_form">
 		<?php echo $this->Form->create('BackendUser'); ?>

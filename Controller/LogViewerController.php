@@ -86,6 +86,11 @@ class LogViewerController extends BackendAppController {
 		$L = new LogRotation('cron');
 		$L->rotate();
 		
-		//$this->redirect($this->referer());
+		$msg = "";
+		foreach($L->log as $log) {
+			$msg .= $log ."\n";
+		}
+		$this->Session->setFlash($msg);
+		$this->redirect($this->referer());
 	}
 }

@@ -17,10 +17,14 @@ span.be-user-auth:HOVER {
 <div class="navbar navbar-inverse navbar-fixed-top">
 	<div class="navbar-inner">
 		<div class="container-fluid">
-			<?php echo $this->Html->link('[Config:Backend.title]',
-					array('plugin'=>'backend','controller'=>'backend','action'=>'index'),
+			<?php 
+			if (Configure::read('Backend.Dashboard.title')):
+			echo $this->Html->link(Configure::read('Backend.Dashboard.title'),
+					array('plugin'=>'backend','controller'=>'backend','action'=>'dashboard'),
 					array('class'=>'brand')
-			); ?>
+			); 
+			endif; 
+			?>
 			<div class="nav-collapse collapse">
 	            <p class="navbar-text pull-right">
 				<span class="be-user-auth">
@@ -40,8 +44,10 @@ span.be-user-auth:HOVER {
 				</span>
 	            </p>
 	            <ul class="nav">
+	            	<!--  
 	            	<li><?php echo $this->Html->link('My Dashboard',
 	              		array('plugin'=>'backend','controller'=>'backend','action'=>'dashboard')); ?></li>
+	            	-->
 	            <?php foreach(CakePlugin::loaded() as $_plugin):?>
 	            	<li><?php echo $this->Html->link($_plugin,
 	              		array('plugin'=>Inflector::underscore($_plugin),'controller'=>Inflector::underscore($_plugin),'action'=>'index')); ?></li>

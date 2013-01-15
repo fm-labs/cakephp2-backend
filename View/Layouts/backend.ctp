@@ -43,10 +43,11 @@
 		<!-- FOOTER -->
 		<footer>
 			<div class="container-fluid">
-				<?php echo $this->element('sql_dump');?>
 			</div>
 		</footer>
 		<!-- #FOOTER -->
+		
+		<?php echo $this->element('Backend.debug/panel'); ?>
 		
 		<!-- MISC -->
 		<div id="spinner"></div>
