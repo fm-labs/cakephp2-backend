@@ -25,18 +25,11 @@ class BackendHtmlHelper extends AppHelper {
  * 
  * @param boolean $boolVar Boolean value
  * @param mixed $params CSS class prefix string or array with html attributes
+ * @deprecated
  */	
-	public function iconBool($boolVar, $params = array()) {
-		
-		if (!is_array($params))
-			$params = array('class' => $params);
-		
-		$params = array_merge(array(
-			'class' => 'icon-bool-'
-		),$params);
-		
-		$params['class'] .= ($boolVar == true) ? '1' : '0';
-		return $this->icon($params);
+	public function iconBool($boolVar) {
+		trigger_error("BackendHtmlHelper::iconBool() is deprecated. User icon() method instead",E_USER_NOTICE);
+		return $this->icon($boolVar);
 	}
 
 /**
