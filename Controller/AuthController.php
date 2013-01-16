@@ -1,6 +1,7 @@
 <?php
 App::uses('BackendAppController','Backend.Controller');
 App::uses('CakeEvent','Event');
+App::uses('CakeTime','Utility');
 
 class AuthController extends BackendAppController {
 	
@@ -24,17 +25,22 @@ class AuthController extends BackendAppController {
 	        if (!$this->Auth->login()) {
 	        	
 	        	//Event Backend.Auth.onLoginFail
-	        	$event = new CakeEvent('Backend.Controller.Auth.onLoginFail', $this, $this->request->data['BackendUser']);
+	        	$eventData = array(
+	        		'user' => $this->request->data['BackendUser'],
+	        		'ip' => $this->request->clientIp()
+	        	);
+	        	$event = new CakeEvent('Backend.Controller.Auth.onLoginFail', $this, $eventData);
 	        	$this->getEventManager()->dispatch($event);
 	        	
-	            $this->Session->setFlash(__d('backend','Username or password is incorrect'), 'default', array(), 'auth');	            
+	            $this->Session->setFlash(__d('backend','Login failed'), 'error', array(), 'auth');	            
 	        } else {
 	        	
 	        	//Event Backend.Auth.onLogin
 	        	$event = new CakeEvent('Backend.Controller.Auth.onLogin', $this, $this->Auth->user());
 	        	$this->getEventManager()->dispatch($event);
 	        	
-	            $this->Session->setFlash(__d('backend','Login successful'));
+	            $this->Session->setFlash(__d('backend','Login successful'), 'success');
+	            $this->Session->setFlash(__d('backend','Last login: %s', CakeTime::timeAgoInWords($this->Auth->user('last_login'))), 'default',array(),'auth');
 	            
 	            //TODO should the event result return an redirect url?
 	            if ($event->result)

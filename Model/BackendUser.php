@@ -13,14 +13,23 @@ class BackendUser extends BackendAppModel {
 			),
 			'isUnique' => array(
 				'rule' => array('isUnique'),
+				'message' => 'This username is already taken'
 			),
 		),
 		'mail' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty')
+			'emailCreate' => array(
+				'rule' => array('email'),
+				'required' => true,
+				'on' => 'create',
+				'message' => 'Enter a valid email address'
+			),
+			'email' => array(
+				'rule' => array('email'),
+				'message' => 'Enter a valid email address'
 			),
 			'isUnique' => array(
-				'rule' => array('isUnique')
+				'rule' => array('isUnique'),
+				'message' => 'This email address is already taken',
 			)
 		),
 		'pass_old' => array(
@@ -29,15 +38,19 @@ class BackendUser extends BackendAppModel {
 			)
 		),
 		'password' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
+			'minLength' => array(
+	            'rule'    => array('minLength', '8'),
+	            'message' => 'Minimum 8 characters long',
+				'allowEmpty' => true
 			)
 		),
+		/*
 		'password2' => array(
 			'notEmpty' => array(
 				'rule' => array('notEmpty'),
 			)
 		),
+		*/
 		'first_name' => array(
 			'notEmpty' => array(
 				'rule' => array('notEmpty')
@@ -66,6 +79,10 @@ class BackendUser extends BackendAppModel {
 			}
 		}
 		
+		return true;
+	}
+	
+	public function beforeSave($options = array()) {
 		//when password field 
 		if (isset($this->data[$this->alias]['password']) && isset($this->data[$this->alias]['password2'])) {
 			if (empty($this->data[$this->alias]['password']) && empty($this->data[$this->alias]['password2'])) {
@@ -73,18 +90,18 @@ class BackendUser extends BackendAppModel {
 				unset($this->data[$this->alias]['password2']);
 			} elseif (!empty($this->data[$this->alias]['password']) ) {
 				if ($this->data[$this->alias]['password'] != $this->data[$this->alias]['password2']) {
-					#$this->invalidate('password',__d('backend',"The passwords do not match"));
+					$this->invalidate('password',__d('backend',"The passwords do not match"));
 					$this->invalidate('password2',__d('backend',"The passwords do not match"));
 					$this->data[$this->alias]['password2'] = null;
+					return false;
 				}
 			}
 		} elseif (isset($this->data[$this->alias]['password'])) {
 			$this->invalidate('password', __d('backend','Password verification not submitted'));
+			$this->invalidate('password2', __d('backend','Password verification not submitted'));
+			return false;
 		}
-		return true;
-	}
-	
-	public function beforeSave($options = array()) {
+		
 		if (isset($this->data[$this->alias]['password']) && !empty($this->data[$this->alias]['password'])) {
 			$this->data[$this->alias]['password'] = AuthComponent::password($this->data[$this->alias]['password']);
 		}

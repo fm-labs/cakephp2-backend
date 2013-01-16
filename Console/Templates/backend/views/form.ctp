@@ -68,7 +68,9 @@
 ?>
 	</fieldset>
 <?php
+	echo "<div class=\"form-actions\">";
 	echo "<?php echo \$this->Form->button(__('Submit')); ?>\n";
+	echo "</div>";
 	echo "<?php echo \$this->Form->end(); ?>\n";
 ?>
 </div>

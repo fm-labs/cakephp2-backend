@@ -58,7 +58,8 @@ class BackendComponent extends Component {
 				
 			$this->Auth->authenticate = array(
 					'Form' => array(
-							'userModel' => 'Backend.BackendUser',
+						'userModel' => 'Backend.BackendUser',
+						'scope' => array('BackendUser.published' => true)
 					)
 			);
 			$this->Auth->loginAction = array(

@@ -45,6 +45,13 @@ class BackendHtmlHelper extends AppHelper {
 		return $this->Html->useTag('icon',$name);
 	}
 	
+	public function phone($number, $attr = array(), $prompt = null) {
+		
+		$title = (isset($attr['title'])) ? $attr['title'] : $number;
+		
+		return $this->Html->link($title, 'tel:'+$number, $attr, $prompt);
+	}
+	
 	/**
 	 * Prints an array as DL list
 	 * 

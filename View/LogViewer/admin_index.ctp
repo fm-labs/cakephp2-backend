@@ -48,7 +48,7 @@
 			<th class="actions"><?php echo __d('backend','Actions'); ?></th>
 		</tr>
 	<?php foreach($files as $file):?>
-		<?php $id = $file['name']; ?>
+		<?php $id = basename($file['name'],'.log'); ?>
 		<tr>
 			<td><?php echo $this->Html->link($file['dir'].$file['name'],array('action'=>'view',$id)); ?></td>
 			<td><?php echo $this->Number->toReadableSize($file['size']); ?></td>

@@ -25,7 +25,10 @@
 	
 	echo $this->Form->input('published');
 ?>
-<?php echo $this->Form->button(__d('backend','Submit'));?>
+	<div class="form-actions">
+	<?php echo $this->Form->button(__d('backend','Submit'));?>
+	</div>
+	
 	</fieldset>
 <?php echo $this->Form->end();?>
 </div>

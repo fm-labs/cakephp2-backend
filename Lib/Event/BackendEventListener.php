@@ -20,7 +20,8 @@ class BackendEventListener implements CakeEventListener {
 	 * @param CakeEvent $event
 	 */
 	public function onLoginFail(CakeEvent $event) {
-		$this->log(__("Invalid login for user '%s'", strval($event->data['username'])),'auth');
+		$this->log(__("Invalid login for user '%s' from IP %s", 
+			strval($event->data['user']['username']),strval($event->data['ip'])),'auth');
 	}
 
 	/**

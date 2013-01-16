@@ -26,8 +26,8 @@
 	foreach ($backendUsers as $backendUser): ?>
 <tr>
 	<td><?php echo h($backendUser['BackendUser']['id']); ?>&nbsp;</td>
-	<td><?php echo $this->BackendHtml->iconBool($backendUser['BackendUser']['published']); ?>&nbsp;</td>
-	<td><?php echo $this->BackendHtml->iconBool($backendUser['BackendUser']['root']); ?>&nbsp;</td>
+	<td><?php echo $this->BackendHtml->icon($backendUser['BackendUser']['published']); ?>&nbsp;</td>
+	<td><?php echo $this->BackendHtml->icon($backendUser['BackendUser']['root']); ?>&nbsp;</td>
 	<td><?php echo h($backendUser['BackendUser']['username']); ?>&nbsp;</td>
 	<td><?php echo h($backendUser['BackendUser']['first_name']); ?>&nbsp;</td>
 	<td><?php echo h($backendUser['BackendUser']['last_name']); ?>&nbsp;</td>

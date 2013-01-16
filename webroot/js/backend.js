@@ -8,9 +8,16 @@ $(document).ready(function() {
 		fieldset.toggleClass('collapsed');
     });
 
-	//Form Buttons
-	$('button,input[type="submit"]').each(function() {
-		$(this).addClass('btn');
+	$('form div.input').each(function() {
+		$(this).addClass('control-group');
+	});
+
+	$('form div.input div.error-message').each(function() {
+		$(this).addClass('help-block');
+	});
+	
+	$('form button, form input[type="submit"]').each(function() {
+		$(this).addClass('btn btn-primary');
 	});
 	
     //Action Buttons
