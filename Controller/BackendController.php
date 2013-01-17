@@ -58,6 +58,7 @@ class BackendController extends BackendAppController {
 				'url' => array('plugin'=>'backend','controller'=>'backend_users', 'action' => 'index'),
 				'actions' => array(
 					array(__d('backend','Add'),array('plugin'=>'backend','controller'=>'backend_users', 'action' => 'add'),null),
+					array(__d('backend','Current user'),array('plugin'=>'backend','controller'=>'auth', 'action' => 'user'),null),
 				)
 			),
 			'curl' => array(
@@ -67,12 +68,10 @@ class BackendController extends BackendAppController {
 					array(__d('backend','Test request'),array('plugin'=>'backend','controller'=>'curl', 'action' => 'request'),null),
 				)
 			),
-			'auth' => array(
-				'title' => __d('backend','Auth'),
-				'url' => array('plugin'=>'backend','controller'=>'auth', 'action' => 'user'),
+			'cronjobs' => array(
+				'title' => __d('backend','Cronjobs'),
+				'url' => array('plugin'=>'backend','controller'=>'cronjobs', 'action' => 'index'),
 				'actions' => array(
-					array(__d('backend','Current user'),array('plugin'=>'backend','controller'=>'auth', 'action' => 'user'),null),
-					array(__d('backend','Logout'),array('plugin'=>'backend','controller'=>'auth', 'action' => 'logout'),null),
 				)
 			),
 			'jquery' => array(
