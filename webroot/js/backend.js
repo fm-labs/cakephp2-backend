@@ -3,7 +3,7 @@ $(document).ready(function() {
 	//$('.sortable').sortable();
 
 	//Forms
-	$('fieldset.collapsable > legend').click(function(e) {
+	$('form fieldset.collapsable > legend').click(function(e) {
     	var fieldset = $(this).parent('fieldset');
 		fieldset.toggleClass('collapsed');
     });
@@ -55,7 +55,11 @@ $(document).ready(function() {
 
     	$(this).children('a').each(function() {
     		
-        	$(this).addClass('btn btn-mini');
+    		if ($(this).parent().prop("tagName") == "TD") {
+    			$(this).addClass('btn btn-mini');
+    		} else {
+    			$(this).addClass('btn btn-small');
+    		}
         	
     	});
     });
