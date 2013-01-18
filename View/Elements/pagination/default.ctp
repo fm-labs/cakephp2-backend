@@ -47,6 +47,7 @@
 	//counter
 	if (!isset($paginationCounter)) $paginationCounter = array();
 	$paginationCounter = am(array(
+		//'format' => __d('admin_panel','Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
 		'format' => __d('backend','Page {:page} of {:pages}, showing {:current} records out of {:count} total')
 	),$paginationCounter);
 	//numbers
@@ -69,7 +70,7 @@
 	
 	<div class="pagination">
 		<ul>
-			<li><?php echo $this->Paginator->prev('< ' . __d('backend','previous'), array(), null, array('class prev')); ?></li>
+			<li><?php echo $this->Paginator->prev('< ' . __d('backend','previous'), array(), null, array('class' => 'prev')); ?></li>
 			<?php echo $this->Paginator->numbers($paginationNumbers); ?>
 			<li><?php echo $this->Paginator->next(__d('backend','next') . ' >', array(), null, array('class' => 'next')); ?></li>
 		</ul>
