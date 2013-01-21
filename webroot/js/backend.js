@@ -25,13 +25,17 @@ $(document).ready(function() {
     	
     	$(this).children('ul').each(function() {
     		
-    		// check for heading
-        	var heading = $(this).prev('h3');
-        	if (heading.length > 0) {
-        		var h = heading.html();
-        		heading.hide();
-        	} else {
-        		var h = "Actions";
+    		console.log($(this).data());
+    		
+    		// heading
+    		var heading = "Actions";
+        	if ($(this).prev('h3').length > 0) {
+        		heading = $(this).prev('h3').html();
+        		$(this).prev('h3').hide();
+        	}
+        	
+        	if ($(this).data('title')) {
+        		heading = $(this).data('title');
         	}
         	
         	// create clone to work on
@@ -41,7 +45,7 @@ $(document).ready(function() {
         	
         	// create twitter-bootstrap style button
         	var btn = $('<a>',{ 'class': 'btn btn-small dropdown-toggle', 'data-toggle': 'dropdown', 'href': '#'})
-        		.append(h+"&nbsp;")
+        		.append(heading+"&nbsp;")
         		.append('<span class="caret"></span>');
         	
         	// create twitter-bootstrap style buttongroup
