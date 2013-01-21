@@ -29,7 +29,7 @@ span.be-user-auth:HOVER {
 	            <p class="navbar-text pull-right">
 				<span class="be-user-auth">
 					<?php if (AuthComponent::user()):?>
-						<?php echo 	$this->Html->link(AuthComponent::user('mail'),
+						<?php echo 	$this->Html->link(AuthComponent::user('username'),
 										array('plugin'=>'backend','controller'=>'auth','action'=>'user','admin'=>true)
 						);?> |
 						<?php echo $this->Html->link(__d('backend','Logout'),
