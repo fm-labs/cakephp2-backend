@@ -95,7 +95,7 @@ i.icon-bool-1 {
 	background-image: url(../img/icons/16x16/status.png);
 }
 
-/** Fieldset **/
+/** Fieldset 
 fieldset {
 	padding: 15px 0;	
 	border: 1px dashed #CCC;
@@ -108,6 +108,7 @@ fieldset > legend {
 	font-size: 13px;
 	color: #7EB51B;
 }
+**/
 
 /* Tables */
 table {

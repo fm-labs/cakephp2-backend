@@ -148,5 +148,5 @@ echo "\t<?php endforeach; ?>\n";
 ?>
 	</table>
 <?php echo "<?php endif; ?>\n\n"; ?>
-<?php endforeach; ?>
 </div>
+<?php endforeach; ?>

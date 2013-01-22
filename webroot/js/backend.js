@@ -25,8 +25,6 @@ $(document).ready(function() {
     	
     	$(this).children('ul').each(function() {
     		
-    		console.log($(this).data());
-    		
     		// heading
     		var heading = "Actions";
         	if ($(this).prev('h3').length > 0) {

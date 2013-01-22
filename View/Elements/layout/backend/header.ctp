@@ -49,8 +49,14 @@ span.be-user-auth:HOVER {
 	              		array('plugin'=>'backend','controller'=>'backend','action'=>'dashboard')); ?></li>
 	            	-->
 	            <?php foreach(CakePlugin::loaded() as $_plugin):?>
-	            	<li><?php echo $this->Html->link($_plugin,
-	              		array('plugin'=>Inflector::underscore($_plugin),'controller'=>Inflector::underscore($_plugin),'action'=>'index')); ?></li>
+	            	<?php 
+	            	$link = $this->Html->link($_plugin,
+	              		array('plugin'=>Inflector::underscore($_plugin),'controller'=>'backend','action'=>'index')); 
+	            	
+					$class = (Inflector::underscore($_plugin) == $this->request->params['plugin']) ? "active" : "";
+					echo $this->Html->tag('li', $link, compact('class'));
+
+	            	?>
 	            <?php endforeach; ?>
 	            </ul>
           </div>

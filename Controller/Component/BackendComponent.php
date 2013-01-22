@@ -91,12 +91,17 @@ class BackendComponent extends Component {
 				if (!in_array($type,array('default','success', 'error','info','warning')))
 					continue;
 				
+				
 				$params = am(array(
 					'plugin'=>'backend',
 					'class'=>'alert',
 					'type'=>$type,
 					'title'=>Inflector::humanize($type)
 				),$message['params']);
+				
+				if (isset($params['validationErrors'])) {
+					$params['validationErrors'] = $controller->{$params['validationErrors']}->validationErrors;
+				}
 				
 				$this->Session->write('Message.'.$key, array(
 					'message' => $message['message'],
