@@ -32,8 +32,8 @@
 <div class="view">
 	<h2>Cronjob <?php echo $id; ?></h2>
 	<div class="actions">
-		<?php echo $this->Html->link(__('Run this cronjob'),array('action'=>'run',$id)); ?>
-		<?php echo $this->Html->link(__('Run all cronjobs'),array('action'=>'run_all')); ?>
+		<?php echo $this->Html->link(__('Run cronjob'),array('action'=>'run',$id)); ?>
+		<?php echo $this->Html->link(__('Force cronjob'),array('action'=>'run',$id,'force'=>true)); ?>
 		<ul>
 			<li><?php echo $this->Html->link(__('List %s', __('Cronjobs')),array('action'=>'index')); ?></li>
 		</ul>

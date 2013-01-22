@@ -61,7 +61,9 @@ class CronjobsController extends BackendAppController {
 		if (!$cronjob)
 			throw new NotFoundException("Cronjob $id not found");
 		
-		list($result, $stats) = $this->_run($id, $cronjob);
+		$force = isset($this->passedArgs['force']) ? $this->passedArgs['force'] : false;
+		
+		list($result, $stats) = $this->_run($id, $cronjob, $force);
 		
 		$this->Session->setFlash($result['message']);
 		$this->redirect(array('action'=>'view',$id));

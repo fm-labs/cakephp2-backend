@@ -52,8 +52,8 @@
 		<tr>
 			<td><?php echo $this->Html->link($file['dir'].$file['name'],array('action'=>'view',$id)); ?></td>
 			<td><?php echo $this->Number->toReadableSize($file['size']); ?></td>
-			<td><?php echo $this->Time->niceShort($file['last_modified']); ?></td>
-			<td><?php echo $this->Time->niceShort($file['last_access']); ?></td>
+			<td><?php echo $this->Time->timeAgoInWords($file['last_modified']); ?></td>
+			<td><?php echo $this->Time->timeAgoInWords($file['last_access']); ?></td>
 			<td class="actions">
 				<ul class="actions">
 					<li><?php echo $this->Html->link(__d('backend','View'),array('action'=>'view',$id)); ?></li>
