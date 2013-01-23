@@ -183,7 +183,6 @@ div.actions {
 }
 
 td.actions {
-	text-align: right;
 }
 
 td.actions ul {
@@ -192,6 +191,12 @@ td.actions ul {
 
 tr:HOVER td.actions ul {
 	opacity: 1;
+}
+
+/** Filter **/
+tr.filter input,
+tr.filter select {	
+	margin: 0;
 }
 
 /* spinner */

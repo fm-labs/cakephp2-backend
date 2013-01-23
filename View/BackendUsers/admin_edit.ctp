@@ -14,7 +14,7 @@
 		<legend><?php echo __d('backend','Admin Edit', __d('backend','Backend User')); ?></legend>
 <?php
 	echo $this->Form->input('id');
-	echo $this->Form->input('root');
+	echo $this->Form->input('backend_user_group_id');
 	echo $this->Form->input('username');
 	echo $this->Form->input('mail');
 	echo $this->Form->input('first_name');

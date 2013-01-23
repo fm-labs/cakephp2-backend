@@ -53,12 +53,16 @@ class BackendController extends BackendAppController {
 					array(__d('backend','Collapsable'),array('plugin'=>'backend','controller'=>'appearance', 'action' => 'collapsable'),null),
 				)
 			),
-			'backend_users' => array(
-				'title' => __d('backend','Backend Users'),
+			'accesscontrol' => array(
+				'title' => __d('backend','Access Control'),
 				'url' => array('plugin'=>'backend','controller'=>'backend_users', 'action' => 'index'),
 				'actions' => array(
-					array(__d('backend','Add'),array('plugin'=>'backend','controller'=>'backend_users', 'action' => 'add'),null),
-					array(__d('backend','Current user'),array('plugin'=>'backend','controller'=>'auth', 'action' => 'user'),null),
+					array(__d('backend','Backend Users'),array('plugin'=>'backend','controller'=>'backend_users', 'action' => 'index'),null),
+					array(__d('backend','Backend User Groups'),array('plugin'=>'backend','controller'=>'backend_user_groups', 'action' => 'index'),null),
+					array(__d('backend','Acos'),array('plugin'=>'backend','controller'=>'acos', 'action' => 'index'),null),
+					array(__d('backend','Aros'),array('plugin'=>'backend','controller'=>'aros', 'action' => 'index'),null),
+					array(__d('backend','ArosAcos'),array('plugin'=>'backend','controller'=>'aros_acos', 'action' => 'index'),null),
+					array(__d('backend','Acl'),array('plugin'=>'backend','controller'=>'acl', 'action' => 'index'),null),
 				)
 			),
 			'curl' => array(

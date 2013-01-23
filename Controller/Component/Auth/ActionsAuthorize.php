@@ -14,31 +14,28 @@
  */
 
 App::uses('BaseAuthorize', 'Controller/Component/Auth');
-App::uses('BackendUser','Backend.Model');
-
-class BackendAuthorize extends BaseAuthorize {
 
 /**
- * Checks user authorization using a controller callback.
+ * An authorization adapter for AuthComponent. Provides the ability to authorize using the AclComponent,
+ * If AclComponent is not already loaded it will be loaded using the Controller's ComponentCollection.
  *
- * @param array $user Active user data
- * @param CakeRequest $request
+ * @package       Cake.Controller.Component.Auth
+ * @since 2.0
+ * @see AuthComponent::$authenticate
+ * @see AclComponent::check()
+ */
+class ActionsAuthorize extends BaseAuthorize {
+
+/**
+ * Authorize a user using the AclComponent.
+ *
+ * @param array $user The user to authorize
+ * @param CakeRequest $request The request needing authorization.
  * @return boolean
  */
 	public function authorize($user, CakeRequest $request) {
-		
-		/*
-		if (method_exists($this->_Controller, 'isBackendAuthorized')) {
-			return (bool)$this->_Controller->isBackendAuthorized($user);
-		}
-		
-		if (isset($request->params['admin'])) {
-			return ($user && $user['root']) ? true : false;
-		}
-		*/
-		
 		$Acl = $this->_Collection->load('Acl');
-		$user = array('Backend.BackendUser' => $user);
+		$user = array($this->settings['userModel'] => $user);
 		return $Acl->check($user, $this->action($request));
 	}
 

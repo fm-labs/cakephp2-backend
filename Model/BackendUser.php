@@ -4,7 +4,7 @@ App::uses('AuthComponent','Controller/Component');
 
 class BackendUser extends BackendAppModel {
 
-	public $actsAs = array('Containable');
+	public $actsAs = array('Containable', 'Acl' => array('type' => 'requester'));
 
 	public $validate = array(
 		'username' => array(
@@ -62,6 +62,36 @@ class BackendUser extends BackendAppModel {
 			)
 		),
 	);
+	
+	public $belongsTo = array(
+		'BackendUserGroup' => array(
+			'className' => 'Backend.BackendUserGroup'		
+		)
+	);
+	
+
+	public function parentNode() {
+		if (!$this->id && empty($this->data)) {
+			return null;
+		}
+		
+		if (isset($this->data[$this->alias]['backend_user_group_id'])) {
+			$groupId = $this->data[$this->alias]['backend_user_group_id'];
+		} else {
+			$groupId = $this->field('backend_user_group_id');
+		}
+		if (!$groupId) {
+			return null;
+		} else {
+			return array('BackendUserGroup' => array('id' => $groupId));
+		}
+	}
+	
+	public function bindNode($user) {
+		$user = array_pop($user);
+		return array('model' => 'BackendUserGroup', 'foreign_key' => $user['backend_user_group_id']);
+	}
+	
 	public function beforeValidate($options = array()) {
 		//change password
 		if (isset($this->data[$this->alias]['pass_old'])) {

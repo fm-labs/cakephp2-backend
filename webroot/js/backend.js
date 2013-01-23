@@ -55,10 +55,10 @@ $(document).ready(function() {
         	$(this).remove();	
     	});
 
-    	$(this).children('a').each(function() {
+    	$(this).children('a, button').each(function() {
     		
     		if ($(this).parent().prop("tagName") == "TD") {
-    			$(this).addClass('btn btn-mini');
+    			$(this).addClass('btn btn-small');
     		} else {
     			$(this).addClass('btn btn-small');
     		}

@@ -14,6 +14,8 @@ class BackendComponent extends Component {
 	
 	public $layout = 'Backend.backend';
 	
+	public $authorize = false;
+	
 	private $_isBackendRequest = false;
 	
 	/**
@@ -54,7 +56,8 @@ class BackendComponent extends Component {
 
 			//Auth
 			$controller->Components->load('Auth');
-			AuthComponent::$sessionKey = "Auth.Backend";
+			//TODO check if backend auth sessionkey overwrite can be avoided
+			AuthComponent::$sessionKey = "Auth.Backend"; 
 				
 			$this->Auth->authenticate = array(
 					'Form' => array(
@@ -67,6 +70,14 @@ class BackendComponent extends Component {
 					'controller'=> 'auth',
 					'action'=>'login',
 			);
+			
+			if ($this->authorize == true) {
+				//TODO check if acl tables are present
+				$this->Auth->authorize = array(
+					'Backend.Backend' => array('actionPath' => 'controllers')
+				);
+			}
+			
 		}
 	}
 	
@@ -86,28 +97,30 @@ class BackendComponent extends Component {
 			// pretty flash messages
 			//TODO make configurable option to enable/disable this feature
 			$messages = $this->Session->read('Message');
-			foreach($messages as $key => $message) {
-				$type = $message['element'];
-				if (!in_array($type,array('default','success', 'error','info','warning')))
-					continue;
-				
-				
-				$params = am(array(
-					'plugin'=>'backend',
-					'class'=>'alert',
-					'type'=>$type,
-					'title'=>Inflector::humanize($type)
-				),$message['params']);
-				
-				if (isset($params['validationErrors'])) {
-					$params['validationErrors'] = $controller->{$params['validationErrors']}->validationErrors;
+			if (is_array($messages)) {
+				foreach($messages as $key => $message) {
+					$type = $message['element'];
+					if (!in_array($type,array('default','success', 'error','info','warning')))
+						continue;
+					
+					
+					$params = am(array(
+						'plugin'=>'backend',
+						'class'=>'alert',
+						'type'=>$type,
+						'title'=>Inflector::humanize($type)
+					),$message['params']);
+					
+					if (isset($params['validationErrors'])) {
+						$params['validationErrors'] = $controller->{$params['validationErrors']}->validationErrors;
+					}
+					
+					$this->Session->write('Message.'.$key, array(
+						'message' => $message['message'],
+						'element' => 'flash',
+						'params' => $params
+					));
 				}
-				
-				$this->Session->write('Message.'.$key, array(
-					'message' => $message['message'],
-					'element' => 'flash',
-					'params' => $params
-				));
 			}
 		}
 		

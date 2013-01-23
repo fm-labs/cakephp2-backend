@@ -3,6 +3,8 @@ App::uses('BackendAppController','Backend.Controller');
 
 class BackendUsersController extends BackendAppController {
 	
+	public $uses = array('Backend.BackendUser');
+	
 /**
  * admin_index method
  *
@@ -42,6 +44,8 @@ class BackendUsersController extends BackendAppController {
 				$this->Session->setFlash(__d('backend','The admin user could not be saved. Please, try again.'));
 			}
 		}
+		$backendUserGroups = $this->BackendUser->BackendUserGroup->find('list');
+		$this->set(compact('backendUserGroups'));
 	}
 
 /**
@@ -66,6 +70,8 @@ class BackendUsersController extends BackendAppController {
 			$this->request->data = $this->BackendUser->read(null, $id);
 			unset($this->request->data['BackendUser']['password']);
 		}
+		$backendUserGroups = $this->BackendUser->BackendUserGroup->find('list');
+		$this->set(compact('backendUserGroups'));
 	}
 
 /**

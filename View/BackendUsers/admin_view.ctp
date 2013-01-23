@@ -17,9 +17,9 @@
 		<?php echo h($backendUser['BackendUser']['id']); ?>
 		&nbsp;
 	</dd>
-	<dt><?php echo __d('backend','Root'); ?></dt>
+	<dt><?php echo __d('backend','Backend User Group'); ?></dt>
 	<dd>
-		<?php echo h($backendUser['BackendUser']['root']); ?>
+		<?php echo h($backendUser['BackendUserGroup']['name']); ?>
 		&nbsp;
 	</dd>
 	<dt><?php echo __d('backend','Username'); ?></dt>

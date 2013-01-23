@@ -1,12 +1,17 @@
 <?php
-#CakePlugin::load('Tools');
-CakePlugin::load('Curl');
 App::uses('Curl','Curl.Lib');
-//App::uses('CurlOptions','Curl.Lib');
 
 class CurlController extends BackendAppController {
 
 	public $uses = array('Backend.CurlRequest');
+	
+	public function beforeFilter() {
+		
+		if (!CakePlugin::loaded('Curl')) {
+			$this->Session->setFlash('Curl Plugin not loaded');
+			$this->redirect($this->referer());
+		}
+	}
 	
 	public function admin_request() {
 

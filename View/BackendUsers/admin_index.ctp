@@ -13,12 +13,12 @@
 	<table>
 	<tr>
 		<th><?php echo $this->Paginator->sort('id');?></th>
-		<th><?php echo $this->Paginator->sort('published');?></th>
-		<th><?php echo $this->Paginator->sort('root');?></th>
+		<th><?php echo $this->Paginator->sort('backend_user_group_id');?></th>
 		<th><?php echo $this->Paginator->sort('username');?></th>
 		<th><?php echo $this->Paginator->sort('first_name');?></th>
 		<th><?php echo $this->Paginator->sort('last_name');?></th>
 		<th><?php echo $this->Paginator->sort('mail');?></th>
+		<th><?php echo $this->Paginator->sort('published');?></th>
 		<th><?php echo $this->Paginator->sort('last_login');?></th>
 		<th class="actions"><?php echo __d('backend','Actions');?></th>
 	</tr>
@@ -26,12 +26,12 @@
 	foreach ($backendUsers as $backendUser): ?>
 <tr>
 	<td><?php echo h($backendUser['BackendUser']['id']); ?>&nbsp;</td>
-	<td><?php echo $this->BackendHtml->icon($backendUser['BackendUser']['published']); ?>&nbsp;</td>
-	<td><?php echo $this->BackendHtml->icon($backendUser['BackendUser']['root']); ?>&nbsp;</td>
+	<td><?php echo h($backendUser['BackendUserGroup']['name']); ?>&nbsp;</td>
 	<td><?php echo h($backendUser['BackendUser']['username']); ?>&nbsp;</td>
 	<td><?php echo h($backendUser['BackendUser']['first_name']); ?>&nbsp;</td>
 	<td><?php echo h($backendUser['BackendUser']['last_name']); ?>&nbsp;</td>
 	<td><?php echo h($backendUser['BackendUser']['mail']); ?>&nbsp;</td>
+	<td><?php echo $this->Status->html($backendUser['BackendUser']['published']); ?>&nbsp;</td>
 	<td><?php echo h($backendUser['BackendUser']['last_login']); ?>&nbsp;</td>
 	<td class="actions">
 	<ul class="actions">
@@ -45,4 +45,5 @@
 	</table>
 	
 	<?php echo $this->element('Backend.pagination/default'); ?>	
+	<?php debug($backendUsers);?>
 </div>
