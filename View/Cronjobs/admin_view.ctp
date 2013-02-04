@@ -36,6 +36,12 @@
 		<?php echo $this->Html->link(__('Force cronjob'),array('action'=>'run',$id,'force'=>true)); ?>
 		<ul>
 			<li><?php echo $this->Html->link(__('List %s', __('Cronjobs')),array('action'=>'index')); ?></li>
+			<li><?php echo $this->Html->link('Run external',
+					array('admin'=>false,'action'=>'run',$id),
+					array('target'=>'_blank')); ?></li>
+			<li><?php echo $this->Html->link('Run external (force)',
+					array('admin'=>false,'action'=>'run',$id,'force'=>true),
+					array('target'=>'_blank')); ?></li>
 		</ul>
 	</div>
 	<dl>

@@ -8,10 +8,29 @@ class CronjobsController extends BackendAppController {
 	public function beforeFilter() {
 		parent::beforeFilter();
 	
-		$this->Auth->allow('run');
+		$this->Auth->allow('run','run_all');
 	}
 	
-	public function run() {
+	public function run($id = null) {
+		
+		$this->autoRender = false;
+		$this->response->type('text');
+		
+		// get cronjob
+		$cronjob = Configure::read('Backend.Cronjob.'.$id);
+		if (!$cronjob) {
+			$this->response->statusCode(400);
+			$this->response->body('NOTFOUND');
+			return;
+		}
+			
+		$force = isset($this->passedArgs['force']) ? $this->passedArgs['force'] : false;
+		list($result, $stats) = $this->_run($id, $cronjob, $force);
+		
+		$this->response->body($result['response']);
+	}
+	
+	public function run_all() {
 	
 		$this->autoRender = false;
 		$this->response->type('text');
@@ -23,7 +42,6 @@ class CronjobsController extends BackendAppController {
 			$allStats[$id] = $this->_run($id, $config);
 		}
 		
-		//$this->set(compact('allStats'));
 		$this->response->body(count($allStats));
 	}
 	
@@ -69,6 +87,19 @@ class CronjobsController extends BackendAppController {
 		$this->redirect(array('action'=>'view',$id));
 	}
 	
+	public function admin_run_all() {
+
+		$cronjobs = Configure::read('Backend.Cronjob');
+		
+		$allStats = array();
+		foreach($cronjobs as $id => $config) {
+			$allStats[$id] = $this->_run($id, $config);
+		}
+		
+		$this->set(compact('allStats'));
+		debug($allStats);
+	}
+	
 	protected function _run($id, $config, $force = false) {
 
 		// open stats
@@ -94,6 +125,7 @@ class CronjobsController extends BackendAppController {
 			$info = curl_getinfo($ch);
 			curl_close($ch);
 		} catch(Exception $e) {
+			CakeLog::critical("Cronjob $id failed", 'cron');
 			$response = $config['expectError'];
 		}
 		

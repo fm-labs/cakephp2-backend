@@ -42,13 +42,6 @@ class BackendComponent extends Component {
 			
 			$this->_isBackendRequest = true;
 			
-			try {
-				Configure::load('backend');
-			} catch (Exception $e) {
-				$this->log($e->getMessage(),'debug');
-			}
-			
-	
 			//Controller
 			$controller->layout = $this->layout;
 			$controller->viewClass = 'Backend.Backend';

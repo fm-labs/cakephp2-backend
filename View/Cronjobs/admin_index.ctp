@@ -13,7 +13,6 @@
 			<th>Interval</th>
 			<th>Last Run</th>
 			<th>Offset</th>
-			<th>Time Elapsed</th>
 			<th>Last Response</th>
 			<th>Last Message</th>
 			<th class="actions">Actions</th>
@@ -22,7 +21,7 @@
 		<tr>
 			<td><?php echo Inflector::humanize($id); ?></td>
 			<td><?php echo $cronjob['url']; ?></td>
-			<td><?php echo $cronjob['interval']; ?></td>
+			<td><?php echo $cronjob['interval']; ?> sec</td>
 			<td><?php 
 				if ($stats[$id]) {
 					echo $this->Time->timeAgoInWords($stats[$id]['time']);
@@ -34,17 +33,30 @@
 				if ($stats[$id]) {
 					$next = $stats[$id]['time'] + $cronjob['interval'];
 					$nextOffset = $next - time();
-					echo sprintf("%+d", $nextOffset);
+					if ($nextOffset < $cronjob['interval']*-1) {
+						$class = 'important';
+					}
+					elseif ($nextOffset < 0) {
+						$class = 'warning';
+					}
+					else {
+						$class = 'success';
+					}
+					echo $this->Html->tag('span',sprintf("%+d", $nextOffset),array('class'=>'label label-'.$class));
 				}
 			?>&nbsp;</td>
 			<td><?php 
 				if ($stats[$id]) {
-					echo $stats[$id]['time_elapsed'];
-				}
-			?>&nbsp;</td>
-			<td><?php 
-				if ($stats[$id]) {
-					echo $stats[$id]['response'];
+					switch($stats[$id]['response']) {
+						case $cronjob['expectOk']:
+							$class = 'success'; break;
+						case $cronjob['expectFail']:
+							$class = 'warning'; break;
+						case $cronjob['expectError']:
+						default:
+							$class = 'important'; break;
+					}
+					echo $this->Html->tag('span',$stats[$id]['response'],array('class'=>'label label-'.$class));
 				}
 			?>&nbsp;</td>
 			<td><?php 
@@ -60,7 +72,4 @@
 		</tr>
 		<?php endforeach; ?>
 	</table>
-	
-	<?php debug($cronjobs);?>
-	<?php debug($stats); ?>
 </div>
