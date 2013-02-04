@@ -24,5 +24,5 @@
 			<?php echo env('HTTP_USER_AGENT') ?> 
 		</div>
 	</div>
-
+	<?php debug($this->Session->read());?>
 </div>

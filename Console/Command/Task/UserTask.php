@@ -1,4 +1,6 @@
 <?php
+App::uses('ClassRegistry','Utility');
+
 class UserTask extends AppShell {
 	
 	public $UserModel;
@@ -35,14 +37,16 @@ class UserTask extends AppShell {
 	    return $parser;
 	}
 	
+	/*
 	public function initialize() {
 		parent::initialize();
 		
 		$this->out("---STARTING UP---");
-		$this->UserModel =& ClassRegistry::init('Backend.BackendUser');
 	}
+	*/
 	
 	public function main() {
+		$this->UserModel =& ClassRegistry::init('Backend.BackendUser');
 		
 		if (empty($this->args)) {
 			$action = $this->in(__d('backend',"What do you wann do?"),array('add'),'add');

@@ -46,9 +46,14 @@ class AuthController extends BackendAppController {
 	            if ($event->result)
 	            	$redirect = $event->result;
 	            else
-	            	//$redirect = $this->Auth->redirect();
-	            	$redirect = $defaultRedirect;
+	            	$redirect = $this->Auth->redirect();
 
+	            
+	            $redirect = Router::normalize($redirect);
+	            if ($redirect == '/' || !preg_match('/^\/admin\//',$redirect))
+	            	$redirect = array('plugin'=>'backend','controller'=>'backend','action'=>'dashboard');
+	            
+	            
 	            $this->redirect($redirect);
 	        }
 	    } elseif ($this->Auth->user()) {

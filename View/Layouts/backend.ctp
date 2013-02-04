@@ -8,6 +8,7 @@
 		
 		<?php echo $this->Html->css('/backend/css/bootstrap/css/bootstrap'); ?>
 		<?php echo $this->Html->css('/backend/css/bootstrap/css/bootstrap-responsive'); ?>
+		<?php echo $this->Html->css('/backend/css/chosen/chosen'); ?>
 		<?php echo $this->Html->css('/backend/css/style'); ?>
 		<?php echo $this->Html->css('/backend/css/forms'); ?>
 		<?php echo $this->fetch('css'); ?>
@@ -53,6 +54,7 @@
 		<div id="spinner"></div>
 		<!-- #MISC -->
 		<?php echo $this->Html->script('/backend/js/bootstrap/bootstrap'); ?>
+		<?php echo $this->Html->script('/backend/js/chosen/chosen.jquery.js'); ?>
 		<?php echo $this->Html->script('/backend/js/backend'); ?>
 		<?php echo $this->fetch('script'); ?>
 		<?php echo $this->Js->writeBuffer(); ?>

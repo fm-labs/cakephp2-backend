@@ -21,7 +21,7 @@
 		echo $this->Form->input('alias');
 		echo $this->Form->input('lft');
 		echo $this->Form->input('rght');
-		echo $this->Form->input('Aco');
+		//echo $this->Form->input('Aco');
 	?>
 	</fieldset>
 <div class="form-actions"><?php echo $this->Form->button(__('Submit')); ?>

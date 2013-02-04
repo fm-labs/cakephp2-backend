@@ -24,6 +24,7 @@ class BackendController extends BackendAppController {
 					array(__d('backend','Globals'),array('plugin'=>'backend','controller'=>'system', 'action' => 'globals'),null),
 					array(__d('backend','Session'),array('plugin'=>'backend','controller'=>'system', 'action' => 'session'),null),
 					array(__d('backend','Config'),array('plugin'=>'backend','controller'=>'system', 'action' => 'config'),null),
+					array(__d('backend','Manifest'),array('plugin'=>'backend','controller'=>'manifest', 'action' => 'index'),null),
 				)		
 			),
 			'logs' => array(
@@ -36,8 +37,33 @@ class BackendController extends BackendAppController {
 					array(__d('backend','Backend'),array('plugin'=>'backend','controller'=>'log_viewer', 'action' => 'view','backend'),null),
 				)		
 			),
+			'packagemanager' => array(
+				'title' => __d('backend','Package Manager'),
+				'url' => array('plugin'=>'backend','controller'=>'package_manager', 'action' => 'index'),
+				'actions' => array(
+					array(__d('backend','Package Manager'),array('plugin'=>'backend','controller'=>'package_manager', 'action' => 'view','debug'),null),
+				)		
+			),
+			'cronjobs' => array(
+				'title' => __d('backend','Cronjobs'),
+				'url' => array('plugin'=>'backend','controller'=>'cronjobs', 'action' => 'index'),
+				'actions' => array(
+				)
+			),
+			'accesscontrol' => array(
+				'title' => __d('backend','Access Control'),
+				'url' => array('plugin'=>'backend','controller'=>'backend_users', 'action' => 'index'),
+				'actions' => array(
+					array(__d('backend','Backend Users'),array('plugin'=>'backend','controller'=>'backend_users', 'action' => 'index'),null),
+					array(__d('backend','Backend User Groups'),array('plugin'=>'backend','controller'=>'backend_user_groups', 'action' => 'index'),null),
+					array(__d('backend','Acos'),array('plugin'=>'backend','controller'=>'acos', 'action' => 'index'),null),
+					array(__d('backend','Aros'),array('plugin'=>'backend','controller'=>'aros', 'action' => 'index'),null),
+					array(__d('backend','ArosAcos'),array('plugin'=>'backend','controller'=>'aros_acos', 'action' => 'index'),null),
+					array(__d('backend','Acl'),array('plugin'=>'backend','controller'=>'acl', 'action' => 'index'),null),
+				)
+			),
 			'unit_tests' => array(
-				'title' => __d('backend','Unit Tests'),
+				'title' => __d('backend','Testing'),
 				'url' => array('plugin'=>'backend','controller'=>'unit_tests', 'action' => 'index'),
 				'actions' => array(
 					array(__d('backend','Unit Tests'),array('plugin'=>'backend','controller'=>'unit_tests', 'action' => 'index'),null),
@@ -53,29 +79,11 @@ class BackendController extends BackendAppController {
 					array(__d('backend','Collapsable'),array('plugin'=>'backend','controller'=>'appearance', 'action' => 'collapsable'),null),
 				)
 			),
-			'accesscontrol' => array(
-				'title' => __d('backend','Access Control'),
-				'url' => array('plugin'=>'backend','controller'=>'backend_users', 'action' => 'index'),
-				'actions' => array(
-					array(__d('backend','Backend Users'),array('plugin'=>'backend','controller'=>'backend_users', 'action' => 'index'),null),
-					array(__d('backend','Backend User Groups'),array('plugin'=>'backend','controller'=>'backend_user_groups', 'action' => 'index'),null),
-					array(__d('backend','Acos'),array('plugin'=>'backend','controller'=>'acos', 'action' => 'index'),null),
-					array(__d('backend','Aros'),array('plugin'=>'backend','controller'=>'aros', 'action' => 'index'),null),
-					array(__d('backend','ArosAcos'),array('plugin'=>'backend','controller'=>'aros_acos', 'action' => 'index'),null),
-					array(__d('backend','Acl'),array('plugin'=>'backend','controller'=>'acl', 'action' => 'index'),null),
-				)
-			),
 			'curl' => array(
 				'title' => __d('backend','Curl'),
 				'url' => array('plugin'=>'backend','controller'=>'curl', 'action' => 'index'),
 				'actions' => array(
 					array(__d('backend','Test request'),array('plugin'=>'backend','controller'=>'curl', 'action' => 'request'),null),
-				)
-			),
-			'cronjobs' => array(
-				'title' => __d('backend','Cronjobs'),
-				'url' => array('plugin'=>'backend','controller'=>'cronjobs', 'action' => 'index'),
-				'actions' => array(
 				)
 			),
 			'jquery' => array(

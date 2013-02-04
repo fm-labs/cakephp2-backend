@@ -21,10 +21,14 @@ class DataFilterComponent extends Component {
 			$query = ($request->is('post')) ? $request->data : $this->Controller->passedArgs;
 		}
 		
+		$ignore = array('page','limit','sort','direction');
 		$conditions = array();
 		$query = Hash::flatten($query);
 		foreach($query as $k => $v) {
 			if (strlen(trim($v)) < 1)
+				continue;
+			
+			if (in_array($k, $ignore))
 				continue;
 			
 			// check for multiple searches

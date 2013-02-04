@@ -110,10 +110,14 @@ input.datetimepicker {
 	width: 150px !important;
 }
 
-label {
+.input label {
 	vertical-align: top;
 	font-weight: bold;
 	vertical-align:middle;
+}
+
+.checkbox label {
+	font-weight: normal;
 }
 
 .required label:after {

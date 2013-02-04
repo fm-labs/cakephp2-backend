@@ -1,3 +1,12 @@
+<?php 
+/**
+ * !!THIS ELEMENT IS DEPRECATED. Use Backend.DisplayHelper instead!!
+ * 
+ * Render Dashboard Items from array
+ * 
+ * @deprecated
+ */
+?>
 <style>
 .dashboard-item {
 	border-top: 1px solid #CCC;

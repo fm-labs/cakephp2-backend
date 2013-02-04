@@ -71,4 +71,7 @@ $(document).ready(function() {
     	$(this).addClass('alert');
     });
     
+    // Chosen
+    $('select').chosen();
+    
 });

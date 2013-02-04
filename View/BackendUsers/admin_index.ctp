@@ -31,7 +31,7 @@
 	<td><?php echo h($backendUser['BackendUser']['first_name']); ?>&nbsp;</td>
 	<td><?php echo h($backendUser['BackendUser']['last_name']); ?>&nbsp;</td>
 	<td><?php echo h($backendUser['BackendUser']['mail']); ?>&nbsp;</td>
-	<td><?php echo $this->Status->html($backendUser['BackendUser']['published']); ?>&nbsp;</td>
+	<td><?php echo h($backendUser['BackendUser']['published']); ?>&nbsp;</td>
 	<td><?php echo h($backendUser['BackendUser']['last_login']); ?>&nbsp;</td>
 	<td class="actions">
 	<ul class="actions">

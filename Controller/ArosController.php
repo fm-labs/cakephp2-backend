@@ -47,8 +47,10 @@ class ArosController extends BackendAppController {
 				$this->Session->setFlash(__('The %s could not be saved. Please, try again.',__('aro')),'error');
 			}
 		}
-		$acos = $this->Aro->Aco->find('list');
-		$this->set(compact('acos'));
+		$parents = $this->Aro->find('list');
+		$this->set(compact('parents'));
+		//$acos = $this->Aro->Aco->find('list');
+		//$this->set(compact('acos'));
 	}
 
 /**

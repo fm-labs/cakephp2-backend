@@ -81,7 +81,6 @@ class BackendComponent extends Component {
 		}
 	}
 	
-	
 	public function startup(Controller $controller) {
 		
 		//iframe
@@ -102,7 +101,6 @@ class BackendComponent extends Component {
 					$type = $message['element'];
 					if (!in_array($type,array('default','success', 'error','info','warning')))
 						continue;
-					
 					
 					$params = am(array(
 						'plugin'=>'backend',
