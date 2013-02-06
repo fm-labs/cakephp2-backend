@@ -72,6 +72,16 @@ $(document).ready(function() {
     });
     
     // Chosen
-    $('select').chosen();
+    $('select').each(function() {
+    	if ($(this).hasClass('no-pretty') || $(this).hasClass('chzn-done'))
+    		return;
+    	
+    	if ($(this).data('chosenAllowSingleDeselect') == true) {
+	    	$(this).chosen({allow_single_deselect:true});
+    	}
+    	else {
+    		$(this).chosen();
+    	}
+    });
     
 });

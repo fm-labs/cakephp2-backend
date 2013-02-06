@@ -17,14 +17,6 @@ span.be-user-auth:HOVER {
 <div class="navbar navbar-inverse navbar-fixed-top">
 	<div class="navbar-inner">
 		<div class="container-fluid">
-			<?php 
-			if (Configure::read('Backend.Dashboard.title')):
-			echo $this->Html->link(Configure::read('Backend.Dashboard.title'),
-					array('plugin'=>'backend','controller'=>'backend','action'=>'dashboard'),
-					array('class'=>'brand')
-			); 
-			endif; 
-			?>
 			<div class="nav-collapse collapse">
 	            <p class="navbar-text pull-right">
 				<span class="be-user-auth">
@@ -44,12 +36,27 @@ span.be-user-auth:HOVER {
 				</span>
 	            </p>
 	            <ul class="nav">
-	            	<!--  
-	            	<li><?php echo $this->Html->link('My Dashboard',
-	              		array('plugin'=>'backend','controller'=>'backend','action'=>'dashboard')); ?></li>
-	            	-->
+				<?php 
+				if (Configure::read('Backend.Dashboard.title')):
+					if (Configure::read('Backend.Dashboard.url')) {
+						$dbTitle = $this->Html->link(Configure::read('Backend.Dashboard.title'),
+								Configure::read('Backend.Dashboard.url')
+						); 
+					} else {
+						$dbTitle = Configure::read('Backend.Dashboard.title');
+					}
+					$class = (!isset($this->request->params['plugin'])) ? "active" : "";
+					echo $this->Html->tag('li', $dbTitle, compact('class'));
+					unset($dbTitle);
+				endif; 
+				?>
 	            <?php foreach(CakePlugin::loaded() as $_plugin):?>
 	            	<?php 
+	            	if (Configure::read('Backend.Dashboard.hidePlugins') 
+						&& in_array($_plugin,Configure::read('Backend.Dashboard.hidePlugins'))) {
+						continue;
+					}
+
 	            	$link = $this->Html->link($_plugin,
 	              		array('plugin'=>Inflector::underscore($_plugin),'controller'=>Inflector::underscore($_plugin),'action'=>'index')); 
 	            	

@@ -1,8 +1,11 @@
 <div class="breadcrumbs">
 <?php echo __('Your are here');?>:
-<?php 
-	echo $this->Html->link(__('Dashboard'), 
-		array('plugin'=>'backend','controller'=>'backend','action'=>'dashboard')); ?>&raquo;<?php 
-	echo $this->Html->getCrumbs(); 
+<?php
+	$startText = array(
+		'text'=> (Configure::read('Backend.Dashboard.title')) ? Configure::read('Backend.Dashboard.title') : __('Dashboard'),
+		'url'=> (Configure::read('Backend.Dashboard.url')) ? Configure::read('Backend.Dashboard.url') : '/admin'
+	);
+	echo $this->Html->getCrumbs('&raquo;', $startText);
+	unset($startText);
 ?>
 </div>

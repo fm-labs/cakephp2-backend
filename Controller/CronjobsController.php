@@ -39,6 +39,9 @@ class CronjobsController extends BackendAppController {
 		
 		$allStats = array();
 		foreach($cronjobs as $id => $config) {
+			if (!$config['enabled'])
+				continue;
+			
 			$allStats[$id] = $this->_run($id, $config);
 		}
 		
@@ -93,6 +96,9 @@ class CronjobsController extends BackendAppController {
 		
 		$allStats = array();
 		foreach($cronjobs as $id => $config) {
+			if (!$config['enabled'])
+				continue;
+			
 			$allStats[$id] = $this->_run($id, $config);
 		}
 		
