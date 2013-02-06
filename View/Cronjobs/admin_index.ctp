@@ -63,12 +63,12 @@
 						default:
 							$class = 'important'; break;
 					}
-					echo $this->Html->tag('span',$stats[$id]['response'],array('class'=>'label label-'.$class));
+					echo $this->Html->tag('span',h($stats[$id]['response']),array('class'=>'label label-'.$class));
 				}
 			?>&nbsp;</td>
 			<td><?php 
 				if ($stats[$id]) {
-					echo $stats[$id]['message'];
+					echo h($stats[$id]['message']);
 				}
 			?>&nbsp;</td>
 			<td class="actions">

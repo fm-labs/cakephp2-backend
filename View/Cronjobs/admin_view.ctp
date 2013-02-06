@@ -112,12 +112,12 @@
 			?>&nbsp;</td>
 			<td><?php 
 				if ($stat) {
-					echo $stat['response'];
+					echo h($stat['response']);
 				}
 			?>&nbsp;</td>
 			<td><?php 
 				if ($stat) {
-					echo $stat['message'];
+					echo h($stat['message']);
 				}
 			?>&nbsp;</td>
 			<td class="actions">
