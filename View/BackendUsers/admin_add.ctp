@@ -12,7 +12,16 @@
 	<fieldset>
 		<legend><?php echo __d('backend','Admin Add', __d('backend','Backend User')); ?></legend>
 <?php
+	echo $this->Form->input('backend_user_group_id');
 	echo $this->Form->input('username');
+	echo $this->Form->input('mail');
+	echo $this->Form->input('first_name');
+	echo $this->Form->input('last_name');
+	
+	echo $this->Form->input('password',array('type'=>'password','default'=>''));
+	echo $this->Form->input('password2',array('type'=>'password','default'=>''));
+	
+	echo $this->Form->input('published');
 ?>
 <?php echo $this->Form->submit(__d('backend','Submit'));?>
 	</fieldset>

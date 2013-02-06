@@ -19,7 +19,7 @@ class AuthController extends BackendAppController {
 	public function admin_login() {
 
 		$this->layout = "Backend.auth";
-		$defaultRedirect = array('plugin'=>'backend','controller'=>'backend','action'=>'dashboard');
+		$defaultRedirect = (Configure::read('Backend.Dashboard.url')) ? Configure::read('Backend.Dashboard.url') : array('plugin'=>'backend','controller'=>'backend','action'=>'dashboard');
 		
 	    if ($this->request->is('post')) {
 	        if (!$this->Auth->login()) {
@@ -51,7 +51,7 @@ class AuthController extends BackendAppController {
 	            
 	            $redirect = Router::normalize($redirect);
 	            if ($redirect == '/' || !preg_match('/^\/admin\//',$redirect))
-	            	$redirect = array('plugin'=>'backend','controller'=>'backend','action'=>'dashboard');
+	            	$redirect = $defaultRedirect;
 	            
 	            
 	            $this->redirect($redirect);
