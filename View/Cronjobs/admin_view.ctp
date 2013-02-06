@@ -47,6 +47,13 @@
 	<dl>
 		<dt>Id</dt>
 		<dd><?php echo $id; ?>&nbsp;</dd>
+		<dt>Enabled</dt>
+		<dd><?php 
+			//TODO implement StatusHelper->html() here
+			$class = ($cronjob['enabled']) ? 'success' : 'important';
+			$enabled = ($cronjob['enabled']) ? __('Yes') : __('No');
+			echo $this->Html->tag('span', $enabled,array('class'=>'label label-'.$class));
+		?>&nbsp;</dd>
 		<dt>Url</dt>
 		<dd><?php echo $cronjob['url']; ?>&nbsp;</dd>
 		<dt>Interval</dt>

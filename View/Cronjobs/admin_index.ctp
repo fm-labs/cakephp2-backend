@@ -9,6 +9,7 @@
 	<table>
 		<tr>
 			<th>Id</th>
+			<th>Enabled</th>
 			<th>Url</th>
 			<th>Interval</th>
 			<th>Last Run</th>
@@ -20,6 +21,12 @@
 		<?php foreach($cronjobs as $id => $cronjob): ?>
 		<tr>
 			<td><?php echo Inflector::humanize($id); ?></td>
+			<td><?php 
+				//TODO implement StatusHelper->html() here
+				$class = ($cronjob['enabled']) ? 'success' : 'important';
+			$enabled = ($cronjob['enabled']) ? __('Yes') : __('No');
+				echo $this->Html->tag('span', $enabled,array('class'=>'label label-'.$class)); 
+			?></td>
 			<td><?php echo $cronjob['url']; ?></td>
 			<td><?php echo $cronjob['interval']; ?> sec</td>
 			<td><?php 
