@@ -26,8 +26,8 @@
 		<?php echo $this->Html->link(__('Goto My Dashboard'),array('action'=>'dashboard')); ?><br />
 	</div>
 
-	<?php #foreach($nav as $n):?>
-	<?php #echo $this->Dashboard->itemFromArray($n); ?>
-	<?php #endforeach; ?>
+	<?php foreach((array) $this->get('backend_sidebar_menu') as $n):?>
+	<?php echo $this->Dashboard->itemFromArray($n); ?>
+	<?php endforeach; ?>
 	
 </div>

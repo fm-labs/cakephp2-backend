@@ -68,6 +68,6 @@
 </div>
 <script>
 $(document).ready(function() {
-	$("tr.collapsed").hide();
+	//$("tr.collapsed").hide();
 });
 </script>
