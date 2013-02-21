@@ -5,10 +5,45 @@ class CronjobsController extends BackendAppController {
 	
 	public $uses = array();
 	
+	public $cronjobs = array();
+	
+	public $cronlogLimit = 100;
+	
 	public function beforeFilter() {
 		parent::beforeFilter();
 	
 		$this->Auth->allow('run','run_all');
+		
+		$this->cronjobs = array(
+			'daily' => array(
+				'enabled' => true,
+				'url' => '/backend/cron/daily',
+				'interval' => 1*DAY,
+				'expectOk' => 'OK',
+				'expectFail' => 'FAILURE',
+				'expectError' => 'ERROR',
+			),
+			'weekly' => array(
+				'enabled' => true,
+				'url' => '/backend/cron/weekly',
+				'interval' => 1*WEEK,
+				'expectOk' => 'OK',
+				'expectFail' => 'FAILURE',
+				'expectError' => 'ERROR',
+			),
+			'monthly' => array(
+				'enabled' => true,
+				'url' => '/backend/cron/monthly',
+				'interval' => 1*MONTH,
+				'expectOk' => 'OK',
+				'expectFail' => 'FAILURE',
+				'expectError' => 'ERROR',
+			),
+		);
+		
+		if (Configure::read('Backend.Cronjob')) {
+			$this->cronjobs = am($this->cronjobs, (array) Configure::read('Backend.Cronjob'));
+		}
 	}
 	
 	public function run($id = null) {
@@ -17,15 +52,14 @@ class CronjobsController extends BackendAppController {
 		$this->response->type('text');
 		
 		// get cronjob
-		$cronjob = Configure::read('Backend.Cronjob.'.$id);
-		if (!$cronjob) {
+		if (!isset($this->cronjobs[$id])) {
 			$this->response->statusCode(400);
 			$this->response->body('NOTFOUND');
 			return;
 		}
 			
 		$force = isset($this->passedArgs['force']) ? $this->passedArgs['force'] : false;
-		list($result, $stats) = $this->_run($id, $cronjob, $force);
+		list($result, $stats) = $this->_run($id, $this->cronjobs[$id], $force);
 		
 		$this->response->body($result['response']);
 	}
@@ -35,10 +69,8 @@ class CronjobsController extends BackendAppController {
 		$this->autoRender = false;
 		$this->response->type('text');
 
-		$cronjobs = Configure::read('Backend.Cronjob');
-		
 		$allStats = array();
-		foreach($cronjobs as $id => $config) {
+		foreach($this->cronjobs as $id => $config) {
 			if (!$config['enabled'])
 				continue;
 			
@@ -50,8 +82,7 @@ class CronjobsController extends BackendAppController {
 	
 	public function admin_index() {
 		
-		$cronjobs = Configure::read('Backend.Cronjob');
-		
+		$cronjobs = $this->cronjobs;
 		$stats = array();
 		foreach($cronjobs as $id => $config) {
 			$_stats = $this->_getStats($id);
@@ -66,25 +97,22 @@ class CronjobsController extends BackendAppController {
 	
 	public function admin_view($id = null) {
 
-		// get cronjob
-		$cronjob = Configure::read('Backend.Cronjob.'.$id);
-		if (!$cronjob)
+		if (!isset($this->cronjobs[$id]))
 			throw new NotFoundException("Cronjob $id not found");
 		
+		$cronjob = $this->cronjobs[$id];
 		$stats = $this->_getStats($id);
 		$this->set(compact('id','cronjob','stats'));
 	}
 	
 	public function admin_run($id = null) {
-		
-		// get cronjob
-		$cronjob = Configure::read('Backend.Cronjob.'.$id);
-		if (!$cronjob)
+
+		if (!isset($this->cronjobs[$id]))
 			throw new NotFoundException("Cronjob $id not found");
 		
 		$force = isset($this->passedArgs['force']) ? $this->passedArgs['force'] : false;
 		
-		list($result, $stats) = $this->_run($id, $cronjob, $force);
+		list($result, $stats) = $this->_run($id, $this->cronjobs[$id], $force);
 		
 		$this->Session->setFlash($result['message']);
 		$this->redirect(array('action'=>'view',$id));
@@ -92,10 +120,8 @@ class CronjobsController extends BackendAppController {
 	
 	public function admin_run_all() {
 
-		$cronjobs = Configure::read('Backend.Cronjob');
-		
 		$allStats = array();
-		foreach($cronjobs as $id => $config) {
+		foreach($this->cronjobs as $id => $config) {
 			if (!$config['enabled'])
 				continue;
 			
@@ -103,7 +129,6 @@ class CronjobsController extends BackendAppController {
 		}
 		
 		$this->set(compact('allStats'));
-		debug($allStats);
 	}
 	
 	protected function _run($id, $config, $force = false) {
@@ -144,6 +169,7 @@ class CronjobsController extends BackendAppController {
 			case $response == $config['expectFail']:
 				$message = 'Cronjob failed';
 				break;
+			case $info['http_code'] == 200:
 			case $response == $config['expectOk']:
 				$message = 'Cronjob successful';
 				break;
@@ -162,7 +188,7 @@ class CronjobsController extends BackendAppController {
 		
 		// write stats
 		array_unshift($stats, $result);
-		$stats = array_slice($stats,0,100);
+		$stats = array_slice($stats,0,$this->cronlogLimit);
 		$this->_setStats($id, $stats);
 		
 		return array($result, $stats);

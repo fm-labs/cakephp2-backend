@@ -24,31 +24,36 @@
 		</header>
 		<!-- #HEADER -->
 		
-					
-		<div class="container-fluid">
-			<?php echo $this->element('Backend.layout/backend/breadcrumbs'); ?>
-			<?php echo $this->Session->flash(); ?>
-			<?php echo $this->Session->flash('auth'); ?>
-			<div class="row-fluid">
-				<div class="span10">
-					<?php echo $this->element('Backend.layout/backend/content_before'); ?>
-					<?php echo $this->fetch('content'); ?>
-					<?php echo $this->element('Backend.layout/backend/content_after'); ?>
-				</div>
-				<aside class="span2">
-					<?php echo $this->element('Backend.layout/backend/sidebar'); ?>
-				</aside>
-			</div>
-		</div>
 		
-		<!-- FOOTER -->
-		<footer>
+		<aside id="be-sidebar" style="left: 0;
+    padding: 10px 10px 10px 0;
+    position: fixed;
+    top: 40px;
+    width: 200px;">
+			<?php echo $this->element('Backend.layout/backend/sidebar'); ?>
+		</aside>
+		
+		<div id="be-main" style="padding:0 0 0 210px; min-height: 400px;">
 			<div class="container-fluid">
+				<?php echo $this->element('Backend.layout/backend/breadcrumbs'); ?>
+				<?php echo $this->Session->flash(); ?>
+				<?php echo $this->Session->flash('auth'); ?>
+				<?php echo $this->element('Backend.layout/backend/content_before'); ?>
+				<?php echo $this->fetch('content'); ?>
+				<?php echo $this->element('Backend.layout/backend/content_after'); ?>
 			</div>
-		</footer>
-		<!-- #FOOTER -->
+			
+			<!-- FOOTER -->
+			<footer>
+				<div class="container-fluid">
+					<?php echo $this->element('Backend.debug/panel'); ?>
+				</div>
+			</footer>
+			
+			<!-- #FOOTER -->
+		</div>	
 		
-		<?php echo $this->element('Backend.debug/panel'); ?>
+		
 		
 		<!-- MISC -->
 		<div id="spinner"></div>

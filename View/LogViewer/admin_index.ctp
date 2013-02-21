@@ -3,42 +3,6 @@
 <div class="index">
 	<h2><?php echo __d('backend','LogViewer'); ?></h2>
 	
-	<div class="hero-unit" style="padding:20px;">
-		<h3>Configured LogRotation</h3>
-		
-		<?php 
-		$logRotations = Configure::read('Backend.LogRotation'); 
-		if (!$logRotations):
-		?>
-		<p>No LogRotations configured<br />
-		Create APP/Config/backend.php<br /><br />
-		Insert following to the config file:
-		</p>
-		<pre>
-		$config = array(
-			'Backend' => array(
-				'LogRotation' => array(
-					'config' => 'default',
-					'file' => 'cron.log', // Log file name or full path to file
-					'keep' => 3, // Number of old logs to keep
-					'schedule' => 'daily', // daily, weekly, monthly
-					'compress' => false, // Compress
-					'compress_delay' => false, // Compress on next cycle
-					'rotate_empty' => false, // Rotate even if log file is empty
-					'email_to' => null, // Email log before deleting. Value must be compatible to CakeEmail::to()
-				)
-			)
-		)
-		</pre>
-		<?php else: ?>
-			<?php foreach ($logRotations as $alias => $lr):?>
-			<strong><?php echo basename($lr['file']); ?></strong> | <?php echo $lr['schedule']?> | Keep <?php echo $lr['keep']; ?>
-			<?php echo $this->Html->link('Force',array('action'=>'rotate',$alias,'force'=>true))?>
-			<br />
-			<?php endforeach; ?>
-		<?php endif; ?>
-	</div>
-	
 	<table>
 		<tr>
 			<th><?php echo __d('backend','Logfile');?></th>
@@ -48,7 +12,7 @@
 			<th class="actions"><?php echo __d('backend','Actions'); ?></th>
 		</tr>
 	<?php foreach($files as $file):?>
-		<?php $id = basename($file['name'],'.log'); ?>
+		<?php $id = basename($file['name']); ?>
 		<tr>
 			<td><?php echo $this->Html->link($file['dir'].$file['name'],array('action'=>'view',$id)); ?></td>
 			<td><?php echo $this->Number->toReadableSize($file['size']); ?></td>
@@ -65,4 +29,37 @@
 		</tr>
 	<?php endforeach; ?>
 	</table>
+	
+	
+	<h2>Configured LogRotation</h2>
+	<table>
+		<tr>
+			<th><?php echo __d('backend','Alias');?></th>
+			<th><?php echo __d('backend','Path');?></th>
+			<th><?php echo __d('backend','Keep');?></th>
+			<th><?php echo __d('backend','Schedule');?></th>
+			<th><?php echo __d('backend','Compress');?></th>
+			<th><?php echo __d('backend','Compress Delay');?></th>
+			<th><?php echo __d('backend','Rotate Empty');?></th>
+			<th><?php echo __d('backend','Email To');?></th>
+			<th class="actions"><?php echo __d('backend','Actions'); ?></th>
+		</tr>
+		<?php foreach ((array) Configure::read('Backend.LogRotation') as $alias => $config):?>
+		<tr>
+			<td><?php echo $alias; ?></td>
+			<td><?php echo $config['path']; ?></td>
+			<td><?php echo $config['keep']; ?></td>
+			<td><?php echo $config['schedule']; ?></td>
+			<td><?php echo $config['compress']; ?></td>
+			<td><?php echo $config['compress_delay']; ?></td>
+			<td><?php echo $config['rotate_empty']; ?></td>
+			<td><?php echo $config['email_to']; ?></td>
+			<td class="actions">
+				<?php echo $this->Html->link('Rotate',array('action'=>'rotate',$alias))?>
+				<?php echo $this->Html->link('Force',array('action'=>'rotate',$alias,'force'=>true)); ?>
+			</td>
+		</tr>
+		<?php endforeach; ?>
+	</table>
+	
 </div>

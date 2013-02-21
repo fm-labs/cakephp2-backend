@@ -10,7 +10,7 @@ class LogViewerController extends BackendAppController {
 		$logDir = LOGS;
 		
 		$Folder = new Folder($logDir,false);
-		$logfiles = $Folder->find('.*.log',true);
+		$logfiles = $Folder->find('.*.log(\.[0-9])?',true);
 		
 		$files = array();
 		foreach($logfiles as $logfile) {
@@ -77,20 +77,19 @@ class LogViewerController extends BackendAppController {
 	}
 	
 	protected function _getFilePath($logFile) {
-		return LOGS . $logFile . '.log';
+		return LOGS . $logFile;
 	}
 	
 	public function admin_rotate($alias = null) {
 		
 		App::uses('LogRotation','Backend.Log');
-		$L = new LogRotation('cron');
-		$L->rotate();
-		
-		$msg = "";
-		foreach($L->log as $log) {
-			$msg .= $log ."\n";
+		$L = new LogRotation($alias);
+		if ($L->rotate()) {
+			$this->Session->setFlash(__('Ok'),'success');
+		} else {
+			$this->Session->setFlash(__('LogRotation for %s failed',$alias),'error');
 		}
-		$this->Session->setFlash($msg);
+		
 		$this->redirect($this->referer());
 	}
 }

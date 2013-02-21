@@ -50,7 +50,7 @@ class AuthController extends BackendAppController {
 
 	            
 	            $redirect = Router::normalize($redirect);
-	            if ($redirect == '/' || !preg_match('/^\/admin\//',$redirect))
+	            if ($redirect == '/' || !preg_match('/^\/admin\//',$redirect) || $redirect == '/admin/backend')
 	            	$redirect = $defaultRedirect;
 	            
 	            

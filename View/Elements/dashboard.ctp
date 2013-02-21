@@ -1,6 +1,6 @@
 <?php 
 /**
- * !!THIS ELEMENT IS DEPRECATED. Use Backend.DisplayHelper instead!!
+ * !!THIS ELEMENT IS DEPRECATED. Use Backend.DashboardHelper instead!!
  * 
  * Render Dashboard Items from array
  * 
