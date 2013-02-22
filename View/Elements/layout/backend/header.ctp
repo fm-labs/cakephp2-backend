@@ -51,12 +51,8 @@ span.be-userpanel:HOVER {
 				endif; 
 				?>
 	            <li><a href="#nav" id="be-navtoggle">#</a></li>
-	            <?php foreach(CakePlugin::loaded() as $_plugin):?>
+	            <?php foreach((array) Configure::read('Backend.Dashboard.plugins') as $_plugin):?>
 	            	<?php 
-	            	if (Configure::read('Backend.Dashboard.hidePlugins') 
-						&& in_array($_plugin,Configure::read('Backend.Dashboard.hidePlugins'))) {
-						continue;
-					}
 
 	            	$link = $this->Html->link($_plugin,
 	              		array('plugin'=>Inflector::underscore($_plugin),'controller'=>Inflector::underscore($_plugin),'action'=>'index')); 

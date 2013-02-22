@@ -16,7 +16,7 @@
 		<?php echo $this->Html->script('/backend/js/jquery-1.8.0.min.js'); ?>
 		<?php echo $this->fetch('script-head'); ?>
 	</head>
-	<body style="padding: 45px 0 40px 0;">
+	<body style="padding: 40px 0 40px 0;">
 		<!-- HEADER -->
 		<header>
 			<?php echo $this->element('Backend.layout/backend/header'); ?>
@@ -33,7 +33,7 @@
 			<?php echo $this->element('Backend.layout/backend/sidebar'); ?>
 		</aside>
 		
-		<div id="be-main" style="padding:0 0 0 210px; min-height: 400px;">
+		<div id="be-main" style="margin:0 0 0 210px; min-height: 400px; box-shadow:-2px 0 5px #CCCCCC; padding: 1em 0 2em 0;">
 			<div class="container-fluid">
 				<?php echo $this->element('Backend.layout/backend/breadcrumbs'); ?>
 				<?php echo $this->Session->flash(); ?>
@@ -43,17 +43,15 @@
 				<?php echo $this->element('Backend.layout/backend/content_after'); ?>
 			</div>
 			
-			<!-- FOOTER -->
-			<footer>
-				<div class="container-fluid">
-					<?php echo $this->element('Backend.debug/panel'); ?>
-				</div>
-			</footer>
-			
-			<!-- #FOOTER -->
 		</div>	
 		
-		
+		<!-- FOOTER -->
+		<footer>
+			<div class="container-fluid">
+				<?php echo $this->element('Backend.debug/panel'); ?>
+			</div>
+		</footer>
+		<!-- #FOOTER -->
 		
 		<!-- MISC -->
 		<div id="spinner"></div>
