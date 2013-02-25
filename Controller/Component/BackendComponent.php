@@ -12,9 +12,40 @@ class BackendComponent extends Component {
 	
 	public $components = array('Session', 'Auth');
 	
+	/**
+	 * @see Controller::$layout
+	 * @var string
+	 */
 	public $layout = 'Backend.backend';
 	
-	public $authorize = false;
+	/**
+	 * @see AuthComponent::$authenticate
+	 * @var array
+	 */
+	public $authenticate = array(
+		'Form' => array(
+			'userModel' => 'Backend.BackendUser',
+			'scope' => array('BackendUser.published' => true)
+		)
+	);
+	
+	/**
+	 * @see AuthComponent::$authorize
+	 * @var array
+	 */
+	public $authorize = array(
+		'Backend.Backend' => array('actionPath' => 'controllers')
+	);
+
+	/**
+	 * @see AuthComponent::$loginAction
+	 * @var array
+	 */
+	public $loginAction = array(
+			'plugin' => 'backend',
+			'controller'=> 'auth',
+			'action'=>'login',
+	);
 	
 	private $_isBackendRequest = false;
 	
@@ -30,10 +61,10 @@ class BackendComponent extends Component {
 	*/
 	public function initialize(Controller $controller) {
 		
-		//Attach EventListeners
+		// attach event listeners
 		$controller->getEventManager()->attach(new BackendEventListener());
 		
-		//add backend detector
+		// add backend detector
 		$controller->request->addDetector('backend', array('callback' => array($this,'isBackendRequest')));
 		$controller->request->addDetector('iframe', array('callback' => array($this,'isIframeRequest')));
 		
@@ -42,33 +73,23 @@ class BackendComponent extends Component {
 			
 			$this->_isBackendRequest = true;
 			
-			//Controller
+			// Controller
 			$controller->layout = $this->layout;
 			$controller->viewClass = 'Backend.Backend';
 			$controller->helpers[] = 'Backend.BackendHtml';
 
-			//Auth
+			// Auth
 			$controller->Components->load('Auth');
 			//TODO check if backend auth sessionkey overwrite can be avoided
 			AuthComponent::$sessionKey = "Auth.Backend"; 
 				
-			$this->Auth->authenticate = array(
-					'Form' => array(
-						'userModel' => 'Backend.BackendUser',
-						'scope' => array('BackendUser.published' => true)
-					)
-			);
-			$this->Auth->loginAction = array(
-					'plugin' => 'backend',
-					'controller'=> 'auth',
-					'action'=>'login',
-			);
+			$this->Auth->authenticate = $this->authenticate;
+			$this->Auth->loginAction = $this->loginAction;
 			
-			if ($this->authorize == true) {
+			// enable Access Control List
+			if (Configure::read('Backend.Acl.enabled') === true) {
 				//TODO check if acl tables are present
-				$this->Auth->authorize = array(
-					'Backend.Backend' => array('actionPath' => 'controllers')
-				);
+				$this->Auth->authorize = $this->authorize;
 			}
 			
 		}
@@ -127,7 +148,7 @@ class BackendComponent extends Component {
 	 */
 	public function isBackendRequest(CakeRequest $request) {
 		
-		//TODO remove global constant
+		//TODO BACKEND constant should be flagged deprecated. Used by BackendDispatcher
 		if (defined('BACKEND'))
 			return true;
 		

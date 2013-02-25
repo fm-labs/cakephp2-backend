@@ -71,7 +71,7 @@ class UserTask extends AppShell {
 		}
 		
 		if (!isset($this->params['first_name'])) {
-			$this->params['first_name'] = $this->in(__d('backend',"Enter FirstName:"),null,'Admin');
+			$this->params['first_name'] = $this->in(__d('backend',"Enter FirstName:"),null,'Backend');
 		}
 		
 		if (!isset($this->params['last_name'])) {
@@ -79,11 +79,12 @@ class UserTask extends AppShell {
 		}
 		
 		if (!isset($this->params['password'])) {
-			$this->params['password'] = $this->in(__d('backend',"Enter Password:"),null,'Secure4Me');
+			$this->params['password'] = $this->in(__d('backend',"Enter Password:"),null,'adminPass');
 		}
 		
-		$this->params['password2'] = $this->in(__d('backend',"Retype your Password:"),null,'Secure4Me');
-		
+		do {
+			$this->params['password2'] = $this->in(__d('backend',"Retype your Password:"),null,'adminPass');
+		} while($this->params['password'] != $this->params['password2']);
 		
 		$data = $this->params;
 		unset($data['help'],$data['quiet'], $data['verbose']);

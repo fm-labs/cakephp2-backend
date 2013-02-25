@@ -2,3 +2,5 @@
 /.buildpath
 /.project
 /.release/
+/package.properties
+/TODO.txt

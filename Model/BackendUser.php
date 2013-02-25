@@ -69,7 +69,15 @@ class BackendUser extends BackendAppModel {
 		)
 	);
 	
-
+	public function __construct($id=false,$table=null,$ds=null) {
+		
+		if (!Configure::read('Backend.Acl.enabled')) {
+			unset($this->actsAs['Acl']);
+		}
+		
+		parent::__construct($id,$table,$ds);
+	}
+	
 	public function parentNode() {
 		if (!$this->id && empty($this->data)) {
 			return null;
@@ -138,20 +146,5 @@ class BackendUser extends BackendAppModel {
 		return true;
 	}
 
-/**
- * Routine to create default root admin user
- * @todo load default values from config file
- */	
-	public function createSuperUser() {
-		$this->create();
-		return $this->save(array($this->alias => array(
-			'root' => true,
-			'mail' => 'admin@localhost',
-			'username' => 'flowmotion',
-			'password' => 'adminpanel',
-			'published'=> true
-		)),false);
-	}
-	
 }
 ?>

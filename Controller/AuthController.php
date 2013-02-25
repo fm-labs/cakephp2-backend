@@ -40,7 +40,10 @@ class AuthController extends BackendAppController {
 	        	$this->getEventManager()->dispatch($event);
 	        	
 	            $this->Session->setFlash(__d('backend','Login successful'), 'success');
-	            $this->Session->setFlash(__d('backend','Last login: %s', CakeTime::timeAgoInWords($this->Auth->user('last_login'))), 'default',array(),'auth');
+	            
+	            if ($this->Auth->user('lastlogin')) {
+	            	$this->Session->setFlash(__d('backend','Last login: %s', CakeTime::timeAgoInWords($this->Auth->user('last_login'))), 'default',array(),'auth');
+	            }
 	            
 	            //TODO should the event result return an redirect url?
 	            if ($event->result)

@@ -9,11 +9,11 @@
 		<?php echo $this->Html->css('/backend/css/bootstrap/css/bootstrap'); ?>
 		<?php echo $this->Html->css('/backend/css/bootstrap/css/bootstrap-responsive'); ?>
 		<?php echo $this->Html->css('/backend/css/chosen/chosen'); ?>
+		<?php echo $this->fetch('css'); ?>
 		<?php echo $this->Html->css('/backend/css/style'); ?>
 		<?php echo $this->Html->css('/backend/css/forms'); ?>
-		<?php echo $this->fetch('css'); ?>
 		
-		<?php echo $this->Html->script('/backend/js/jquery-1.8.0.min.js'); ?>
+		<?php echo $this->Html->script('/backend/js/jquery-1.9.1.min.js'); ?>
 		<?php echo $this->fetch('script-head'); ?>
 	</head>
 	<body style="padding: 40px 0 40px 0;">

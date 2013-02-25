@@ -2,7 +2,7 @@
 <html>
 	<?php echo $this->Html->charset(); ?>
 	<head>
-		<title>Backend: 404 NotFound</title>
+		<title>404 NotFound</title>
 		
 		<?php echo $this->fetch('meta'); ?>
 		<?php echo $this->fetch('css'); ?>
@@ -12,29 +12,17 @@
 	<body>
 		<!-- HEADER -->
 		<header>
-			<div class="ym-wrapper">
-				<h1>404 NotFound</h1>
-			</div>
+			<h1>404 NotFound</h1>
 		</header>
 		<!-- #HEADER -->
 		
-		<div id="main">
-			<div class="ym-wrapper">
-					<!-- MAIN -->
-					<div id="content">
-						<div class="ym-cbox">
-							<?php echo $this->fetch('content'); ?>
-						</div>
-					</div>
-					<!-- #MAIN -->
-			</div>
+		<div id="content">
+			<?php echo $this->fetch('content'); ?>
 		</div>
 		
 		<!-- FOOTER -->
 		<footer>
-			<div class="ym-wrapper">
-				<?php echo $this->element('sql_dump');?>
-			</div>
+			<?php echo $this->element('sql_dump');?>
 		</footer>
 		<!-- #FOOTER -->
 	</body>

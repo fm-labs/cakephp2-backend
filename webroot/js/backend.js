@@ -8,9 +8,9 @@ $(document).ready(function() {
 		fieldset.toggleClass('collapsed');
     });
 
-	$('form div.input').each(function() {
-		$(this).addClass('control-group');
-	});
+	//$('form div.input').each(function() {
+	//	$(this).addClass('control-group');
+	//});
 
 	$('form div.input div.error-message').each(function() {
 		$(this).addClass('help-block');

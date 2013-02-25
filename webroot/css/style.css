@@ -221,6 +221,10 @@ tr.filter select {
 	margin: 1em 0;
 }
 
+.ui-widget {
+	font-size: 1em;
+}
+
 .ui-widget-content a {
 	background: none repeat scroll 0 0 transparent !important;
     color: #4D87C7 !important;

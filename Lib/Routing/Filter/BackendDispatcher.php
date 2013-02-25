@@ -6,6 +6,8 @@ App::uses('DispatcherFilter', 'Routing');
  * and served it back to the client if appropriate.
  *
  * @package Cake.Routing.Filter
+ * 
+ * TODO BackendDispatcher should be flagged deprecated
  */
 class BackendDispatcher extends DispatcherFilter {
 
