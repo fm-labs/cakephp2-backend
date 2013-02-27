@@ -68,15 +68,27 @@ class BackendComponent extends Component {
 		$controller->request->addDetector('backend', array('callback' => array($this,'isBackendRequest')));
 		$controller->request->addDetector('iframe', array('callback' => array($this,'isIframeRequest')));
 		
+		// is a plugin using backend?
+		if ($controller->request->params['plugin']) {
+			$this->plugin = $controller->request->params['plugin'];
+		}
 		
 		if ($controller->request->is('backend')) {
 			
 			$this->_isBackendRequest = true;
 			
+			// Load plugin specif config
+			if ($this->plugin && $this->plugin != "backend") {
+				try {
+					Configure::load(Inflector::camelize($this->plugin).'.backend');
+				} catch(Exception $e) {
+					// this plugin has no backend configuration
+				}
+			}
+			
 			// Controller
 			$controller->layout = $this->layout;
 			$controller->viewClass = 'Backend.Backend';
-			$controller->helpers[] = 'Backend.BackendHtml';
 
 			// Auth
 			$controller->Components->load('Auth');
@@ -103,9 +115,17 @@ class BackendComponent extends Component {
 		}
 	}
 	
-	public function beforeRender($controller) {
+	public function beforeRender(Controller $controller) {
 
 		if ($this->_isBackendRequest) {
+			
+			// load backendhelpers
+			$controller->helpers[] = 'Backend.BackendHtml';
+			
+			//TODO check if this won't lead to bugs
+			if ($controller->layout) {
+				$controller->helpers[] = 'Backend.BackendLayout';
+			}
 			
 			// pretty flash messages
 			//TODO make configurable option to enable/disable this feature

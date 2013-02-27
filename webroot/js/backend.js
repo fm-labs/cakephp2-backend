@@ -20,6 +20,13 @@ $(document).ready(function() {
 		$(this).addClass('btn btn-primary');
 	});
 	
+	$('form div.submit').each(function() {
+		if ($(this).parent().hasClass('form-actions') || $(this).hasClass('no-pretty'))
+			return false;
+		
+		$(this).addClass('form-actions');
+	});
+	
     //Action Buttons
     $('td.actions,div.actions').each(function() {
     	

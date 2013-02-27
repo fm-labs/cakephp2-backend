@@ -120,10 +120,11 @@ span.be-userpanel:HOVER {
 	
 	</style>
 	
+	<?php if (Configure::read('Backend.Navigation.default')):?>
 	<div id="be-navpanel">
 		<div class="container-fluid">
 			<ul>
-				<?php foreach((array) Configure::read('Backend.Navigation') as $n):?>
+				<?php foreach((array) Configure::read('Backend.Navigation.default') as $n):?>
 				<li>
 					<h2><?php echo $this->Html->link($n['title'],$n['url']);?></h2>
 					<ul>
@@ -138,6 +139,7 @@ span.be-userpanel:HOVER {
 			<div class="clearfix"></div>
 		</div>
 	</div>
+	<?php endif; ?>
 </div>
 <?php //TODO use css3 instead of jquery here ?>
 <script>

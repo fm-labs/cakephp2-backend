@@ -7,8 +7,8 @@ $config = array(
 		'Dashboard' => array(
 			'title' => 'Dashboard',
 			'url' => array('plugin'=>'backend','controller'=>'backend','action'=>'dashboard'),
-			'plugins' => array('Backend')		
+			'plugins' => 'Backend'		
 		)		
-	)	
+	)
 );
 ?>
