@@ -12,6 +12,7 @@ $sidebar = $this->BackendLayout->fetch('sidebar');
 		<?php echo $this->fetch('meta'); ?>
 		
 		<?php echo $this->BackendLayout->css(); ?>
+		<?php echo $this->fetch('css'); ?>
 		
 		<?php echo $this->BackendLayout->script(); ?>
 		<?php echo $this->fetch('script'); ?>
@@ -39,7 +40,7 @@ $sidebar = $this->BackendLayout->fetch('sidebar');
 				<?php echo $this->Session->flash('auth'); ?>
 				<?php echo $this->BackendLayout->fetch('content_before'); ?>
 				<?php echo $this->fetch('content'); ?>
-				<?php echo $this->BackendLayout->fetch('conternt_after'); ?>
+				<?php echo $this->BackendLayout->fetch('content_after'); ?>
 			</div>
 			
 		</div>	
@@ -47,14 +48,24 @@ $sidebar = $this->BackendLayout->fetch('sidebar');
 		<!-- FOOTER -->
 		<footer>
 			<div class="container-fluid">
-				<?php echo $this->element('Backend.debug/panel'); ?>
+				<?php echo $this->BackendLayout->fetch('footer'); ?>
 			</div>
 		</footer>
 		<!-- #FOOTER -->
 		
+		<?php if (Configure::read('debug')>0):?>
+		<div>
+			<div class="container-fluid">
+				<?php echo $this->element('Backend.debug/panel'); ?>
+			</div>
+		</div>
+		<?php endif; ?>
+		
 		<!-- MISC -->
 		<div id="spinner"></div>
 		<!-- #MISC -->
+		
+		<?php echo $this->BackendLayout->fetch('bottom'); ?>
 		<?php echo $this->Js->writeBuffer(); ?>
 	</body>
 </html>

@@ -55,8 +55,10 @@
 			<td><?php echo $config['rotate_empty']; ?></td>
 			<td><?php echo $config['email_to']; ?></td>
 			<td class="actions">
-				<?php echo $this->Html->link('Rotate',array('action'=>'rotate',$alias))?>
-				<?php echo $this->Html->link('Force',array('action'=>'rotate',$alias,'force'=>true)); ?>
+				<ul>
+				<li><?php echo $this->Html->link('Rotate',array('action'=>'rotate',$alias))?></li>
+				<li><?php echo $this->Html->link('Force',array('action'=>'rotate',$alias,'force'=>true)); ?></li>
+				</ul>
 			</td>
 		</tr>
 		<?php endforeach; ?>

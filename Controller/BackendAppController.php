@@ -5,9 +5,10 @@ class BackendAppController extends AppController {
 	
 	public $helpers = array('Html','Session');
 	
-	public $components = array('Session', 'Auth', 'Backend.Backend');
+	public $components = array('Backend.Backend');
 	
 	public function beforeFilter() {
+		parent::beforeFilter();
 		$this->_initMenu();
 	}
 	

@@ -88,19 +88,26 @@ class BackendLayoutHelper extends AppHelper {
 	}
 	
 	/**
-	 * Fetches the css block for backend layout
+	 * Fetches the css for backend layouts
+	 * Load order: backend, [plugin,] app
 	 * 
-	 * @todo autoinclude css from other plugins, if they are using backend
+	 * @return string Html content for <head>
 	 */
 	public function css() {
-		$out = $this->_View->element('Backend.layout/backend/css');
-		return $out;
+		
+		$paths = array();
+		$paths[] = 'Backend.layout/backend/css';
+		if ($this->plugin && $this->plugin != 'Backend') {
+			$paths[] = $this->plugin.'.layout/backend/css';
+		}
+		$paths[] = 'layout/backend/css';
+		return $this->_fetchAll($paths);
 	}
 
 	/**
-	 * Fetches the script block for backend layout
+	 * Fetches the scripts for backend layouts
 	 *
-	 * @todo autoinclude scripts from other plugins, if they are using backend
+	 * @return string Html content for <head>
 	 */
 	public function script() {
 		$out = $this->_View->element('Backend.layout/backend/scripts');

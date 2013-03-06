@@ -2,6 +2,9 @@
 App::uses('BackendAppModel','Backend.Model');
 App::uses('AuthComponent','Controller/Component');
 
+/**
+ * @property AclBehavior $Acl
+ */
 class BackendUser extends BackendAppModel {
 
 	public $actsAs = array('Containable', 'Acl' => array('type' => 'requester'));
@@ -93,6 +96,7 @@ class BackendUser extends BackendAppModel {
 		} else {
 			return array('BackendUserGroup' => array('id' => $groupId));
 		}
+		
 	}
 	
 	public function bindNode($user) {

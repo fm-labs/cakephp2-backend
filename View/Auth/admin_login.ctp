@@ -1,5 +1,10 @@
 <div id="users_login">
 
+	<?php if ($this->get('redirect')):?>
+	<div class="login-redirect">
+		<?php echo $this->Html->link($this->get('redirect')); ?>
+	</div>
+	<?php endif; ?>
 	<div id="login_form">
 		<?php echo $this->Form->create('BackendUser'); ?>
 		<fieldset>

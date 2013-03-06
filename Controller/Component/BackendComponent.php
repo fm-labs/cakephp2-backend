@@ -10,7 +10,9 @@ App::uses('BackendEventListener','Backend.Event');
  */
 class BackendComponent extends Component {
 	
-	public $components = array('Session', 'Auth');
+	public $components = array('Session');
+	
+	public $Auth;
 	
 	/**
 	 * @see Controller::$layout
@@ -34,7 +36,7 @@ class BackendComponent extends Component {
 	 * @var array
 	 */
 	public $authorize = array(
-		'Backend.Backend' => array('actionPath' => 'controllers')
+		'Actions' => array('actionPath' => 'controllers','userModel'=>'Backend.BackendUser')
 	);
 
 	/**
@@ -60,6 +62,11 @@ class BackendComponent extends Component {
 	 * @return boolean
 	*/
 	public function initialize(Controller $controller) {
+		
+		// load AuthComponent
+		if ($controller->Components->loaded('Auth')) {
+			$this->Auth =& $controller->Auth;
+		}
 		
 		// attach event listeners
 		$controller->getEventManager()->attach(new BackendEventListener());
@@ -91,19 +98,19 @@ class BackendComponent extends Component {
 			$controller->viewClass = 'Backend.Backend';
 
 			// Auth
-			$controller->Components->load('Auth');
-			//TODO check if backend auth sessionkey overwrite can be avoided
-			AuthComponent::$sessionKey = "Auth.Backend"; 
+			if ($this->Auth) {
+				//TODO check if backend auth sessionkey overwrite can be avoided
+				AuthComponent::$sessionKey = "Auth.Backend"; 
+					
+				$this->Auth->authenticate = $this->authenticate;
+				$this->Auth->loginAction = $this->loginAction;
 				
-			$this->Auth->authenticate = $this->authenticate;
-			$this->Auth->loginAction = $this->loginAction;
-			
-			// enable Access Control List
-			if (Configure::read('Backend.Acl.enabled') === true) {
-				//TODO check if acl tables are present
-				$this->Auth->authorize = $this->authorize;
+				// enable Access Control List
+				if (Configure::read('Backend.Acl.enabled') === true) {
+					//TODO check if acl tables are present
+					$this->Auth->authorize = $this->authorize;
+				}
 			}
-			
 		}
 	}
 	

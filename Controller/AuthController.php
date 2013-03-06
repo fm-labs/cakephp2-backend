@@ -20,6 +20,7 @@ class AuthController extends BackendAppController {
 
 		$this->layout = "Backend.auth";
 		$defaultRedirect = (Configure::read('Backend.Dashboard.url')) ? Configure::read('Backend.Dashboard.url') : array('plugin'=>'backend','controller'=>'backend','action'=>'dashboard');
+		$redirect = false;
 		
 	    if ($this->request->is('post')) {
 	        if (!$this->Auth->login()) {
@@ -29,15 +30,15 @@ class AuthController extends BackendAppController {
 	        		'user' => $this->request->data['BackendUser'],
 	        		'ip' => $this->request->clientIp()
 	        	);
-	        	$event = new CakeEvent('Backend.Controller.Auth.onLoginFail', $this, $eventData);
-	        	$this->getEventManager()->dispatch($event);
+	        	// $event = new CakeEvent('Backend.Controller.Auth.onLoginFail', $this, $eventData);
+	        	// $this->getEventManager()->dispatch($event);
 	        	
 	            $this->Session->setFlash(__d('backend','Login failed'), 'error', array(), 'auth');	            
 	        } else {
 	        	
 	        	//Event Backend.Auth.onLogin
 	        	$event = new CakeEvent('Backend.Controller.Auth.onLogin', $this, $this->Auth->user());
-	        	$this->getEventManager()->dispatch($event);
+	        	//$this->getEventManager()->dispatch($event);
 	        	
 	            $this->Session->setFlash(__d('backend','Login successful'), 'success');
 	            
@@ -51,17 +52,18 @@ class AuthController extends BackendAppController {
 	            else
 	            	$redirect = $this->Auth->redirect();
 
-	            
 	            $redirect = Router::normalize($redirect);
 	            if ($redirect == '/' || !preg_match('/^\/admin\//',$redirect) || $redirect == '/admin/backend')
 	            	$redirect = $defaultRedirect;
 	            
-	            
 	            $this->redirect($redirect);
 	        }
 	    } elseif ($this->Auth->user()) {
-	        $this->redirect($this->referer($defaultRedirect));
+	    	$redirect = $this->referer($defaultRedirect,true);
+	        $this->redirect($redirect);
 	    }
+	    
+	    $this->set(compact('redirect'));
 	}
 
 /**

@@ -59,7 +59,13 @@
 				}
 				?>
 				<?php foreach($_permission as $_k => $_p):?>
-				<td><?php echo $this->Status->html($_p, $status) ?></td>
+				<td><?php list($label,$class) = $status[$_p]; 
+					echo sprintf("<span class=\"label label-%s\">%s</span> %s",$class, $label, $this->BackendHtml->icon($_p));
+					echo $this->Html->link(__('Allow'),array('action'=>'allow',$aro['Aro']['id'],$aco['Aco']['id'],$_k));
+					echo $this->Html->link(__('Reset'),array('action'=>'reset',$aro['Aro']['id'],$aco['Aco']['id'],$_k));
+					echo $this->Html->link(__('Deny'),array('action'=>'deny',$aro['Aro']['id'],$aco['Aco']['id'],$_k));
+					?>
+				</td>
 				<?php endforeach; ?>
 			<?php endforeach;?>
 		</tr>
