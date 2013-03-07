@@ -2,7 +2,7 @@
 <html>
 	<?php echo $this->Html->charset(); ?>
 	<head>
-		<title>Backend</title>
+		<title>Backend Error</title>
 		
 		<?php echo $this->fetch('meta'); ?>
 		<?php echo $this->fetch('css'); ?>
@@ -10,32 +10,23 @@
 		
 	</head>
 	<body>
-		<!-- HEADER -->
+	<div class="page">
+	
 		<header>
-			<div class="ym-wrapper">
-				<h1>HELLO</h1>
-			</div>
-		</header>
-		<!-- #HEADER -->
+			<h1>Uups, something went wrong</h1>
+		</header> <!-- #HEADER -->
 		
 		<div id="main">
-			<div class="ym-wrapper">
-					<!-- MAIN -->
-					<div id="content">
-						<div class="ym-cbox">
-							<?php echo $this->fetch('content'); ?>
-						</div>
-					</div>
-					<!-- #MAIN -->
+			<div id="content">
+				<?php echo $this->Session->flash(); ?>
+				<?php echo $this->fetch('content'); ?>
 			</div>
-		</div>
+		</div><!-- #MAIN -->
 		
-		<!-- FOOTER -->
 		<footer>
-			<div class="ym-wrapper">
-				<?php echo $this->element('sql_dump');?>
-			</div>
-		</footer>
-		<!-- #FOOTER -->
+			<?php echo $this->element('sql_dump');?>
+		</footer> <!-- #FOOTER -->
+		
+	</div> <!-- #page -->
 	</body>
 </html>

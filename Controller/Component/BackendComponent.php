@@ -20,6 +20,8 @@ class BackendComponent extends Component {
 	 */
 	public $layout = 'Backend.backend';
 	
+	public $errorLayout = 'Backend.error';
+	
 	/**
 	 * @see AuthComponent::$authenticate
 	 * @var array
@@ -110,6 +112,12 @@ class BackendComponent extends Component {
 					//TODO check if acl tables are present
 					$this->Auth->authorize = $this->authorize;
 				}
+			}
+			
+			// Error Handling
+			if (is_a($controller,'CakeErrorController')) {
+				// use backend error layout
+				$controller->layout = $this->errorLayout;
 			}
 		}
 	}
