@@ -3,5 +3,5 @@
 Configure::write('Routing.prefixes', array('admin'));
 
 // load default backend configuration
-Configure::load('Backend.backend');
+#Configure::load('Backend.backend');
 ?>

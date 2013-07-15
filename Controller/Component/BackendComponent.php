@@ -2,6 +2,8 @@
 App::uses('Component','Controller');
 App::uses('BackendEventListener','Backend.Event');
 
+Configure::load('backend');
+
 /**
  * 
  * @author flow
@@ -81,12 +83,6 @@ class BackendComponent extends Component {
 			
 			$this->_isBackendRequest = true;
 			
-			// load AuthComponent
-			if (!$controller->Components->loaded('Auth')) {
-				$controller->Auth = $controller->Components->load('Auth');
-				$controller->Auth->initialize($controller);
-			}
-			
 			// Load plugin specif config
 			if ($this->plugin && $this->plugin != "backend") {
 				try {
@@ -100,8 +96,15 @@ class BackendComponent extends Component {
 			$controller->layout = $this->layout;
 			$controller->viewClass = 'Backend.Backend';
 
+
+			// load AuthComponent
+			if (Configure::read('Backend.Auth.enabled') === true && !$controller->Components->loaded('Auth')) {
+				$controller->Auth = $controller->Components->load('Auth');
+				$controller->Auth->initialize($controller);
+			}
+			
 			// Auth
-			if ($controller->Auth) {
+			if (Configure::read('Backend.Auth.enabled') === true && $controller->Auth) {
 				//TODO check if backend auth sessionkey overwrite can be avoided
 				AuthComponent::$sessionKey = "Auth.Backend"; 
 					

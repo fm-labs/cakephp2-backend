@@ -10,7 +10,9 @@ class AuthController extends BackendAppController {
 	public function beforeFilter() {
 		parent::beforeFilter();
 		
-		$this->Auth->allow('admin_login');
+		if (isset($this->Auth)) {
+			$this->Auth->allow('admin_login');
+		}
 	}
 	
 /**
@@ -18,6 +20,14 @@ class AuthController extends BackendAppController {
  */
 	public function admin_login() {
 
+		if (Configure::read('Backend.Auth.enabled') !== true) {
+			if (isset($this->Auth)) {
+				$this->redirect($this->Auth->loginAction);
+			} else {
+				$this->redirect('/');
+			}
+		}
+		
 		$this->layout = "Backend.auth";
 		$defaultRedirect = (Configure::read('Backend.Dashboard.url')) ? Configure::read('Backend.Dashboard.url') : array('plugin'=>'backend','controller'=>'backend','action'=>'dashboard');
 		$redirect = false;

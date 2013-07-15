@@ -1,5 +1,4 @@
 <div id="users_login">
-
 	<?php if ($this->get('redirect')):?>
 	<div class="login-redirect">
 		<?php echo $this->Html->link($this->get('redirect')); ?>

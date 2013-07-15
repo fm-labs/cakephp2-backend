@@ -20,7 +20,9 @@ span.be-userpanel:HOVER {
 			<div class="nav-collapse collapse">
 	            <p class="navbar-text pull-right">
 				<span class="be-userpanel">
-					<?php if (AuthComponent::user()):?>
+					<?php if (!class_exists('AuthComponent')):?>
+						Authentication is DISABLED!
+					<?php elseif (AuthComponent::user()):?>
 						<?php echo 	$this->Html->link(AuthComponent::user('username'),
 										array('plugin'=>'backend','controller'=>'auth','action'=>'user','admin'=>true)
 						);?> |
