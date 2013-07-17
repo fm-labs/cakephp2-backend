@@ -76,6 +76,9 @@ class BackendAppController extends AppController {
 								array(__d('backend','Collapsable'),array('plugin'=>'backend','controller'=>'appearance', 'action' => 'collapsable'),null),
 						)
 				),
+				/**
+				 * @deprecated
+				 * 
 				'jquery' => array(
 						'title' => __d('backend','Jquery'),
 						'url' => array('plugin'=>'backend','controller'=>'jquery', 'action' => 'index'),
@@ -87,6 +90,7 @@ class BackendAppController extends AppController {
 								array(__d('backend','Jquery Colorbox'),array('plugin'=>'backend','controller'=>'jquery', 'action' => 'colorbox'),null),
 						)
 				)
+				*/
 		);
 		
 		$this->set('backend_sidebar_menu', $nav);
