@@ -1,3 +1,4 @@
+<?php $this->Html->addCrumb(__('Backend'),array('controller'=>'backend', 'action'=>'index')); ?>
 <?php $this->Html->addCrumb(__d('backend','Systeminfo'),array('action'=>'index')); ?>
 <div>
 	<h1><?php echo __d('backend',"System "); ?></h1>

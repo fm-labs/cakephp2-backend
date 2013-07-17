@@ -1,4 +1,5 @@
-<?php echo $this->Html->addCrumb(__('Systeminfo'),array('action'=>'index')); ?>
+<?php $this->Html->addCrumb(__('Backend'),array('controller'=>'backend', 'action'=>'index')); ?>
+<?php $this->Html->addCrumb(__('Systeminfo'),array('action'=>'index')); ?>
 <div class="view">
 	<h2>Config</h2>
 	

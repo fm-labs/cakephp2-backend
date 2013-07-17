@@ -26,7 +26,7 @@ class BackendAppController extends AppController {
 								array(__d('backend','Globals'),array('plugin'=>'backend','controller'=>'system', 'action' => 'globals'),null),
 								array(__d('backend','Session'),array('plugin'=>'backend','controller'=>'system', 'action' => 'session'),null),
 								array(__d('backend','Config'),array('plugin'=>'backend','controller'=>'system', 'action' => 'config'),null),
-								array(__d('backend','Manifest'),array('plugin'=>'backend','controller'=>'manifest', 'action' => 'index'),null),
+								#array(__d('backend','Manifest'),array('plugin'=>'backend','controller'=>'manifest', 'action' => 'index'),null),
 						)
 				),
 				'logs' => array(
@@ -73,7 +73,7 @@ class BackendAppController extends AppController {
 								array(__d('backend','Typo'),array('plugin'=>'backend','controller'=>'appearance', 'action' => 'typo'),null),
 								array(__d('backend','Form'),array('plugin'=>'backend','controller'=>'appearance', 'action' => 'form'),null),
 								array(__d('backend','Flash'),array('plugin'=>'backend','controller'=>'appearance', 'action' => 'flash'),null),
-								array(__d('backend','Collapsable'),array('plugin'=>'backend','controller'=>'appearance', 'action' => 'collapsable'),null),
+								#array(__d('backend','Collapsable'),array('plugin'=>'backend','controller'=>'appearance', 'action' => 'collapsable'),null),
 						)
 				),
 				/**
