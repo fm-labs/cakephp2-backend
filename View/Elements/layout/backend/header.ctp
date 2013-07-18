@@ -37,7 +37,7 @@ span.be-userpanel:HOVER {
 					<?php endif; ?>
 				</span>
 	            </p>
-	            <ul class="nav">
+	            <ul class="nav" id="header-nav">
 				<?php 
 				if (Configure::read('Backend.Dashboard.title')):
 					if (Configure::read('Backend.Dashboard.url')) {
@@ -52,7 +52,6 @@ span.be-userpanel:HOVER {
 					unset($dbTitle);
 				endif; 
 				?>
-	            <li><a href="#nav" id="be-navtoggle">#</a></li>
 	            <?php foreach((array) Configure::read('Backend.Dashboard.plugins') as $_plugin):?>
 	            	<?php 
 
@@ -141,14 +140,15 @@ span.be-userpanel:HOVER {
 			<div class="clearfix"></div>
 		</div>
 	</div>
+	<?php //TODO use css3 instead of jquery here ?>
+	<script>
+	$(document).ready(function() {
+		$('#header-nav').append('<li><a href="#nav" id="be-navtoggle">#</a></li>');
+		$('#be-navtoggle').click(function() {
+			$('#be-navtoggle').toggleClass('opened');
+			$('#be-navpanel').slideToggle(400);
+		});	
+	});
+	</script>
 	<?php endif; ?>
 </div>
-<?php //TODO use css3 instead of jquery here ?>
-<script>
-$(document).ready(function() {
-	$('#be-navtoggle').click(function() {
-		$('#be-navtoggle').toggleClass('opened');
-		$('#be-navpanel').slideToggle(400);
-	});	
-});
-</script>
