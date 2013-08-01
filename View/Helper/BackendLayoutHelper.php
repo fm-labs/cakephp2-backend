@@ -34,7 +34,7 @@ class BackendLayoutHelper extends AppHelper {
 		if ($contents)
 			return $contents;
 		
-		// check app, plugin for custom layout elements
+		// check app & plugin for custom layout elements
 		// otherwise fallback to backend layout elements
 		
 		$paths = array();
