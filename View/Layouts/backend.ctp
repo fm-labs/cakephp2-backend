@@ -64,7 +64,7 @@ $sidebar = $this->BackendLayout->fetch('sidebar');
 		<!-- MISC -->
 		<div id="spinner"></div>
 		<!-- #MISC -->
-		
+		<?php echo $this->element('Backend.debug/panel'); ?>
 		<?php echo $this->BackendLayout->fetch('bottom'); ?>
 		<?php echo $this->Js->writeBuffer(); ?>
 	</body>
