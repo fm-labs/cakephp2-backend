@@ -150,5 +150,15 @@ class BackendUser extends BackendAppModel {
 		return true;
 	}
 
+	public function setupSuperuser($data) {
+		
+		$data[$this->alias]['id'] = null;
+		$data[$this->alias]['backend_user_group_id'] = null;
+		$data[$this->alias]['published'] = false;
+		
+		$this->create();
+		return $this->save($data);
+	}
+	
 }
 ?>

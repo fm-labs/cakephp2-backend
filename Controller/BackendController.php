@@ -3,6 +3,14 @@ App::uses('BackendAppController', 'Backend.Controller');
 
 class BackendController extends BackendAppController {
 
+	public function beforeFilter() {
+		parent::beforeFilter();
+		
+		if (isset($this->Auth) && Configure::read('debug') > 0) {
+			$this->Auth->allow('admin_setup');
+		}
+	}
+	
 	public function index() {
 		$this->redirect(array('admin'=>true,'action'=>'index'));
 	}
@@ -101,6 +109,21 @@ class BackendController extends BackendAppController {
 		
 		$this->set(compact('dashboard'));
 		
+	}
+	
+	public function admin_setup() {
+		$this->layout = "Backend.setup";
+		
+		$this->BackendUser = ClassRegistry::init('Backend.BackendUser');
+		
+		if ($this->request->is('post') || $this->request->is('put')) {
+			if ($this->BackendUser->setupSuperuser($this->request->data)) {
+				$this->Session->setFlash(__('Superuser created'));
+			} else {
+				$this->Session->setFlash(__('Failed to create superuser'));
+				debug($this->BackendUser->validationErrors);
+			}
+		}
 	}
 	
 }
