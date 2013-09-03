@@ -53,14 +53,6 @@ $sidebar = $this->BackendLayout->fetch('sidebar');
 		</footer>
 		<!-- #FOOTER -->
 		
-		<?php if (Configure::read('debug')>0):?>
-		<div>
-			<div class="container-fluid">
-				<?php echo $this->element('Backend.debug/panel'); ?>
-			</div>
-		</div>
-		<?php endif; ?>
-		
 		<!-- MISC -->
 		<div id="spinner"></div>
 		<!-- #MISC -->

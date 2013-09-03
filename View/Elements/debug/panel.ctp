@@ -6,6 +6,8 @@
 		left: 0;
 		width: 100%;
 		opacity: 0.1;
+		border-top: 4px solid #CCC;
+		background-color: #e3e3e3;
 	}
 	
 	.debug-panel-container:HOVER {
@@ -13,12 +15,10 @@
 	}
 
 	.debug-panel {
-		background-color: #FFF;
 		padding: 5px;
 	}
 	
 	.debug-panel-window {
-		background-color: #FFF;
 		padding: 1em;
 		display: none;
 	}
