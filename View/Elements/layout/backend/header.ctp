@@ -39,6 +39,7 @@ span.be-userpanel:HOVER {
 	            </p>
 	            <ul class="nav" id="header-nav">
 				<?php 
+				// Display Dashboard title
 				if (Configure::read('Backend.Dashboard.title')):
 					if (Configure::read('Backend.Dashboard.url')) {
 						$dbTitle = $this->Html->link(Configure::read('Backend.Dashboard.title'),
@@ -52,16 +53,25 @@ span.be-userpanel:HOVER {
 					unset($dbTitle);
 				endif; 
 				?>
-	            <?php foreach((array) Configure::read('Backend.Dashboard.plugins') as $_plugin):?>
-	            	<?php 
+	            <?php 
+	            // Display plugins
+	            foreach((array) Configure::read('Backend.Dashboard.plugins') as $_plugin):
 
 	            	$link = $this->Html->link($_plugin,
 	              		array('plugin'=>Inflector::underscore($_plugin),'controller'=>Inflector::underscore($_plugin),'action'=>'index')); 
 	            	
 					$class = (Inflector::underscore($_plugin) == $this->request->params['plugin']) ? "active" : "";
 					echo $this->Html->tag('li', $link, compact('class'));
-	            	?>
-	            <?php endforeach; ?>
+	            endforeach; 
+	            ?>
+	            <?php 
+	            // Display custom nav items
+	            // Check for 'be-nav-custom' viewblock or fallback to element
+	            //TODO fallback to configuration
+	            //TODO make block name configurable
+	            echo $this->fetch('be-header-nav-custom', 
+					$this->element('Backend.layout/backend/header-nav-custom'));
+	            ?>
 	            </ul>
           </div>
 		</div>
