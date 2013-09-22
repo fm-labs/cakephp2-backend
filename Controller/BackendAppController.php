@@ -5,7 +5,7 @@ class BackendAppController extends AppController {
 	
 	public $helpers = array('Html','Session');
 	
-	public $components = array('Backend.Backend');
+	public $components = array('Session', 'Backend.Backend');
 	
 	public function beforeFilter() {
 		parent::beforeFilter();
