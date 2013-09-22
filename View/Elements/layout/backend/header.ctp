@@ -20,7 +20,7 @@ span.be-userpanel:HOVER {
 			<div class="nav-collapse collapse">
 	            <p class="navbar-text pull-right">
 				<span class="be-userpanel">
-					<?php if (!class_exists('AuthComponent')):?>
+					<?php if (!class_exists('AuthComponent') || !Configure::read('Backend.Auth.enabled')):?>
 						Authentication is DISABLED!
 					<?php elseif (AuthComponent::user()):?>
 						<?php echo 	$this->Html->link(AuthComponent::user('username'),
@@ -51,6 +51,10 @@ span.be-userpanel:HOVER {
 					$class = (!isset($this->request->params['plugin'])) ? "active" : "";
 					echo $this->Html->tag('li', $dbTitle, compact('class'));
 					unset($dbTitle);
+				else:
+					echo $this->Html->tag('li',
+						$this->Html->link('Dashboard', array('plugin'=>'backend', 'controller'=>'backend', 'action'=>'dashboard'))	
+					);
 				endif; 
 				?>
 	            <?php 
