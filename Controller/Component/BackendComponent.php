@@ -2,8 +2,6 @@
 App::uses('Component','Controller');
 App::uses('BackendEventListener','Backend.Event');
 
-Configure::load('backend');
-
 /**
  * 
  * @author flow

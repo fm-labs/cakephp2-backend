@@ -26,6 +26,14 @@
 		<?php echo $this->Html->link(__('Goto My Dashboard'),array('action'=>'dashboard')); ?><br />
 	</div>
 
+	
+	<?php 
+	// Check if any Backend Configuration is loaded
+	if (!Configure::read('Backend')) {
+		echo $this->Html->div('alert alert-warning','No Backend configuration found!');
+	}
+	?>	
+	
 	<?php foreach((array) $this->get('backend_sidebar_menu') as $n):?>
 	<?php echo $this->Dashboard->itemFromArray($n); ?>
 	<?php endforeach; ?>
