@@ -20,19 +20,14 @@ class LogViewerController extends BackendAppController {
 
 	protected function _getFilePath($logFile) {
 	
-		try {
-			$path = realpath($this->logDir . $logFile);
-		
-			if (!$path)
-				throw new Exception('Invalid log file path: '.$path);
-		
-			if (!preg_match('/^'.preg_quote($this->logDir,'/').'/', $path))
-				throw new Exception('You are not allowed to access that log file path: '.$path);
-		
-		} catch (Exception $e) {
-			CakeLog::write('warning', $e->getMessage(), array('logviewer'));
+		$path = realpath($this->logDir . $logFile);
+	
+		if (!$path)
 			return false;
-		}
+	
+		if (!preg_match('/^'.preg_quote($this->logDir,'/').'/', $path))
+			return false;
+		
 		return $path;
 	}	
 	
