@@ -12,8 +12,7 @@ class BackendUserFixture extends CakeTestFixture {
  */
 	public $fields = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'key' => 'primary'),
-		'root' => array('type' => 'boolean', 'null' => false, 'default' => '0'),
-		'username' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 127, 'key' => 'unique', 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
+		'username' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 255, 'key' => 'unique', 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'password' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 50, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'first_name' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'last_name' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
@@ -23,8 +22,10 @@ class BackendUserFixture extends CakeTestFixture {
 		'created' => array('type' => 'datetime', 'null' => true, 'default' => null),
 		'indexes' => array(
 			'PRIMARY' => array('column' => 'id', 'unique' => 1),
+			'mail' => array('column' => 'mail', 'unique' => 1),
 			'username' => array('column' => 'username', 'unique' => 1),
-			'mail' => array('column' => 'mail', 'unique' => 1)
+			'username_pwd_published' => array('column' => array('username', 'password', 'published'), 'unique' => 0),
+			'username_pwd' => array('column' => array('username', 'password'), 'unique' => 0)
 		),
 		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
 	);
@@ -37,27 +38,58 @@ class BackendUserFixture extends CakeTestFixture {
 	public $records = array(
 		array(
 			'id' => 1,
-			'root' => 1,
-			'username' => 'test_root',
-			'password' => 'asdf',
-			'first_name' => 'TestFirstName',
-			'last_name' => 'TestLastName',
-			'mail' => 'test_root@localhost',
-			'last_login' => '',
+			'username' => 'user1',
+			'password' => 'Lorem ipsum dolor sit amet',
+			'first_name' => 'Lorem ipsum dolor sit amet',
+			'last_name' => 'Lorem ipsum dolor sit amet',
+			'mail' => 'mail1@example.org',
+			'last_login' => '2013-09-23 10:05:39',
 			'published' => 1,
-			'created' => '2012-09-16 19:15:39'
+			'created' => '2013-09-23 10:05:39'
 		),
 		array(
 			'id' => 2,
-			'root' => 0,
-			'username' => 'test_nonroot',
-			'password' => 'asdf',
-			'first_name' => 'TestFirstName',
-			'last_name' => 'TestLastName',
-			'mail' => 'test_nonroot@localhost',
-			'last_login' => '',
+			'username' => 'user2',
+			'password' => 'Lorem ipsum dolor sit amet',
+			'first_name' => 'Lorem ipsum dolor sit amet',
+			'last_name' => 'Lorem ipsum dolor sit amet',
+			'mail' => 'mail2@example.org',
+			'last_login' => '2013-09-23 10:05:39',
 			'published' => 1,
-			'created' => '2012-09-16 19:15:39'
+			'created' => '2013-09-23 10:05:39'
+		),
+		array(
+			'id' => 3,
+			'username' => 'user3',
+			'password' => 'Lorem ipsum dolor sit amet',
+			'first_name' => 'Lorem ipsum dolor sit amet',
+			'last_name' => 'Lorem ipsum dolor sit amet',
+			'mail' => 'mail3@example.org',
+			'last_login' => '2013-09-23 10:05:39',
+			'published' => 1,
+			'created' => '2013-09-23 10:05:39'
+		),
+		array(
+			'id' => 4,
+			'username' => 'user4',
+			'password' => 'Lorem ipsum dolor sit amet',
+			'first_name' => 'Lorem ipsum dolor sit amet',
+			'last_name' => 'Lorem ipsum dolor sit amet',
+			'mail' => 'mail4@example.org',
+			'last_login' => '2013-09-23 10:05:39',
+			'published' => 1,
+			'created' => '2013-09-23 10:05:39'
+		),
+		array(
+			'id' => 5,
+			'username' => 'user5',
+			'password' => 'Lorem ipsum dolor sit amet',
+			'first_name' => 'Lorem ipsum dolor sit amet',
+			'last_name' => 'Lorem ipsum dolor sit amet',
+			'mail' => 'mail5@example.org',
+			'last_login' => '2013-09-23 10:05:39',
+			'published' => 1,
+			'created' => '2013-09-23 10:05:39'
 		),
 	);
 

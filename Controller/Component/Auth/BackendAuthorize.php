@@ -1,25 +1,43 @@
 <?php
-/**
- * PHP 5
- *
- * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
- *
- * Licensed under The MIT License
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org CakePHP(tm) Project
- * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
- */
-
 App::uses('BaseAuthorize', 'Controller/Component/Auth');
-App::uses('BackendUser','Backend.Model');
 
 class BackendAuthorize extends BaseAuthorize {
 
+	protected function _authorize($permissions, $action, $user) {
+
+		$roles = Hash::extract($user, 'BackendUserRole.{n}.name');
+		
+		if (isset($permissions[$action])) {
+				
+			$allowedRoles = $permissions[$action];
+				
+			if (is_string($allowedRoles))
+				$allowedRoles = array($allowedRoles);
+
+			if ($allowedRoles === array('*') || in_array('*', $allowedRoles)) {
+				return true;
+			}
+			
+			if (array_intersect($allowedRoles, $roles)) {
+				return true;
+			}
+			
+			// root access
+			if (in_array('root', $roles)) {
+				return true;
+			}
+			
+			return false;
+		}
+		
+		// no permissions defined
+		// TODO: should fail in "paranoid"-mode
+		return true;		
+	}
+	
 /**
- * Checks user authorization using a controller callback.
+ * Checks user authorization using Controller::$permissions
+ * or Configure::read('Permissions.controller_name.action_name')
  *
  * @param array $user Active user data
  * @param CakeRequest $request
@@ -27,19 +45,23 @@ class BackendAuthorize extends BaseAuthorize {
  */
 	public function authorize($user, CakeRequest $request) {
 		
-		/*
-		if (method_exists($this->_Controller, 'isBackendAuthorized')) {
-			return (bool)$this->_Controller->isBackendAuthorized($user);
+		$permissions = array();
+		
+		// load permissions from controller
+		if (isset($this->_Controller->permissions)) {
+			$permissions = $this->_Controller->permissions;
 		}
 		
-		if (isset($request->params['admin'])) {
-			return ($user && $user['root']) ? true : false;
+		// load permissions from configuration
+		/*
+		$app = ($request->params['plugin']) ? $request->params['plugin'] : 'app'; 
+		$path = join('.', array('Permissions', $app, $request->params['controller']));
+		if (Configure::read($path)) {
+			$permissions = array_merge($permissions, Configure::read($path));
 		}
 		*/
 		
-		$Acl = $this->_Collection->load('Acl');
-		$user = array('Backend.BackendUser' => $user);
-		return $Acl->check($user, $this->action($request));
+		return $this->_authorize($permissions, $request->params['action'], $user);
 	}
 
 }

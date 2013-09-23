@@ -1,5 +1,5 @@
 <?php $this->Html->addCrumb(__('Backend'), array('controller'=>'backend', 'action'=>'index')); ?>
-<?php $this->Html->addCrumb(__('Backend User'), array('action'=>'index')); ?>
+<?php $this->Html->addCrumb(__('Backend Users'), array('action'=>'index')); ?>
 <div class="backendUsers view">
 		<h2><?php  echo __d('backend','Backend User');?></h2>
 		
@@ -11,15 +11,10 @@
 				<li><?php echo $this->Html->link(__d('backend','New %s',__d('backend','Backend User')), array('action' => 'add')); ?> </li>
 			</ul>
 		</div>
-			<dl>
-				<dt><?php echo __d('backend','Id'); ?></dt>
+<dl>
+	<dt><?php echo __d('backend','Id'); ?></dt>
 	<dd>
 		<?php echo h($backendUser['BackendUser']['id']); ?>
-		&nbsp;
-	</dd>
-	<dt><?php echo __d('backend','Backend User Group'); ?></dt>
-	<dd>
-		<?php echo h($backendUser['BackendUserGroup']['name']); ?>
 		&nbsp;
 	</dd>
 	<dt><?php echo __d('backend','Username'); ?></dt>
@@ -62,5 +57,25 @@
 		<?php echo h($backendUser['BackendUser']['created']); ?>
 		&nbsp;
 	</dd>
-			</dl>
-	</div>
+		</dl>
+</div>
+
+<div class="related">
+	<h3><?php echo __('Related BackendUserRoles'); ?></h3>
+	
+	<?php if ($backendUser['BackendUserRole']): ?>
+	<table>
+		<tr>
+			<th><?php echo __('Id'); ?></th>
+			<th><?php echo __('Name'); ?></th>
+		</tr>
+		<?php foreach($backendUser['BackendUserRole'] as $role): ?>
+		<tr>
+			<td><?php echo h($role['id']); ?></td>
+			<td><?php echo h($role['name']); ?></td>
+		</tr>
+		<?php endforeach; ?>
+	</table>
+	<?php endif; ?>
+</div>
+<?php debug($backendUser); ?>

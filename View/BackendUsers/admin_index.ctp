@@ -1,6 +1,6 @@
 <?php $this->Helpers->load('Backend.BackendHtml'); ?>
 <?php $this->Html->addCrumb(__('Backend'), array('controller'=>'backend', 'action'=>'index')); ?>
-<?php $this->Html->addCrumb(__('Backend User'), array('action'=>'index')); ?>
+<?php $this->Html->addCrumb(__('Backend Users'), array('action'=>'index')); ?>
 <div class="backendUsers index">
 	<h2><?php echo __d('backend','Backend Users');?></h2>
 
@@ -13,7 +13,6 @@
 	<table>
 	<tr>
 		<th><?php echo $this->Paginator->sort('id');?></th>
-		<th><?php echo $this->Paginator->sort('backend_user_group_id');?></th>
 		<th><?php echo $this->Paginator->sort('username');?></th>
 		<th><?php echo $this->Paginator->sort('first_name');?></th>
 		<th><?php echo $this->Paginator->sort('last_name');?></th>
@@ -26,7 +25,6 @@
 	foreach ($backendUsers as $backendUser): ?>
 <tr>
 	<td><?php echo h($backendUser['BackendUser']['id']); ?>&nbsp;</td>
-	<td><?php echo h($backendUser['BackendUserGroup']['name']); ?>&nbsp;</td>
 	<td><?php echo h($backendUser['BackendUser']['username']); ?>&nbsp;</td>
 	<td><?php echo h($backendUser['BackendUser']['first_name']); ?>&nbsp;</td>
 	<td><?php echo h($backendUser['BackendUser']['last_name']); ?>&nbsp;</td>
@@ -45,5 +43,7 @@
 	</table>
 	
 	<?php echo $this->element('Backend.pagination/default'); ?>	
+	<?php debug($this->Session->read('Auth')); ?>
 	<?php debug($backendUsers);?>
+	<?php //debug(Hash::extract($backendUsers, '{n}.BackendUserRole.{n}.name')); ?>
 </div>

@@ -5,13 +5,21 @@ class BackendUsersController extends BackendAppController {
 	
 	public $uses = array('Backend.BackendUser');
 	
+	public $permissions = array(
+		'admin_index' => '*',
+		'admin_add' => '*',
+		'admin_view' => '*',
+		'admin_edit' => array('admin', 'usermanager'),
+		'admin_delete' => array('admin', 'usermanager'),
+	);
+	
 /**
  * admin_index method
  *
  * @return void
  */
 	public function admin_index() {
-		$this->BackendUser->recursive = 0;
+		$this->BackendUser->recursive = 1;
 		$this->set('backendUsers', $this->paginate());
 	}
 
@@ -37,15 +45,15 @@ class BackendUsersController extends BackendAppController {
 	public function admin_add() {
 		if ($this->request->is('post')) {
 			$this->BackendUser->create();
-			if ($this->BackendUser->save($this->request->data)) {
+			if ($this->BackendUser->saveAdd($this->request->data)) {
 				$this->Session->setFlash(__d('backend','The admin user has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__d('backend','The admin user could not be saved. Please, try again.'));
 			}
 		}
-		$backendUserGroups = $this->BackendUser->BackendUserGroup->find('list');
-		$this->set(compact('backendUserGroups'));
+		$backendUserRoles = $this->BackendUser->BackendUserRole->find('list');
+		$this->set(compact('backendUserRoles'));
 	}
 
 /**
@@ -60,7 +68,7 @@ class BackendUsersController extends BackendAppController {
 			throw new NotFoundException(__d('backend','Invalid admin user'));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
-			if ($this->BackendUser->save($this->request->data)) {
+			if ($this->BackendUser->saveEdit($this->request->data)) {
 				$this->Session->setFlash(__d('backend','The admin user has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
@@ -70,8 +78,8 @@ class BackendUsersController extends BackendAppController {
 			$this->request->data = $this->BackendUser->read(null, $id);
 			unset($this->request->data['BackendUser']['password']);
 		}
-		$backendUserGroups = $this->BackendUser->BackendUserGroup->find('list');
-		$this->set(compact('backendUserGroups'));
+		$backendUserRoles = $this->BackendUser->BackendUserRole->find('list');
+		$this->set(compact('backendUserRoles'));
 	}
 
 /**
