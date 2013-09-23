@@ -5,6 +5,8 @@ App::uses('File','Utility');
 
 class LogViewerController extends BackendAppController {
 
+	public $logDir = LOGS;
+	
 	public $permissions = array(
 		'admin_index' => '*',
 		'admin_view' => '*',
@@ -15,9 +17,28 @@ class LogViewerController extends BackendAppController {
 		'admin_rotate' => array('admin','logmanager'),
 	);
 	
+
+	protected function _getFilePath($logFile) {
+	
+		try {
+			$path = realpath($this->logDir . $logFile);
+		
+			if (!$path)
+				throw new Exception('Invalid log file path: '.$path);
+		
+			if (!preg_match('/^'.preg_quote($this->logDir,'/').'/', $path))
+				throw new Exception('You are not allowed to access that log file path: '.$path);
+		
+		} catch (Exception $e) {
+			CakeLog::write('warning', $e->getMessage(), array('logviewer'));
+			return false;
+		}
+		return $path;
+	}	
+	
 	public function admin_index() {
 		
-		$logDir = LOGS;
+		$logDir = $this->logDir;
 		
 		$Folder = new Folder($logDir,false);
 		$logfiles = $Folder->find('.*.log(\.[0-9])?',true);
@@ -28,7 +49,7 @@ class LogViewerController extends BackendAppController {
 			
 			$file = array(
 				'name' => $logfile,
-				'dir' => $logDir,
+				//'dir' => $logDir,
 				'size' => $F->size(),
 				'last_modified' => $F->lastChange(),
 				'last_access' => $F->lastAccess(),	
@@ -41,53 +62,55 @@ class LogViewerController extends BackendAppController {
 	
 	public function admin_view($logFile = null) {
 		if (!$logFile) {
-			$this->Session->setFlash(__d('backend','Select a Log file'));
+			$this->Session->setFlash(__d('backend','No logfile selected'),'error');
 			$this->redirect(array('action'=>'index'));
 		}
 		
 		$filePath = $this->_getFilePath($logFile);
-		if (file_exists($filePath)) {
-			$File = new File($filePath,false);
-			$log = $File->read();
-		} else {
-			$this->Session->setFlash(__d('backend','Log file %s does not exist',$logFile));
-			$log = "";
+		if (!$filePath || !file_exists($filePath)) {
+			$this->Session->setFlash(__d('backend','Logfile %s not found',$logFile),'error');
+			return $this->redirect(array('action'=>'index'));
 		}
 		
+		$File = new File($filePath,false);
+		$log = $File->read();
 		$this->set(compact('logFile', 'log'));
 	}
 	
 	public function admin_clear($logFile = null) {
 		if (!$logFile) {
-			$this->Session->setFlash(__d('backend','Select a Log file'));
+			$this->Session->setFlash(__d('backend','No logfile selected'),'error');
 			$this->redirect(array('action'=>'index'));
-		}
+		} 
 		
 		$filePath = $this->_getFilePath($logFile);
-		$File = new File($filePath,false);
-		$File->write("");
+		if (!$filePath) {
+			$this->Session->setFlash(__d('backend','Logfile %s not found',$logFile),'error');
+			return $this->redirect($this->referer(array('action'=>'index')));
+		}
 
-		$this->Session->setFlash(__d('backend','Log file %s cleared',$logFile));
+		$File = new File($filePath,false);
+		if ($File->write("")) {
+			$this->Session->setFlash(__d('backend','Logfile %s cleared',$logFile),'success');
+		} else {
+			$this->Session->setFlash(__d('backend','Failed to clear logfile %s',$logFile),'error');
+		}
 		$this->redirect(array('action'=>'index'));
 	}
 	
-	public function admin_delete($logFile) {
+	public function admin_delete($logFile = null) {
 		if (!$logFile) {
-			$this->Session->setFlash(__d('backend','Select a Log file'));
+			$this->Session->setFlash(__d('backend','No logfile selected'));
 			$this->redirect(array('action'=>'index'));
 		}
 		
 		$filePath = $this->_getFilePath($logFile);
 		if (unlink($filePath)) {
-			$this->Session->setFlash(__d('backend','Log file %s deleted',$logFile));
+			$this->Session->setFlash(__d('backend','Logfile %s deleted',$logFile),'success');
 		} else {
-			$this->Session->setFlash(__d('backend','Log file %s could not be deleted',$logFile));
+			$this->Session->setFlash(__d('backend','Logfile %s could not be deleted',$logFile),'error');
 		}
 		$this->redirect(array('action'=>'index'));
-	}
-	
-	protected function _getFilePath($logFile) {
-		return LOGS . $logFile;
 	}
 	
 	public function admin_rotate($alias = null) {
