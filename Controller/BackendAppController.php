@@ -7,6 +7,14 @@ class BackendAppController extends AppController {
 	
 	public $components = array('Session', 'Backend.Backend');
 	
+	public $permissions = array(
+		'admin_index' => '*',
+		'admin_view' => '*',
+		'admin_add' => array('admin'),
+		'admin_edit' => array('admin'),
+		'admin_delete' => array('admin')	
+	);
+	
 	public function beforeFilter() {
 		parent::beforeFilter();
 		$this->_initMenu();
