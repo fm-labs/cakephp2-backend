@@ -42,10 +42,10 @@ class BackendAppController extends AppController {
 						'url' => array('plugin'=>'backend','controller'=>'log_viewer', 'action' => 'index'),
 						'actions' => array(
 								array(__d('backend','All Logs'),array('plugin'=>'backend','controller'=>'log_viewer', 'action' => 'index'),null),
-								array(__d('backend','Debug'),array('plugin'=>'backend','controller'=>'log_viewer', 'action' => 'view','debug'),null),
-								array(__d('backend','Error'),array('plugin'=>'backend','controller'=>'log_viewer', 'action' => 'view','error'),null),
-								array(__d('backend','Auth'),array('plugin'=>'backend','controller'=>'log_viewer', 'action' => 'view','auth'),null),
-								array(__d('backend','Backend'),array('plugin'=>'backend','controller'=>'log_viewer', 'action' => 'view','backend'),null),
+								array(__d('backend','Debug'),array('plugin'=>'backend','controller'=>'log_viewer', 'action' => 'view','debug.log'),null),
+								array(__d('backend','Error'),array('plugin'=>'backend','controller'=>'log_viewer', 'action' => 'view','error.log'),null),
+								array(__d('backend','Backend'),array('plugin'=>'backend','controller'=>'log_viewer', 'action' => 'view','backend.log'),null),
+								array(__d('backend','Auth'),array('plugin'=>'backend','controller'=>'log_viewer', 'action' => 'view','auth.log'),null),
 						)
 				),
 				'cronjobs' => array(
