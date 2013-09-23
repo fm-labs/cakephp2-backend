@@ -6,7 +6,6 @@
 	<div class="actions">
 		<ul class="actions">
 			<li><?php echo $this->Html->link(__d('backend','Go back'),array('action'=>'index')); ?></li>
-			<li><?php echo $this->Html->link(__d('backend','Backup & Clear'),array('action'=>'backup',$logFile)); ?></li>
 			<li><?php echo $this->Html->link(__d('backend','Clear'),array('action'=>'clear',$logFile)); ?></li>
 			<li><?php echo $this->Html->link(__d('backend','Delete'),array('action'=>'delete',$logFile)); ?></li>
 		</ul>
