@@ -5,6 +5,16 @@ App::uses('File','Utility');
 
 class LogViewerController extends BackendAppController {
 
+	public $permissions = array(
+		'admin_index' => '*',
+		'admin_view' => '*',
+		'admin_add' => array('admin','logmanager'),
+		'admin_edit' => array('admin','logmanager'),
+		'admin_delete' => array('admin','logmanager'),
+		'admin_clear' => array('admin','logmanager'),
+		'admin_rotate' => array('admin','logmanager'),
+	);
+	
 	public function admin_index() {
 		
 		$logDir = LOGS;
