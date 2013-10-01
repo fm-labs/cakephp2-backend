@@ -2,5 +2,8 @@
 # CHANGELOG #
 #############
 
+[0.3.0]
+- Dropped Acl-Support in favor of Role-based-Auth (Acl-support is now unstable)
+- Refactored Backend Authorization/Authentication
+
 [0.2.2]
-* 
