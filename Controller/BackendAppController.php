@@ -18,6 +18,7 @@ class BackendAppController extends AppController {
 	public function beforeFilter() {
 		parent::beforeFilter();
 		$this->_initMenu();
+		
 	}
 	
 	protected function _initMenu() {
