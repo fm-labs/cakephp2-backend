@@ -145,15 +145,16 @@
 		if ($this-><?php echo $currentModelName; ?>->delete()) {
 <?php if ($wannaUseSession): ?>
 			$this->Session->setFlash(__('%s deleted',__('<?php echo ucfirst(strtolower($singularHumanName)); ?>')),'success');
-			$this->redirect(array('action' => 'index'));
+			//$this->redirect(array('action' => 'index'));
 <?php else: ?>
 			$this->flash(__('%s deleted',__('<?php echo ucfirst(strtolower($singularHumanName)); ?>'))), array('action' => 'index'));
 <?php endif; ?>
-		}
+		} else {
 <?php if ($wannaUseSession): ?>
 		$this->Session->setFlash(__('%s was not deleted',__('<?php echo ucfirst(strtolower($singularHumanName)); ?>')),'error');
 <?php else: ?>
 		$this->flash(__('%s was not deleted',__('<?php echo ucfirst(strtolower($singularHumanName)); ?>'))), array('action' => 'index'));
 <?php endif; ?>
-		$this->redirect(array('action' => 'index'));
+        }
+		$this->redirect($this->referer(array('action' => 'index')));
 	}
