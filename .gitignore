@@ -1,7 +1,7 @@
-/.settings
+/.idea/
+/.settings/
 /.buildpath
 /.project
-/.release/
 /package.properties
 /TODO.txt
 /_bak

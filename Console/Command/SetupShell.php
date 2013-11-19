@@ -5,7 +5,7 @@ class SetupShell extends AppShell {
 	
 	public function main() {
 		
-		$this->out('run setup');
+		$this->setup();
 	}
 	
 	public function setup() {
