@@ -1,5 +1,5 @@
-<?php $this->Html->addCrumb(__('Acos'),array('action'=>'index'),array()); ?>
-<?php $this->Html->addCrumb(__('Add %s',__('Aco')),array('action'=>'add'),array('class'=>'active')); ?>
+<?php $this->Html->addCrumb(__('Acos'),array('action' => 'index'),array()); ?>
+<?php $this->Html->addCrumb(__('Add %s',__('Aco')),array('action' => 'add'),array('class' => 'active')); ?>
 <div class="acos form">
 
 	<h2><?php echo __('Aco'); ?></h2>

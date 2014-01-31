@@ -3,8 +3,8 @@
 	
 	<div class="actions">
 		<?php echo $this->Html->link(__('Backend Dashboard'),
-				array('action'=>'index'),
-				array('class'=>'btn btn-primary')
+				array('action' => 'index'),
+				array('class' => 'btn btn-primary')
 		); ?>
 	</div>
 	
@@ -35,10 +35,10 @@
 			<td><?php echo $controller; ?></td>
 			<td class="actions">
 				<?php echo $this->Html->link('Index', 
-						array('plugin' => null, 'controller'=>Inflector::underscore($controller),'action'=>'index')
+						array('plugin' => null, 'controller'=>Inflector::underscore($controller),'action' => 'index')
 				); ?>
 				<?php echo $this->Html->link('Add', 
-						array('plugin' => null, 'controller'=>Inflector::underscore($controller),'action'=>'add')
+						array('plugin' => null, 'controller'=>Inflector::underscore($controller),'action' => 'add')
 				); ?>
 			</td>
 		</tr>

@@ -24,15 +24,15 @@ span.be-userpanel:HOVER {
 						Authentication is DISABLED!
 					<?php elseif (AuthComponent::user()):?>
 						<?php echo 	$this->Html->link(AuthComponent::user('username'),
-										array('plugin'=>'backend','controller'=>'auth','action'=>'user','admin'=>true)
+										array('plugin' => 'backend','controller' => 'auth','action' => 'user','admin'=>true)
 						);?> |
 						<?php echo $this->Html->link(__d('backend','Logout'),
-								array('plugin'=>'backend','controller'=>'auth','action'=>'logout','admin'=>true)
+								array('plugin' => 'backend','controller' => 'auth','action' => 'logout','admin'=>true)
 						); ?>
 					<?php else: ?>
 						<?php echo __d('backend','Not logged in'); ?> |
 						<?php echo $this->Html->link(__d('backend','Login'),
-								array('plugin'=>'backend','controller'=>'auth','action'=>'login','admin'=>true)
+								array('plugin' => 'backend','controller' => 'auth','action' => 'login','admin'=>true)
 						); ?>
 					<?php endif; ?>
 				</span>
@@ -53,7 +53,7 @@ span.be-userpanel:HOVER {
 					unset($dbTitle);
 				else:
 					echo $this->Html->tag('li',
-						$this->Html->link('Dashboard', array('plugin'=>'backend', 'controller'=>'backend', 'action'=>'dashboard'))	
+						$this->Html->link('Dashboard', array('plugin' => 'backend', 'controller' => 'backend', 'action' => 'dashboard'))
 					);
 				endif; 
 				?>
@@ -62,7 +62,7 @@ span.be-userpanel:HOVER {
 	            foreach((array) Configure::read('Backend.Dashboard.plugins') as $_plugin):
 
 	            	$link = $this->Html->link($_plugin,
-	              		array('plugin'=>Inflector::underscore($_plugin),'controller'=>Inflector::underscore($_plugin),'action'=>'index')); 
+	              		array('plugin'=>Inflector::underscore($_plugin),'controller'=>Inflector::underscore($_plugin),'action' => 'index'));
 	            	
 					$class = (Inflector::underscore($_plugin) == $this->request->params['plugin']) ? "active" : "";
 					echo $this->Html->tag('li', $link, compact('class'));

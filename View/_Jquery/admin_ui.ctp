@@ -17,7 +17,7 @@ $this->Js->loadPlugin('JqueryUi.JqueryTimepicker');
 
 		<?php
 		echo $this->Form->create('Test');	
-		echo $this->Form->input('publish_start',array('type'=>'text','class'=>'datepicker'));
+		echo $this->Form->input('publish_start',array('type' => 'text','class' => 'datepicker'));
 		echo $this->Form->end();
 		?>
 		

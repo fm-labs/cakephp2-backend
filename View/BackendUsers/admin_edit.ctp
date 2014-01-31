@@ -1,5 +1,5 @@
-<?php $this->Html->addCrumb(__('Backend'), array('controller'=>'backend', 'action'=>'index')); ?>
-<?php $this->Html->addCrumb(__('Backend Users'), array('action'=>'index')); ?>
+<?php $this->Html->addCrumb(__('Backend'), array('controller' => 'backend', 'action' => 'index')); ?>
+<?php $this->Html->addCrumb(__('Backend Users'), array('action' => 'index')); ?>
 <div class="backendUsers form">
 <h2><?php echo __d('backend','Backend User'); ?></h2>
 <div class="actions">
@@ -19,8 +19,8 @@
 	echo $this->Form->input('first_name');
 	echo $this->Form->input('last_name');
 	
-	echo $this->Form->input('pass',array('type'=>'password','default'=>'','required'=>false));
-	echo $this->Form->input('pass2',array('type'=>'password','default'=>'','required'=>false));
+	echo $this->Form->input('pass',array('type' => 'password','default' => '','required'=>false));
+	echo $this->Form->input('pass2',array('type' => 'password','default' => '','required'=>false));
 	
 	echo $this->Form->input('published');
 	echo $this->Form->input('BackendUserRole');

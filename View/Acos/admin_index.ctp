@@ -1,5 +1,5 @@
 
-<?php $this->Html->addCrumb(__('Acos'),array('action'=>'index'),array('class'=>'active')); ?>
+<?php $this->Html->addCrumb(__('Acos'),array('action' => 'index'),array('class' => 'active')); ?>
 <div class="acos index">
 	<h2><?php echo __('Acos'); ?></h2>
 	

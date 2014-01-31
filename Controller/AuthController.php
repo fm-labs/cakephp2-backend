@@ -29,7 +29,7 @@ class AuthController extends BackendAppController {
 		}
 		
 		$this->layout = "Backend.auth";
-		$defaultRedirect = (Configure::read('Backend.Dashboard.url')) ? Configure::read('Backend.Dashboard.url') : array('plugin'=>'backend','controller'=>'backend','action'=>'dashboard');
+		$defaultRedirect = (Configure::read('Backend.Dashboard.url')) ? Configure::read('Backend.Dashboard.url') : array('plugin' => 'backend','controller' => 'backend','action' => 'dashboard');
 		$redirect = false;
 		
 	    if ($this->request->is('post')) {

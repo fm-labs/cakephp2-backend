@@ -28,20 +28,20 @@
 }
 
 </style>
-<?php $this->Html->addCrumb('Cronjobs',array('action'=>'index')); ?>
+<?php $this->Html->addCrumb('Cronjobs',array('action' => 'index')); ?>
 <div class="view">
 	<h2>Cronjob <?php echo $id; ?></h2>
 	<div class="actions">
-		<?php echo $this->Html->link(__('Run cronjob'),array('action'=>'run',$id)); ?>
-		<?php echo $this->Html->link(__('Force cronjob'),array('action'=>'run',$id,'force'=>true)); ?>
+		<?php echo $this->Html->link(__('Run cronjob'),array('action' => 'run',$id)); ?>
+		<?php echo $this->Html->link(__('Force cronjob'),array('action' => 'run',$id,'force'=>true)); ?>
 		<ul>
-			<li><?php echo $this->Html->link(__('List %s', __('Cronjobs')),array('action'=>'index')); ?></li>
+			<li><?php echo $this->Html->link(__('List %s', __('Cronjobs')),array('action' => 'index')); ?></li>
 			<li><?php echo $this->Html->link('Run external',
-					array('admin'=>false,'action'=>'run',$id),
-					array('target'=>'_blank')); ?></li>
+					array('admin'=>false,'action' => 'run',$id),
+					array('target' => '_blank')); ?></li>
 			<li><?php echo $this->Html->link('Run external (force)',
-					array('admin'=>false,'action'=>'run',$id,'force'=>true),
-					array('target'=>'_blank')); ?></li>
+					array('admin'=>false,'action' => 'run',$id,'force'=>true),
+					array('target' => '_blank')); ?></li>
 		</ul>
 	</div>
 	<dl>
@@ -52,7 +52,7 @@
 			//TODO implement StatusHelper->html() here
 			$class = ($cronjob['enabled']) ? 'success' : 'important';
 			$enabled = ($cronjob['enabled']) ? __('Yes') : __('No');
-			echo $this->Html->tag('span', $enabled,array('class'=>'label label-'.$class));
+			echo $this->Html->tag('span', $enabled,array('class' => 'label label-'.$class));
 		?>&nbsp;</dd>
 		<dt>Url</dt>
 		<dd><?php echo $cronjob['url']; ?>&nbsp;</dd>
@@ -121,7 +121,7 @@
 				}
 			?>&nbsp;</td>
 			<td class="actions">
-				<?php echo $this->Html->link('Run',array('action'=>'run',$id)); ?>
+				<?php echo $this->Html->link('Run',array('action' => 'run',$id)); ?>
 			</td>
 		</tr>
 		<?php endforeach; ?>

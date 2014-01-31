@@ -7,7 +7,7 @@
 	
 	$url = (Configure::read('Backend.Dashboard.url')) 
 		? Configure::read('Backend.Dashboard.url') 
-		: array('plugin'=>'backend','controller'=>'backend','action'=>'dashboard');
+		: array('plugin' => 'backend','controller' => 'backend','action' => 'dashboard');
 	
 	echo $this->Html->getCrumbs('&raquo;', compact('text','url'));
 ?>

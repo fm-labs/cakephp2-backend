@@ -8,18 +8,18 @@ class SystemController extends BackendAppController {
 		$tabs = array(
 			array(
 				'title'=>__d('backend',"CAKE Globals"),
-				'type'=>'ajax',
-				'content'=>array('action'=>'globals')
+				'type' => 'ajax',
+				'content'=>array('action' => 'globals')
 			),
 			array(
 				'title'=>__d('backend',"PHP Info"),
-				'type'=>'ajax',
-				'content'=>array('action'=>'phpinfo')
+				'type' => 'ajax',
+				'content'=>array('action' => 'phpinfo')
 			),
 			array(
 				'title'=>__d('backend',"Loaded Plugins"),
-				'type'=>'ajax',
-				'content'=>array('action'=>'plugins')
+				'type' => 'ajax',
+				'content'=>array('action' => 'plugins')
 			),
 		);
 		$this->set(compact('tabs'));

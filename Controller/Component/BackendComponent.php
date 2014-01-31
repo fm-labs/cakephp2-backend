@@ -1,6 +1,6 @@
 <?php
-App::uses('Component','Controller');
-App::uses('BackendEventListener','Backend.Event');
+App::uses('Component', 'Controller');
+App::uses('BackendEventListener', 'Backend.Event');
 
 /**
  * BackendComponent
@@ -8,25 +8,25 @@ App::uses('BackendEventListener','Backend.Event');
  * @property SessionComponent $Session
  */
 class BackendComponent extends Component {
-	
+
 	public $components = array('Session');
 
-	/**
-	 * @see Controller::$layout
-	 * @var string
-	 */
+/**
+ * @see Controller::$layout
+ * @var string
+ */
 	public $layout = 'Backend.backend';
 
-	/**
-	 * @see Controller::$layout
-	 * @var string
-	 */
+/**
+ * @see Controller::$layout
+ * @var string
+ */
 	public $errorLayout = 'Backend.error';
-	
-	/**
-	 * @see AuthComponent::$authenticate
-	 * @var array
-	 */
+
+/**
+ * @see AuthComponent::$authenticate
+ * @var array
+ */
 	public $authenticate = array(
 		'Form' => array(
 			'userModel' => 'Backend.BackendUser',
@@ -34,80 +34,80 @@ class BackendComponent extends Component {
 			'contain' => array('BackendUserRole') // since CakePHP 2.2
 		)
 	);
-	
-	/**
-	 * @see AuthComponent::$authorize
-	 * @var array
-	 */
+
+/**
+ * @see AuthComponent::$authorize
+ * @var array
+ */
 	public $authorize = array('Backend.Backend');
 
-	/**
-	 * @see AuthComponent::$loginAction
-	 * @var array
-	 */
+/**
+ * @see AuthComponent::$loginAction
+ * @var array
+ */
 	public $loginAction = array(
 			'plugin' => 'backend',
-			'controller'=> 'auth',
-			'action'=>'login',
+			'controller' => 'auth',
+			'action' => 'login',
 	);
-	
-	/**
-	 * Backend request flag
-	 * TRUE, if all conditions for a backend request are fullfiled
-	 * 
-	 * @see BackendComponent::isBackendRequest()
-	 * @var bool
-	 */
+
+/**
+ * Backend request flag
+ * TRUE, if all conditions for a backend request are fullfilled
+ *
+ * @see BackendComponent::isBackendRequest()
+ * @var bool
+ */
 	protected $_isBackendRequest = false;
-	
-	/**
-	 * Plugin name of current request
-	 * 
-	 * @var string
-	 */
+
+/**
+ * Plugin name of current request
+ *
+ * @var string
+ */
 	protected $plugin;
-	
-	
-	/**
-	 * Initialize Controller and CakeRequest
-	 *
-	 * This method applies Controller attributes.
-	 * Should be called in Component::initialize() or Controller::beforeFilter()
-	 *
-	 * @param Controller $controller
-	 * @param CakeRequest $request
-	 * @return boolean
-	*/
+
+
+/**
+ * Initialize Controller and CakeRequest
+ *
+ * This method applies Controller attributes.
+ * Should be called in Component::initialize() or Controller::beforeFilter()
+ *
+ * @param Controller $controller
+ * @param CakeRequest $request
+ * @return boolean
+*/
 	public function initialize(Controller $controller) {
-		
 		// attach event listeners
 		$controller->getEventManager()->attach(new BackendEventListener());
-		
+
 		// add request detectors
-		$controller->request->addDetector('backend', array('callback' => array($this,'isBackendRequest')));
-		$controller->request->addDetector('iframe', array('callback' => array($this,'isIframeRequest')));
-		
-		
+		$controller->request->addDetector('backend',
+			array('callback' => array($this, 'isBackendRequest')));
+		$controller->request->addDetector('iframe',
+			array('callback' => array($this, 'isIframeRequest')));
+
 		if (!$controller->request->is('backend')) {
 			return;
 		}
-		
+
 		$this->_isBackendRequest = true;
-		
+
 		// plugin support
 		if ($controller->request->params['plugin']) {
 			$this->plugin = $controller->request->params['plugin'];
-		
+
 			// Load plugin specific config
 			if ($this->plugin != "backend") {
 				try {
-					Configure::load(Inflector::camelize($this->plugin).'.backend');
+					Configure::load(Inflector::camelize($this->plugin) . '.backend');
 				} catch(Exception $e) {
 					// $this->log(__('The plugin %s has no backend configuration', $this->plugin), 'debug');
 				}
 			}
 		}
-		
+
 		// Setup Controller
 		$controller->layout = $this->layout;
 		$controller->viewClass = 'Backend.Backend';
@@ -126,14 +126,14 @@ class BackendComponent extends Component {
 				
 			$controller->Auth->authenticate = $this->authenticate;
 			$controller->Auth->loginAction = $this->loginAction;
-			
+
 			/*
 			// enable Access Control List
 			if (Configure::read('Backend.Acl.enabled') === true) {
 				$this->authorize = array(
 					'Actions' => array(
 						'actionPath' => 'controllers',
-						'userModel'=>'Backend.BackendUser'
+						'userModel' => 'Backend.BackendUser'
 					)
 				);
 			}
@@ -172,6 +172,7 @@ class BackendComponent extends Component {
 		
 		// pretty flash messages
 		//TODO make configurable option to enable/disable this feature
+		//TODO use Flash Plugin instead
 		$messages = $this->Session->read('Message');
 		if (is_array($messages)) {
 			foreach($messages as $key => $message) {
@@ -180,8 +181,8 @@ class BackendComponent extends Component {
 					continue;
 				
 				$params = am(array(
-					'plugin'=>'backend',
-					'class'=>'alert',
+					'plugin' => 'backend',
+					'class' => 'alert',
 					'type'=>$type,
 					'title'=>Inflector::humanize($type)
 				),$message['params']);
@@ -235,4 +236,3 @@ class BackendComponent extends Component {
 		return CakeLog::write($type, $msg, 'backend');
 	}
 }
-?>

@@ -1,5 +1,5 @@
-<?php $this->Html->addCrumb(__('Backend'),array('controller'=>'backend', 'action'=>'index')); ?>
-<?php $this->Html->addCrumb(__d('backend','Systeminfo'),array('action'=>'index')); ?>
+<?php $this->Html->addCrumb(__('Backend'),array('controller' => 'backend', 'action' => 'index')); ?>
+<?php $this->Html->addCrumb(__d('backend','Systeminfo'),array('action' => 'index')); ?>
 <div>
 	<h1><?php echo __d('backend',"System "); ?></h1>
 
@@ -20,22 +20,22 @@
 		<dd><?php echo $this->request->clientIp();?></dd>
 		
 		<dt><?php echo __d('backend',"PHP Info");?></dt>
-		<dd><?php echo $this->Html->link(__d('backend','Open'),array('action'=>'phpinfo'));?></dd>
+		<dd><?php echo $this->Html->link(__d('backend','Open'),array('action' => 'phpinfo'));?></dd>
 		
 		<dt><?php echo __d('backend',"Date & Time Info");?></dt>
-		<dd><?php echo $this->Html->link(__d('backend','Open'),array('action'=>'datetime'));?></dd>
+		<dd><?php echo $this->Html->link(__d('backend','Open'),array('action' => 'datetime'));?></dd>
 	
 		<dt><?php echo __d('backend',"Plugins");?></dt>
-		<dd><?php echo $this->Html->link(__d('backend','Open'),array('action'=>'plugins'));?></dd>
+		<dd><?php echo $this->Html->link(__d('backend','Open'),array('action' => 'plugins'));?></dd>
 		
 		<dt><?php echo __d('backend',"Globals");?></dt>
-		<dd><?php echo $this->Html->link(__d('backend','Open'),array('action'=>'globals'));?></dd>
+		<dd><?php echo $this->Html->link(__d('backend','Open'),array('action' => 'globals'));?></dd>
 		
 		<dt><?php echo __d('backend',"Session");?></dt>
-		<dd><?php echo $this->Html->link(__d('backend','Open'),array('action'=>'session'));?></dd>
+		<dd><?php echo $this->Html->link(__d('backend','Open'),array('action' => 'session'));?></dd>
 		
 		<dt><?php echo __d('backend',"Config");?></dt>
-		<dd><?php echo $this->Html->link(__d('backend','Open'),array('action'=>'config'));?></dd>
+		<dd><?php echo $this->Html->link(__d('backend','Open'),array('action' => 'config'));?></dd>
 	
 	</dl>
 

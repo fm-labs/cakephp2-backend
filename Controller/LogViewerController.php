@@ -58,13 +58,13 @@ class LogViewerController extends BackendAppController {
 	public function admin_view($logFile = null) {
 		if (!$logFile) {
 			$this->Session->setFlash(__d('backend','No logfile selected'),'error');
-			$this->redirect(array('action'=>'index'));
+			$this->redirect(array('action' => 'index'));
 		}
 		
 		$filePath = $this->_getFilePath($logFile);
 		if (!$filePath || !file_exists($filePath)) {
 			$this->Session->setFlash(__d('backend','Logfile %s not found',$logFile),'error');
-			return $this->redirect(array('action'=>'index'));
+			return $this->redirect(array('action' => 'index'));
 		}
 		
 		$File = new File($filePath,false);
@@ -75,13 +75,13 @@ class LogViewerController extends BackendAppController {
 	public function admin_clear($logFile = null) {
 		if (!$logFile) {
 			$this->Session->setFlash(__d('backend','No logfile selected'),'error');
-			$this->redirect(array('action'=>'index'));
+			$this->redirect(array('action' => 'index'));
 		} 
 		
 		$filePath = $this->_getFilePath($logFile);
 		if (!$filePath) {
 			$this->Session->setFlash(__d('backend','Logfile %s not found',$logFile),'error');
-			return $this->redirect($this->referer(array('action'=>'index')));
+			return $this->redirect($this->referer(array('action' => 'index')));
 		}
 
 		$File = new File($filePath,false);
@@ -90,13 +90,13 @@ class LogViewerController extends BackendAppController {
 		} else {
 			$this->Session->setFlash(__d('backend','Failed to clear logfile %s',$logFile),'error');
 		}
-		$this->redirect(array('action'=>'index'));
+		$this->redirect(array('action' => 'index'));
 	}
 	
 	public function admin_delete($logFile = null) {
 		if (!$logFile) {
 			$this->Session->setFlash(__d('backend','No logfile selected'));
-			$this->redirect(array('action'=>'index'));
+			$this->redirect(array('action' => 'index'));
 		}
 		
 		$filePath = $this->_getFilePath($logFile);
@@ -105,7 +105,7 @@ class LogViewerController extends BackendAppController {
 		} else {
 			$this->Session->setFlash(__d('backend','Logfile %s could not be deleted',$logFile),'error');
 		}
-		$this->redirect(array('action'=>'index'));
+		$this->redirect(array('action' => 'index'));
 	}
 	
 	public function admin_rotate($alias = null) {

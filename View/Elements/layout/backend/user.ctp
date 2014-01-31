@@ -24,15 +24,15 @@ div.be-user-auth:HOVER {
 		<?php echo "Authentication is disabled!"?>
 	<?php elseif (AuthComponent::user()):?>
 		<?php echo 	$this->Html->link(AuthComponent::user('mail'),
-						array('plugin'=>'backend','controller'=>'auth','action'=>'user','admin'=>true)
+						array('plugin' => 'backend','controller' => 'auth','action' => 'user','admin'=>true)
 		);?> |
 		<?php echo $this->Html->link(__d('backend','Logout'),
-				array('plugin'=>'backend','controller'=>'auth','action'=>'logout','admin'=>true)
+				array('plugin' => 'backend','controller' => 'auth','action' => 'logout','admin'=>true)
 		); ?>
 	<?php else: ?>
 		<?php echo __d('backend','Not logged in'); ?> |
 		<?php echo $this->Html->link(__d('backend','Login'),
-				array('plugin'=>'backend','controller'=>'auth','action'=>'login','admin'=>true)
+				array('plugin' => 'backend','controller' => 'auth','action' => 'login','admin'=>true)
 		); ?>
 	<?php endif; ?>
 </div>

@@ -3,10 +3,10 @@
 	<div class="actions">
 		<ul class="actions">
 			<li><?php echo $this->Html->link(__d('backend','Change Password'),
-					array('plugin'=>'backend','controller'=>'backend_users','action'=>'passc','admin'=>true)
+					array('plugin' => 'backend','controller' => 'backend_users','action' => 'passc','admin'=>true)
 			); ?></li>
 			<li><?php echo $this->Html->link(__d('backend','Logout'),
-					array('plugin'=>'backend','controller'=>'auth','action'=>'logout','admin'=>true)
+					array('plugin' => 'backend','controller' => 'auth','action' => 'logout','admin'=>true)
 			); ?></li>
 		</ul>
 	</div>

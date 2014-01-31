@@ -1,4 +1,4 @@
-<?php $this->Html->addCrumb(__('Backend'), array('controller'=>'backend', 'action'=>'index')); ?>
+<?php $this->Html->addCrumb(__('Backend'), array('controller' => 'backend', 'action' => 'index')); ?>
 
 <style>
 .dashboard-item {
@@ -23,7 +23,7 @@
 	<h2>Backend Dashboard</h2>
 	
 	<div class="actions">
-		<?php echo $this->Html->link(__('Goto My Dashboard'),array('action'=>'dashboard')); ?><br />
+		<?php echo $this->Html->link(__('Goto My Dashboard'),array('action' => 'dashboard')); ?><br />
 	</div>
 
 	
