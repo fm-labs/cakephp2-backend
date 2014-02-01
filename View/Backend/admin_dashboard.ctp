@@ -7,30 +7,9 @@
 				array('class' => 'btn btn-primary')
 		); ?>
 	</div>
-	
-	<?php 
-	// List Controllers from app/Controllers directory
-	
-	App::uses('Folder','Utility');
-	$controllerDir = APP."Controller".DS;
-	$Folder = new Folder($controllerDir);
-	$files = $Folder->find('.*Controller.php$',true);
-	$controllers = array();
-	foreach($files as $file) {
-		if (!preg_match('/^(.*)Controller.php$/',$file,$matches)) {
-			debug("No match: ".$file);
-			continue;
-			
-		}
-		
-		if ($matches[1] == "App")
-			continue;
-		
-		$controllers[] = $matches[1];
-	}
-	?>
+
 	<table>
-		<?php foreach($controllers as $controller):?>
+		<?php foreach($this->get('controllers') as $controller):?>
 		<tr>
 			<td><?php echo $controller; ?></td>
 			<td class="actions">

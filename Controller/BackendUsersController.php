@@ -1,5 +1,5 @@
 <?php
-App::uses('BackendAppController','Backend.Controller');
+App::uses('BackendAppController', 'Backend.Controller');
 
 class BackendUsersController extends BackendAppController {
 	
