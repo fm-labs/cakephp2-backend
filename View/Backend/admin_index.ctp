@@ -23,7 +23,7 @@
 	<h2>Backend Dashboard</h2>
 	
 	<div class="actions">
-		<?php echo $this->Html->link(__('Goto My Dashboard'),array('action' => 'dashboard')); ?><br />
+		<?php echo $this->Html->link(__('Goto My Dashboard'), Configure::read('Backend.Dashboard.url')); ?><br />
 	</div>
 
 	
