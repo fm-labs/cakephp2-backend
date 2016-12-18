@@ -36,22 +36,22 @@
 			<?php echo $this->Html->link($arosAco['Aco']['id'], array('controller' => 'acos', 'action' => 'view', $arosAco['Aco']['id'])); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __(' Create'); ?></dt>
+		<dt><?php echo __('Create'); ?></dt>
 		<dd>
 			<?php echo h($arosAco['ArosAco']['_create']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __(' Read'); ?></dt>
+		<dt><?php echo __('Read'); ?></dt>
 		<dd>
 			<?php echo h($arosAco['ArosAco']['_read']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __(' Update'); ?></dt>
+		<dt><?php echo __('Update'); ?></dt>
 		<dd>
 			<?php echo h($arosAco['ArosAco']['_update']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __(' Delete'); ?></dt>
+		<dt><?php echo __('Delete'); ?></dt>
 		<dd>
 			<?php echo h($arosAco['ArosAco']['_delete']); ?>
 			&nbsp;
