@@ -16,13 +16,15 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 ?>
-<?php if (strpos($action, 'add') === false): ?>
-<?php echo "<?php \$this->Html->addCrumb(__('{$pluralHumanName}'),array('action'=>'index'),array()); ?>\n"; ?>
-<?php echo "<?php \$this->Html->addCrumb(__('Edit %s',__('{$singularHumanName}')),array('action'=>'edit',\$this->Form->value('{$modelClass}.id')),array('class'=>'active')); ?>\n"; ?>
-<?php else: ?>
-<?php echo "<?php \$this->Html->addCrumb(__('{$pluralHumanName}'),array('action'=>'index'),array()); ?>\n"; ?>
-<?php echo "<?php \$this->Html->addCrumb(__('Add %s',__('{$singularHumanName}')),array('action'=>'add'),array('class'=>'active')); ?>\n"; ?>
-<?php endif; ?>
+<?php
+if (strpos($action, 'add') === false) {
+	echo "<?php \$this->Html->addCrumb(__('{$pluralHumanName}'), array('action' => 'index'), array()); ?>\n";
+	echo "<?php \$this->Html->addCrumb(__('Edit %s', __('{$singularHumanName}')), array('action' => 'edit', \$this->Form->value('{$modelClass}.id')), array('class' => 'active')); ?>\n";
+} else {
+	echo "<?php \$this->Html->addCrumb(__('{$pluralHumanName}'), array('action' => 'index'), array()); ?>\n";
+	echo "<?php \$this->Html->addCrumb(__('Add %s', __('{$singularHumanName}')), array('action' => 'add'), array('class' => 'active')); ?>\n";
+}
+?>
 <div class="<?php echo $pluralVar; ?> form">
 
 	<h2><?php printf("<?php echo __('%s'); ?>", $singularHumanName); ?></h2>
@@ -31,16 +33,16 @@
 <?php 
 	if (strpos($action, 'add') === false) {
 		echo "\t\t<li><?php echo \$this->Form->postLink(__('Delete'), array('action' => 'delete', \$this->Form->value('{$modelClass}.{$primaryKey}')), null, __('Are you sure you want to delete # %s?', \$this->Form->value('{$modelClass}.{$primaryKey}'))); ?></li>\n";
-	} 
-	echo "\t\t<li><?php echo \$this->Html->link(__('List %s',__('" . $pluralHumanName . "')), array('action' => 'index')); ?></li>\n";
+	}
+	echo "\t\t<li><?php echo \$this->Html->link(__('List %s', __('" . $pluralHumanName . "')), array('action' => 'index')); ?></li>\n";
 ?>
 <?php
 		$done = array();
 		foreach ($associations as $type => $data) {
 			foreach ($data as $alias => $details) {
 				if ($details['controller'] != $this->name && !in_array($details['controller'], $done)) {
-					echo "\t\t<li><?php echo \$this->Html->link(__('List %s',__('" . Inflector::humanize($details['controller']) . "')), array('controller' => '{$details['controller']}', 'action' => 'index')); ?> </li>\n";
-					echo "\t\t<li><?php echo \$this->Html->link(__('New %s',__('" . Inflector::humanize(Inflector::underscore($alias)) . "')), array('controller' => '{$details['controller']}', 'action' => 'add')); ?> </li>\n";
+					echo "\t\t<li><?php echo \$this->Html->link(__('List %s', __('" . Inflector::humanize($details['controller']) . "')), array('controller' => '{$details['controller']}', 'action' => 'index')); ?> </li>\n";
+					echo "\t\t<li><?php echo \$this->Html->link(__('New %s', __('" . Inflector::humanize(Inflector::underscore($alias)) . "')), array('controller' => '{$details['controller']}', 'action' => 'add')); ?> </li>\n";
 					$done[] = $details['controller'];
 				}
 			}

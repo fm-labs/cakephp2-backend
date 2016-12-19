@@ -7,12 +7,12 @@
 			<legend><?php echo __d('backend','Admin Edit %s', __d('backend','Page')); ?></legend>
 		<?php
 		echo $this->Form->input('id');
-		echo $this->Form->input('parent_id',array('options'=>$parentPages,'empty'=>'- Root -'));
+		echo $this->Form->input('parent_id',array('options'=>$parentPages,'empty' => '- Root -'));
 		echo $this->Form->input('title');
 		echo $this->Form->input('url');
 		echo $this->Form->input('alias');
 		echo $this->Form->input('target');
-		echo $this->Form->input('layout_view_id',array('empty'=>'-- Inherit --'));
+		echo $this->Form->input('layout_view_id',array('empty' => '-- Inherit --'));
 		echo $this->Form->input('meta_title');
 		echo $this->Form->input('meta_language');
 		echo $this->Form->input('meta_robots_tag');

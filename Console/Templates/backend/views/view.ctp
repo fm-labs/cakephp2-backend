@@ -16,8 +16,8 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 ?>
-<?php echo "<?php \$this->Html->addCrumb(__('{$pluralHumanName}'),array('action'=>'index'),array()); ?>\n"; ?>
-<?php echo "<?php \$this->Html->addCrumb(__('View %s','#'.\$this->request->params['pass'][0]),array('action'=>'view',\$this->request->params['pass'][0]),array('class'=>'active')); ?>\n"; ?>
+<?php echo "<?php \$this->Html->addCrumb(__('{$pluralHumanName}'),array('action' => 'index'),array()); ?>\n"; ?>
+<?php echo "<?php \$this->Html->addCrumb(__('View %s','#'.\$this->request->params['pass'][0]),array('action' => 'view',\$this->request->params['pass'][0]),array('class' => 'active')); ?>\n"; ?>
 <div class="<?php echo $pluralVar; ?> view">
 <h2><?php echo "<?php  echo __('{$singularHumanName}'); ?>"; ?></h2>
 

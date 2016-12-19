@@ -1,4 +1,4 @@
-<?php $this->Html->addCrumb(__('Backend'), array('controller'=>'backend', 'action'=>'index')); ?>
+<?php $this->Html->addCrumb(__('Backend'), array('controller' => 'backend', 'action' => 'index')); ?>
 
 <style>
 .dashboard-item {
@@ -23,9 +23,17 @@
 	<h2>Backend Dashboard</h2>
 	
 	<div class="actions">
-		<?php echo $this->Html->link(__('Goto My Dashboard'),array('action'=>'dashboard')); ?><br />
+		<?php echo $this->Html->link(__('Goto My Dashboard'), Configure::read('Backend.Dashboard.url')); ?><br />
 	</div>
 
+	
+	<?php 
+	// Check if any Backend Configuration is loaded
+	if (!Configure::read('Backend')) {
+		echo $this->Html->div('alert alert-warning','No Backend configuration found!');
+	}
+	?>	
+	
 	<?php foreach((array) $this->get('backend_sidebar_menu') as $n):?>
 	<?php echo $this->Dashboard->itemFromArray($n); ?>
 	<?php endforeach; ?>

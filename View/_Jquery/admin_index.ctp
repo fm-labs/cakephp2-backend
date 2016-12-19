@@ -18,7 +18,7 @@ $this->Js->loadPlugin('JqueryColorbox.JqueryColorbox');
 		<h4>jQuery.ajax( url [, settings] )</h4>
 		<?php
 		$script = $this->Js->plugin('Jquery')->ajax('index.php',array(
-				'accepts'=>'text/html',
+				'accepts' => 'text/html',
 				'complete' => "alert(textStatus);",
 		));
 		?>

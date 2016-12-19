@@ -3,42 +3,21 @@
 	
 	<div class="actions">
 		<?php echo $this->Html->link(__('Backend Dashboard'),
-				array('action'=>'index'),
-				array('class'=>'btn btn-primary')
+				array('action' => 'index'),
+				array('class' => 'btn btn-primary')
 		); ?>
 	</div>
-	
-	<?php 
-	// List Controllers from app/Controllers directory
-	
-	App::uses('Folder','Utility');
-	$controllerDir = APP."Controller".DS;
-	$Folder = new Folder($controllerDir);
-	$files = $Folder->find('.*Controller.php$',true);
-	$controllers = array();
-	foreach($files as $file) {
-		if (!preg_match('/^(.*)Controller.php$/',$file,$matches)) {
-			debug("No match: ".$file);
-			continue;
-			
-		}
-		
-		if ($matches[1] == "App")
-			continue;
-		
-		$controllers[] = $matches[1];
-	}
-	?>
+
 	<table>
-		<?php foreach($controllers as $controller):?>
+		<?php foreach($this->get('controllers') as $controller):?>
 		<tr>
 			<td><?php echo $controller; ?></td>
 			<td class="actions">
 				<?php echo $this->Html->link('Index', 
-						array('plugin' => null, 'controller'=>Inflector::underscore($controller),'action'=>'index')
+						array('plugin' => null, 'controller'=>Inflector::underscore($controller),'action' => 'index')
 				); ?>
 				<?php echo $this->Html->link('Add', 
-						array('plugin' => null, 'controller'=>Inflector::underscore($controller),'action'=>'add')
+						array('plugin' => null, 'controller'=>Inflector::underscore($controller),'action' => 'add')
 				); ?>
 			</td>
 		</tr>

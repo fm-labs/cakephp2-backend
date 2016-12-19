@@ -1,10 +1,10 @@
-<?php $this->Html->addCrumb('Cronjobs',array('action'=>'index')); ?>
+<?php $this->Html->addCrumb('Cronjobs',array('action' => 'index')); ?>
 <?php $this->Helpers->load('Time'); ?>
 <div class="index">
 	<h2>Cronjobs</h2>
 	
 	<div class="actions">
-		<?php echo $this->Html->link(__('Run all cronjobs'),array('action'=>'run_all')); ?>
+		<?php echo $this->Html->link(__('Run all cronjobs'),array('action' => 'run_all')); ?>
 	</div>
 	<table>
 		<tr>
@@ -25,7 +25,7 @@
 				//TODO implement StatusHelper->html() here
 				$class = ($cronjob['enabled']) ? 'success' : 'important';
 			$enabled = ($cronjob['enabled']) ? __('Yes') : __('No');
-				echo $this->Html->tag('span', $enabled,array('class'=>'label label-'.$class)); 
+				echo $this->Html->tag('span', $enabled,array('class' => 'label label-'.$class));
 			?></td>
 			<td><?php echo $cronjob['url']; ?></td>
 			<td><?php echo $cronjob['interval']; ?> sec</td>
@@ -49,7 +49,7 @@
 					else {
 						$class = 'success';
 					}
-					echo $this->Html->tag('span',sprintf("%+d", $nextOffset),array('class'=>'label label-'.$class));
+					echo $this->Html->tag('span',sprintf("%+d", $nextOffset),array('class' => 'label label-'.$class));
 				}
 			?>&nbsp;</td>
 			<td><?php 
@@ -63,7 +63,7 @@
 						default:
 							$class = 'important'; break;
 					}
-					echo $this->Html->tag('span',h($stats[$id]['response']),array('class'=>'label label-'.$class));
+					echo $this->Html->tag('span',h($stats[$id]['response']),array('class' => 'label label-'.$class));
 				}
 			?>&nbsp;</td>
 			<td><?php 
@@ -72,9 +72,9 @@
 				}
 			?>&nbsp;</td>
 			<td class="actions">
-				<?php echo $this->Html->link('View',array('action'=>'view',$id));?>
-				<?php echo $this->Html->link('Run',array('action'=>'run',$id));?>
-				<?php echo $this->Html->link('Force',array('action'=>'run',$id,'force'=>true));?>
+				<?php echo $this->Html->link('View',array('action' => 'view',$id));?>
+				<?php echo $this->Html->link('Run',array('action' => 'run',$id));?>
+				<?php echo $this->Html->link('Force',array('action' => 'run',$id,'force'=>true));?>
 			</td>
 		</tr>
 		<?php endforeach; ?>

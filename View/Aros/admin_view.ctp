@@ -1,5 +1,5 @@
-<?php $this->Html->addCrumb(__('Aros'),array('action'=>'index'),array()); ?>
-<?php $this->Html->addCrumb(__('View %s','#'.$this->request->params['pass'][0]),array('action'=>'view',$this->request->params['pass'][0]),array('class'=>'active')); ?>
+<?php $this->Html->addCrumb(__('Aros'),array('action' => 'index'),array()); ?>
+<?php $this->Html->addCrumb(__('View %s','#'.$this->request->params['pass'][0]),array('action' => 'view',$this->request->params['pass'][0]),array('class' => 'active')); ?>
 <div class="aros view">
 <h2><?php  echo __('Aro'); ?></h2>
 

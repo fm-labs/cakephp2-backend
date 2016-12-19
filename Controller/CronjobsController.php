@@ -115,7 +115,7 @@ class CronjobsController extends BackendAppController {
 		list($result, $stats) = $this->_run($id, $this->cronjobs[$id], $force);
 		
 		$this->Session->setFlash($result['message']);
-		$this->redirect(array('action'=>'view',$id));
+		$this->redirect(array('action' => 'view',$id));
 	}
 	
 	public function admin_run_all() {

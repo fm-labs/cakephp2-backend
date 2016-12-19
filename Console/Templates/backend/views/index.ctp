@@ -17,26 +17,25 @@
  */
 ?>
 
-<?php echo "<?php \$this->Html->addCrumb(__('{$pluralHumanName}'),array('action'=>'index'),array('class'=>'active')); ?>\n"; ?>
+<?php echo "<?php \$this->Html->addCrumb(__('{$pluralHumanName}'), array('action' => 'index'),array('class' => 'active')); ?>\n"; ?>
 <div class="<?php echo $pluralVar; ?> index">
 	<h2><?php echo "<?php echo __('{$pluralHumanName}'); ?>"; ?></h2>
-	
 
 	<div class="actions">
 		<ul>
 			<li><?php echo "<?php echo \$this->Html->link(__('New %s',__('" . $singularHumanName . "')), array('action' => 'add')); ?>"; ?></li>
-	<?php
-		$done = array();
-		foreach ($associations as $type => $data) {
-			foreach ($data as $alias => $details) {
-				if ($details['controller'] != $this->name && !in_array($details['controller'], $done)) {
-					echo "\t\t<li><?php echo \$this->Html->link(__('List %s',__('" . Inflector::humanize($details['controller']) . "')), array('controller' => '{$details['controller']}', 'action' => 'index')); ?> </li>\n";
-					echo "\t\t<li><?php echo \$this->Html->link(__('New %s',__('" . Inflector::humanize(Inflector::underscore($alias)) . "')), array('controller' => '{$details['controller']}', 'action' => 'add')); ?> </li>\n";
-					$done[] = $details['controller'];
-				}
+<?php
+	$done = array();
+	foreach ($associations as $type => $data) {
+		foreach ($data as $alias => $details) {
+			if ($details['controller'] != $this->name && !in_array($details['controller'], $done)) {
+				echo "\t\t<li><?php echo \$this->Html->link(__('List %s', __('" . Inflector::humanize($details['controller']) . "')), array('controller' => '{$details['controller']}', 'action' => 'index')); ?> </li>\n";
+				echo "\t\t<li><?php echo \$this->Html->link(__('New %s', __('" . Inflector::humanize(Inflector::underscore($alias)) . "')), array('controller' => '{$details['controller']}', 'action' => 'add')); ?> </li>\n";
+				$done[] = $details['controller'];
 			}
 		}
-	?>
+	}
+?>
 		</ul>
 	</div>
 	

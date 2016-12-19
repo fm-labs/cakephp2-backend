@@ -20,19 +20,19 @@ span.be-userpanel:HOVER {
 			<div class="nav-collapse collapse">
 	            <p class="navbar-text pull-right">
 				<span class="be-userpanel">
-					<?php if (!class_exists('AuthComponent')):?>
+					<?php if (!class_exists('AuthComponent') || !Configure::read('Backend.Auth.enabled')):?>
 						Authentication is DISABLED!
 					<?php elseif (AuthComponent::user()):?>
 						<?php echo 	$this->Html->link(AuthComponent::user('username'),
-										array('plugin'=>'backend','controller'=>'auth','action'=>'user','admin'=>true)
+										array('plugin' => 'backend','controller' => 'auth','action' => 'user','admin'=>true)
 						);?> |
 						<?php echo $this->Html->link(__d('backend','Logout'),
-								array('plugin'=>'backend','controller'=>'auth','action'=>'logout','admin'=>true)
+								array('plugin' => 'backend','controller' => 'auth','action' => 'logout','admin'=>true)
 						); ?>
 					<?php else: ?>
 						<?php echo __d('backend','Not logged in'); ?> |
 						<?php echo $this->Html->link(__d('backend','Login'),
-								array('plugin'=>'backend','controller'=>'auth','action'=>'login','admin'=>true)
+								array('plugin' => 'backend','controller' => 'auth','action' => 'login','admin'=>true)
 						); ?>
 					<?php endif; ?>
 				</span>
@@ -51,6 +51,10 @@ span.be-userpanel:HOVER {
 					$class = (!isset($this->request->params['plugin'])) ? "active" : "";
 					echo $this->Html->tag('li', $dbTitle, compact('class'));
 					unset($dbTitle);
+				else:
+					echo $this->Html->tag('li',
+						$this->Html->link('Dashboard', array('plugin' => 'backend', 'controller' => 'backend', 'action' => 'dashboard'))
+					);
 				endif; 
 				?>
 	            <?php 
@@ -58,7 +62,7 @@ span.be-userpanel:HOVER {
 	            foreach((array) Configure::read('Backend.Dashboard.plugins') as $_plugin):
 
 	            	$link = $this->Html->link($_plugin,
-	              		array('plugin'=>Inflector::underscore($_plugin),'controller'=>Inflector::underscore($_plugin),'action'=>'index')); 
+	              		array('plugin'=>Inflector::underscore($_plugin),'controller'=>Inflector::underscore($_plugin),'action' => 'index'));
 	            	
 					$class = (Inflector::underscore($_plugin) == $this->request->params['plugin']) ? "active" : "";
 					echo $this->Html->tag('li', $link, compact('class'));
