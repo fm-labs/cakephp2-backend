@@ -4,7 +4,7 @@ class DataFilterComponent extends Component {
 	
 	public $Controller;
 	
-	public function initialize($controller) {
+	public function initialize(Controller $controller) {
 		$this->Controller = $controller;
 	}
 	
