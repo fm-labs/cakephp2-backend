@@ -12,6 +12,9 @@
     "require": {
         "composer/installers": "~1.0"
     },
+    "require-dev": {
+        "cakephp/cakephp": "~2.9"
+    },
     "extra": {
         "installer-name": "Backend"
     }
