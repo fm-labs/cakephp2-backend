@@ -227,12 +227,5 @@ class BackendComponent extends Component {
 	public function isIframeRequest(CakeRequest $request) {
 		return (isset($request->params['named']['iframe'])) ? $request->params['named']['iframe'] : false;
 	}	
-	
-	/**
-	 * (non-PHPdoc)
-	 * @see Object::log()
-	 */
-	public function log($msg, $type = 'debug') {
-		return CakeLog::write($type, $msg, 'backend');
-	}
+
 }
